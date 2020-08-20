@@ -296,9 +296,9 @@ D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Debug\ru\Microsoft
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Debug\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Debug\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Debug\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
-D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.csprojAssemblyReference.cache
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.exe.config
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.csproj.CoreCompileInputs.cache
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.csproj.CopyComplete
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.exe
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.pdb
+D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.csprojAssemblyReference.cache
