@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Bridges.Core.Domain.Example, ITS.Core.Bridges" table="ITS.Core.Bridges_example">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<many-to-one column="notes_id" name="Notes" class="date"/>
+		<many-to-one column="notes1_id" name="Notes1" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<property column="height_to_natural_soil" name="HeightToNaturalSoil" type="single" />
+		<property column="str1" name="Str1" type="string" />
+		<property column="int1" name="Int1" type="int" />
+		<property column="crossbar_height" name="CrossbarHeight" type="double" />
+		<property column="d2" name="D2" type="decimal" />
+	</class>
+</hibernate-mapping>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,27 +11,22 @@ namespace classToMapping
     {
         static void Main(string[] args)
         {
-            Modifer.fromClassToMapping(@"namespace classToMapping
+            Modifer modifer = new Modifer("ITS.Core.Bridges");
+            var mappingText = modifer.GenerateMapping(@"namespace ITS.Bridges.Core.Domain
             {
-                class Example
+                class Example : DomainObject<long>
                 {
                     public float HeightToNaturalSoil { get; set; }
-                    public float LayingDepth { get; set; }
-                    public Example TypicalProject { get; set; }
-                    public enum4ik enum1 { get; set; }
-                    public float MassivePartSizeAlong { get; set; }
-                    public float MassivePartSizeAcross { get; set; }
-                    public int PileCount { get; set; }
-                    public float MaxDistanceBetweenAxis { get; set; }
-                    public string Scheme { get; set; }
-                    public float CrossbarWidth { get; set; }
-                    public float CrossbarHeight { get; set; }
-                    public float CrossbarLength { get; set; }
-                    public float PileCrossSectionWidth { get; set; }
-                    public float PileCrossSectionHeight { get; set; }
-                    public string Notes { get; set; }
+                    public string Str1 { get; set; }
+                    public int Int1 { get; set; }
+                    public double CrossbarHeight { get; set; }
+                    public decimal D2 { get; set; }
+                    public DateTime Notes { get; set; }
+                    public DateTime? Notes1 { get; set; }
                 }
             }");
+            Console.WriteLine(mappingText);
+            File.WriteAllText(Environment.CurrentDirectory+"/"+modifer.FileName,mappingText);
             Console.Read();
         }
     }
