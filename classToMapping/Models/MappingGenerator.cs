@@ -122,6 +122,7 @@ namespace classToMapping.Models
         /// <returns></returns>
         private static bool HasSetter(PropertyDeclarationSyntax c)
         {
+#warning может не работать с не авто свойствами 
             return c.AccessorList != null &&
                                 c.AccessorList.ChildNodes().Select(prop => prop.ToString()).Contains("set;");
         }
