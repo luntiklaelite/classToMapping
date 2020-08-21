@@ -1,5 +1,5 @@
 ﻿ITS.Core.Bridges.Domain.Enums
-ITS.Core.Bridges.Domain.EnumString
+ITS.Core.Bridges.Domain.EnumStrings
 Материал пролётного строения
 SpanStructureMaterial
 Железобетон преднапряженный
@@ -20,3 +20,5 @@ StoneOrConcreteMasonry
 Aluminum
 Композитный материал
 CompositeMaterial
+Нет данных
+NoData

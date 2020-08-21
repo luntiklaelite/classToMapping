@@ -106,7 +106,7 @@ namespace classToMapping.Models
             stringBuilder.AppendLine($"\t\t\t{{");
             stringBuilder.AppendLine($"\t\t\t\tif (instance == null)");
             stringBuilder.AppendLine($"\t\t\t\t{{");
-            stringBuilder.AppendLine($"\t\t\t\t\tinstance = new BridgeStatusStrings();");
+            stringBuilder.AppendLine($"\t\t\t\t\tinstance = new {NameOfEnum}Strings();");
             stringBuilder.AppendLine($"\t\t\t\t}}");
             stringBuilder.AppendLine($"\t\t\t\treturn instance;");
             stringBuilder.AppendLine($"\t\t\t}}");
@@ -117,7 +117,7 @@ namespace classToMapping.Models
             stringBuilder.AppendLine($"\t\t{{");
             stringBuilder.AppendLine($"\t\t\treturn Strings[{nameOfParam}];");
             stringBuilder.AppendLine($"\t\t}}");
-            stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetName(string name)");
+            stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
             stringBuilder.AppendLine($"\t\t{{");
             stringBuilder.AppendLine($"\t\t\treturn Strings.FirstOrDefault(s => s.Value == name).Key;");
             stringBuilder.AppendLine($"\t\t}}");
