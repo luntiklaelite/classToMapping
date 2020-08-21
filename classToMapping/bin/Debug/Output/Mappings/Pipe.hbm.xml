@@ -4,31 +4,6 @@
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
-		<property column="main_obstacle_type" name="MainObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.MainObstacleType,ITS.Core.Bridges]], NHibernate" not-null="true"/>
-		<property column="watercourse_type" name="WatercourseType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.WatercourseType,ITS.Core.Bridges]], NHibernate" not-null="true"/>
-		<many-to-one column="water_flow_type_id" name="WaterFlowType" class="WaterFlow"/>
-		<many-to-one column="date_view" name="DateView" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
-		<many-to-one column="date_of_commisionning" name="DateOfCommisionning" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
-		<many-to-one column="date_overhaul" name="DateOverhaul" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
-		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Quality,ITS.Core.Bridges]], NHibernate" not-null="true"/>
-		<many-to-one column="defects_id" name="Defects" class="IList<Defect>"/>
-		<many-to-one column="input_edge_info_id" name="InputEdgeInfo" class="PipeEdgeInfo"/>
-		<many-to-one column="output_edge_info_id" name="OutputEdgeInfo" class="PipeEdgeInfo"/>
-		<many-to-one column="pipe_status_id" name="PipeStatus" class="Status"/>
-		<many-to-one column="feature_object" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
-		<many-to-one column="established_org" name="EstablishedOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
-		<many-to-one column="service_org" name="ServiceOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
-		<many-to-one column="pipes_id" name="Pipes" class="IList<Pipe>"/>
-		<many-to-one column="tip_id" name="Tip" class="Tip"/>
-		<many-to-one column="channel_strengthening_id" name="ChannelStrengthening" class="Strengthening"/>
-		<many-to-one column="slope_strengthening_id" name="SlopeStrengthening" class="Strengthening"/>
-		<property column="cross_section" name="CrossSection" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.CrossSection,ITS.Core.Bridges]], NHibernate" not-null="true"/>
-		<many-to-one column="material_id" name="Material" class="Material"/>
-		<many-to-one column="material_id" name="Material" class="Material"/>
-		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Quality,ITS.Core.Bridges]], NHibernate" not-null="true"/>
-		<many-to-one column="type_id" name="Type" class="TipType"/>
-		<many-to-one column="material_id" name="Material" class="Material"/>
-		<many-to-one column="tip_element_type_id" name="TipElementType" class="Quality"/>
 		<property column="pipe_body_length" name="PipeBodyLength" type="single" />
 		<property column="pipe_length" name="PipeLength" type="single" />
 		<property column="embankment_height_profile" name="EmbankmentHeightProfile" type="single" />
@@ -43,5 +18,30 @@
 		<property column="area" name="Area" type="single" />
 		<property column="portal_width" name="PortalWidth" type="single" />
 		<property column="trumpet_width" name="TrumpetWidth" type="single" />
+		<property column="main_obstacle_type" name="MainObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.MainObstacleType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="watercourse_type" name="WatercourseType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.WatercourseType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="water_flow_type" name="WaterFlowType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.WaterFlowType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<many-to-one column="date_view" name="DateView" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<many-to-one column="date_of_commisionning" name="DateOfCommisionning" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<many-to-one column="date_overhaul" name="DateOverhaul" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.Quality, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<many-to-one column="defects_id" name="Defects" class="ITS.Core.RoadPipes.Domain.IList<Defect>"/>
+		<many-to-one column="input_edge_info_id" name="InputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/>
+		<many-to-one column="output_edge_info_id" name="OutputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/>
+		<property column="pipe_status" name="PipeStatus" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.PipeStatus, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<many-to-one column="feature_object" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
+		<many-to-one column="established_org" name="EstablishedOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<many-to-one column="service_org" name="ServiceOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<many-to-one column="pipes_id" name="Pipes" class="ITS.Core.RoadPipes.Domain.IList<Pipe>"/>
+		<many-to-one column="tip_id" name="Tip" class="ITS.Core.RoadPipes.Domain.Tip"/>
+		<many-to-one column="channel_strengthening_id" name="ChannelStrengthening" class="ITS.Core.RoadPipes.Domain.Strengthening"/>
+		<many-to-one column="slope_strengthening_id" name="SlopeStrengthening" class="ITS.Core.RoadPipes.Domain.Strengthening"/>
+		<property column="cross_section" name="CrossSection" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.CrossSection, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<many-to-one column="material_id" name="Material" class="ITS.Core.RoadPipes.Domain.Material"/>
+		<many-to-one column="material_id" name="Material" class="ITS.Core.RoadPipes.Domain.Material"/>
+		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.Quality, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="type" name="Type" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.Type, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<many-to-one column="material_id" name="Material" class="ITS.Core.RoadPipes.Domain.Material"/>
+		<property column="tip_element_type" name="TipElementType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.TipElementType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 	</class>
 </hibernate-mapping>

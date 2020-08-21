@@ -17,7 +17,7 @@ namespace classToMapping
         {
             CreateOutputDirectorys();
 
-            MappingGenerator gen = new MappingGenerator("ITS.Core.Bridges", "ITS.Core.Bridges.Domain.Enums");
+            MappingGenerator gen = new MappingGenerator("ITS.Core.Bridges");
             var files = Directory.GetFiles(@"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Enums", "*.cs");
             gen.SetParsedTextFromFiles(new[]
             {
@@ -55,7 +55,7 @@ namespace classToMapping
         {
             if (Directory.Exists(Environment.CurrentDirectory + $"\\Output"))
             {
-                Directory.Delete(Environment.CurrentDirectory + $"\\Output\\", true);
+                Directory.Delete(Environment.CurrentDirectory + $"\\Output",true);
             }
             Directory.CreateDirectory(Environment.CurrentDirectory + $"\\Output");
             Directory.CreateDirectory(Environment.CurrentDirectory + $"\\Output\\Enums");
