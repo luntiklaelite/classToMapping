@@ -302,4 +302,3 @@ D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMappi
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.exe
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.pdb
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Debug\classToMapping.csprojAssemblyReference.cache
-D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Debug\Input\enum.txt

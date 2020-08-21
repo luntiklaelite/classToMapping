@@ -1,0 +1,22 @@
+﻿ITS.Core.Bridges.Domain.Enums
+ITS.Core.Bridges.Domain.EnumString
+Материал пролётного строения
+SpanStructureMaterial
+Железобетон преднапряженный
+ReinforcedConcretePrestressed
+Железобетон
+Ferroconcrete
+Сталь
+Steel
+Сталежелезобетон
+SteelКeinforcedСoncrete
+Древесина
+Wood
+Древесина клееная
+GluedTimber
+Каменная или бетонная кладка
+StoneOrConcreteMasonry
+Алюминий
+Aluminum
+Композитный материал
+CompositeMaterial

@@ -40,7 +40,10 @@ namespace classToMapping
             //var mappingText = gen.GenerateMapping();
             //Console.WriteLine(mappingText);
             //File.WriteAllText(Environment.CurrentDirectory+$"\\{gen.FileName}",mappingText);
-            Directory.Delete(Environment.CurrentDirectory + $"\\Output",true);
+            if (Directory.Exists(Environment.CurrentDirectory + $"\\Output"))
+            {
+                Directory.Delete(Environment.CurrentDirectory + $"\\Output", true);
+            }
             Directory.CreateDirectory(Environment.CurrentDirectory + $"\\Output");
             var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Input","*.txt");
             for (int i = 0; i < files.Length; i++)
@@ -55,8 +58,9 @@ namespace classToMapping
                 File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\{generator.NameOfEnum}.cs", enumText);
                 File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\{generator.NameOfEnum}Strings.cs", enumConverterText);
             }
-            
-            //Console.Read();
+#if DEBUG
+            Console.Read();
+#endif
         }
     }
 }
