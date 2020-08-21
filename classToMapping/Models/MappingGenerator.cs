@@ -95,12 +95,12 @@ namespace classToMapping.Models
 
             FileName = mainClass.Identifier.ToString() + ".hbm.xml";
 
-            var propertiesWithPredefinedTypes = root.DescendantNodes()
+            var propertiesWithPredefinedTypes = mainClass.DescendantNodes()
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<PredefinedTypeSyntax>().Count() > 0)
                 .Where(c => HasSetter(c)); //нужны только свойства, содержащие сеттер
-            var propertiesWithCustomTypes = root.DescendantNodes()
+            var propertiesWithCustomTypes = mainClass.DescendantNodes()
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<IdentifierNameSyntax>().Count() > 0)
@@ -131,7 +131,7 @@ namespace classToMapping.Models
                 string identifier = a.Identifier.ToString();
                 if (TypesForMappings.ContainsKey(a.Type.ToString()))
                 {
-                    stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" class=\"{TypesForMappings[a.Type.ToString()]}\"/>");
+                    stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" class=\"{TypesForMappings[a.Type.ToString()]}\"/>");
                 }
                 else if(enumNames.Contains(a.Type.ToString()))
                 {
