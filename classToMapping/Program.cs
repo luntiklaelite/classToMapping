@@ -17,7 +17,7 @@ namespace classToMapping
         {
             CreateOutputDirectorys();
 
-            MappingGenerator gen = new MappingGenerator("ITS.Core.Bridges");
+            MappingMigrationGenerator gen = new MappingMigrationGenerator("ITS.Core.Bridges");
             var files = Directory.GetFiles(@"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Enums", "*.cs");
             gen.SetParsedTextFromFiles(new[]
             {
@@ -27,11 +27,12 @@ namespace classToMapping
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Strengthening.cs",
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Tip.cs",
             }.Concat(files).ToArray());
+            gen.
             var mappingText = gen.GenerateMapping();
 #if DEBUG
             Console.WriteLine(mappingText);
 #endif
-            File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\Mappings\\{gen.FileName}", mappingText);
+            File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\Mappings\\{gen.MappingFileName}", mappingText);
 
             //            var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Input","*.txt");
             //            for (int i = 0; i < files.Length; i++)

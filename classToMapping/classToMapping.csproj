@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="Example.cs" />
     <Compile Include="Models\EnumGenerator.cs" />
-    <Compile Include="Models\MappingGenerator.cs" />
+    <Compile Include="Models\MappingMigrationGenerator.cs" />
     <Compile Include="Models\StringUtilities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
