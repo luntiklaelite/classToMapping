@@ -27,16 +27,23 @@ namespace classToMapping.Models
             {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
             {"FeatureObject","ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"},
         };
+        public static List<string> NotMappedPropertyNames { get; set; } = new List<string>()
+        {
+            "Photos",
+            "PhotoableType",
+        };
         public string AssemblyName { get; set; }
-        public string FileName { get; set; }
+        public string EnumNamespace { get; set; }
+        public string FileName { get;private set; }
         private string textForParsing;
         public MappingGenerator()
         {
 
         }
-        public MappingGenerator(string assemblyName)
+        public MappingGenerator(string assemblyName, string enumNamespace)
         {
             AssemblyName = assemblyName;
+            EnumNamespace = enumNamespace;
         }
         public void SetParsedTextFromFiles(string[] paths)
         {
@@ -61,9 +68,10 @@ namespace classToMapping.Models
             CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
             var nameSpace = root.ChildNodes().OfType<NamespaceDeclarationSyntax>().First();
             var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+            var enumNames = root.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                .Select(e=>e.Identifier.ToString()).ToList();
             var mainClass = classes.First();
             string name = mainClass.Identifier.ToString();
-            //var props = mainClass.ChildNodes().OfType<PropertyDeclarationSyntax>();
             var baseList = mainClass.BaseList?.Types.Select(t => t.ToString());
 
             FileName = mainClass.Identifier.ToString() + ".hbm.xml";
@@ -77,7 +85,7 @@ namespace classToMapping.Models
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<IdentifierNameSyntax>().Count() > 0)
-                .Where(c => c.Identifier.ToString() != "Photos" && c.Identifier.ToString() != "PhotoableType") //свойства, связанные с фото в маппинг не записываются
+                .Where(c => !NotMappedPropertyNames.Contains(c.Identifier.ToString()))
                 .Where(c => HasSetter(c)); //нужны только свойства, содержащие сеттер
             stringBuilder.AppendLine($"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
@@ -93,6 +101,10 @@ namespace classToMapping.Models
                 if (TypesForMappings.ContainsKey(a.Type.ToString()))
                 {
                     stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" class=\"{TypesForMappings[a.Type.ToString()]}\"/>");
+                }
+                else if(enumNames.Contains(a.Identifier.ToString()))
+                {
+                    stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{EnumNamespace}.{a.Identifier.ToString()},{AssemblyName}]], NHibernate\" not-null=\"true\"/>");
                 }
                 else
                 {

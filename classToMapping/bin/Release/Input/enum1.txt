@@ -9,7 +9,7 @@ Ferroconcrete
 Сталь
 Steel
 Сталежелезобетон
-SteelКeinforcedСoncrete
+SteelReinforcedСoncrete
 Древесина
 Wood
 Древесина клееная

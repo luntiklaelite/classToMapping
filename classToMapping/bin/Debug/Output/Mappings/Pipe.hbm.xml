@@ -4,13 +4,13 @@
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
-		<many-to-one column="main_obstacle_type_id" name="MainObstacleType" class="MainObstacleType"/>
-		<many-to-one column="watercourse_type_id" name="WatercourseType" class="WatercourseType"/>
+		<property column="main_obstacle_type" name="MainObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.MainObstacleType,ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="watercourse_type" name="WatercourseType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.WatercourseType,ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="water_flow_type_id" name="WaterFlowType" class="WaterFlow"/>
 		<many-to-one column="date_view" name="DateView" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
 		<many-to-one column="date_of_commisionning" name="DateOfCommisionning" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
 		<many-to-one column="date_overhaul" name="DateOverhaul" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
-		<many-to-one column="quality_id" name="Quality" class="Quality"/>
+		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Quality,ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="defects_id" name="Defects" class="IList<Defect>"/>
 		<many-to-one column="input_edge_info_id" name="InputEdgeInfo" class="PipeEdgeInfo"/>
 		<many-to-one column="output_edge_info_id" name="OutputEdgeInfo" class="PipeEdgeInfo"/>
@@ -22,10 +22,10 @@
 		<many-to-one column="tip_id" name="Tip" class="Tip"/>
 		<many-to-one column="channel_strengthening_id" name="ChannelStrengthening" class="Strengthening"/>
 		<many-to-one column="slope_strengthening_id" name="SlopeStrengthening" class="Strengthening"/>
-		<many-to-one column="cross_section_id" name="CrossSection" class="CrossSection"/>
+		<property column="cross_section" name="CrossSection" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.CrossSection,ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="Material"/>
 		<many-to-one column="material_id" name="Material" class="Material"/>
-		<many-to-one column="quality_id" name="Quality" class="Quality"/>
+		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Quality,ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="type_id" name="Type" class="TipType"/>
 		<many-to-one column="material_id" name="Material" class="Material"/>
 		<many-to-one column="tip_element_type_id" name="TipElementType" class="Quality"/>
