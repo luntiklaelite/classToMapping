@@ -14,7 +14,7 @@ namespace classToMapping
         //названия свойств, которые не надо вносить в маппинг и другое
         static void Main(string[] args)
         {
-            Modifer modifer = new Modifer("ITS.Core.Bridges");
+            CodeGenerator gen = new CodeGenerator("ITS.Core.Bridges");
             var csharpCode = @"namespace ITS.Bridges.Core.Domain
             {
                 class Example : DomainObject<long>
@@ -28,7 +28,7 @@ namespace classToMapping
                     public DateTime? Notes1 { get; set; }
                 }
             }";
-            modifer.SetParsedTextFromFiles(new[] 
+            gen.SetParsedTextFromFiles(new[] 
             {
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Pipe.cs",
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Defect.cs",
@@ -36,9 +36,9 @@ namespace classToMapping
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Strengthening.cs",
                 @"D:\ProjectsRepository\repos\RoadPipes\ITS.Core.RoadPipes\Domain\Tip.cs",
             });
-            var mappingText = modifer.GenerateMapping();
+            var mappingText = gen.GenerateMapping();
             Console.WriteLine(mappingText);
-            File.WriteAllText(Environment.CurrentDirectory+"/"+modifer.FileName,mappingText);
+            File.WriteAllText(Environment.CurrentDirectory+"/"+gen.FileName,mappingText);
             Console.Read();
         }
     }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace classToMapping
 {
     //TO DO: сделать поддержку enum
-    public class Modifer
+    public class CodeGenerator
     {
         public static Dictionary<string, string> TypesForMappings = new Dictionary<string, string>()
         {
@@ -29,11 +29,11 @@ namespace classToMapping
         public string AssemblyName { get; set; }
         public string FileName { get; set; }
         private string textForParsing;
-        public Modifer()
+        public CodeGenerator()
         {
 
         }
-        public Modifer(string assemblyName)
+        public CodeGenerator(string assemblyName)
         {
             AssemblyName = assemblyName;
         }
