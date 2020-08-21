@@ -40,6 +40,7 @@ namespace classToMapping
             //var mappingText = gen.GenerateMapping();
             //Console.WriteLine(mappingText);
             //File.WriteAllText(Environment.CurrentDirectory+$"\\{gen.FileName}",mappingText);
+            Directory.Delete(Environment.CurrentDirectory + $"\\Output",true);
             Directory.CreateDirectory(Environment.CurrentDirectory + $"\\Output");
             var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Input","*.txt");
             for (int i = 0; i < files.Length; i++)

@@ -1,4 +1,3 @@
-D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Release\Input\enum.txt
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Release\classToMapping.exe.config
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Release\classToMapping.exe
 D:\ProjectsRepository\repos\classToMapping\classToMapping\bin\Release\classToMapping.pdb
@@ -150,3 +149,4 @@ D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Release\classToMap
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Release\classToMapping.csproj.CopyComplete
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Release\classToMapping.exe
 D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Release\classToMapping.pdb
+D:\ProjectsRepository\repos\classToMapping\classToMapping\obj\Release\classToMapping.csprojAssemblyReference.cache

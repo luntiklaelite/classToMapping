@@ -38,7 +38,7 @@ namespace classToMapping.Models
             NamespaceOfEnumConverter = tmp[1];
             CommentOfEnum = tmp[2];
             NameOfEnum = tmp[3];
-            for (int i = 2; i < tmp.Length; i++)
+            for (int i = 4; i < tmp.Length; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -95,8 +95,8 @@ namespace classToMapping.Models
                 stringBuilder.AppendLine($"\t\t\t\t {{ {NameOfEnum}.{EnumElements[i]},\"{EnumComments[i]}\" }},");
             }
             stringBuilder.AppendLine("\t\t\t};");
-            stringBuilder.AppendLine($"\t\tprivate static {NameOfEnum}Strings instance;");    
-            stringBuilder.AppendLine($"\t\tpublic {NameOfEnum}Strings() {{ }}");    
+            stringBuilder.AppendLine($"\t\tpublic {NameOfEnum}Strings() {{ }}");
+            stringBuilder.AppendLine($"\t\tprivate static {NameOfEnum}Strings instance;");
             stringBuilder.AppendLine($"\t\tpublic static {NameOfEnum}Strings Instance");    
             stringBuilder.AppendLine($"\t\t{{");
             stringBuilder.AppendLine($"\t\t\tget");
