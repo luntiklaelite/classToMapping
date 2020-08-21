@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static classToMapping.Models.StringUtilities;
 
 namespace classToMapping.Models
 {
@@ -111,7 +112,7 @@ namespace classToMapping.Models
             stringBuilder.AppendLine($"\t\t\t}}");
             stringBuilder.AppendLine($"\t\t}}");
             stringBuilder.AppendLine();
-            var nameOfParam = MappingGenerator.CamelCaseToUnderscore(NameOfEnum);
+            var nameOfParam = CamelCaseToUnderscore(NameOfEnum);
             stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
             stringBuilder.AppendLine($"\t\t{{");
             stringBuilder.AppendLine($"\t\t\treturn Strings[{nameOfParam}];");
