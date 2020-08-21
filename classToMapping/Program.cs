@@ -48,8 +48,10 @@ namespace classToMapping
                 EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]));
                 string enumText = generator.GetEnumText();
                 string enumConverterText = generator.GetEnumStringConverterText();
+#if DEBUG
                 Console.WriteLine(enumText);
                 Console.WriteLine(enumConverterText);
+#endif
                 File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\{generator.NameOfEnum}.cs", enumText);
                 File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\{generator.NameOfEnum}Strings.cs", enumConverterText);
             }
