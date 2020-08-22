@@ -144,7 +144,6 @@ D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\bin\Release\ru\Micr
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\bin\Release\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\bin\Release\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\bin\Release\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
-D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.csprojAssemblyReference.cache
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.csproj.CoreCompileInputs.cache
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.csproj.CopyComplete
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.dll

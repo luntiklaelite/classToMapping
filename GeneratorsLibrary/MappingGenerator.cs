@@ -48,6 +48,18 @@ namespace GeneratorsLibrary
             AssemblyName = assemblyName;
             TablePrefix = tablePrefix;
         }
+        public MappingGenerator(string assemblyName, string tablePrefix, string[] paths)
+        {
+            AssemblyName = assemblyName;
+            TablePrefix = tablePrefix;
+            SetParsedTextFromFiles(paths);
+        }
+        public MappingGenerator(string assemblyName, string tablePrefix, string code)
+        {
+            AssemblyName = assemblyName;
+            TablePrefix = tablePrefix;
+            SetParsedTextFromCode(code);
+        }
         public void SetParsedTextFromFiles(string[] paths)
         {
             textForParsing = string.Empty;
@@ -134,9 +146,9 @@ namespace GeneratorsLibrary
             }
             return null;
         }
-        public Dictionary<string,string> GenerateMappings()
+        public List<KeyValuePair<string, string>> GenerateMappings()
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
+            var result = new List<KeyValuePair<string, string>>();
             var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
             var enums = root.DescendantNodes().OfType<EnumDeclarationSyntax>();
             foreach (var cls in classes)
@@ -144,7 +156,7 @@ namespace GeneratorsLibrary
                 var kvp = GenerateMapping(cls,enums);
                 if (kvp != null)
                 {
-                    result.Add(kvp.Value.Key, kvp.Value.Value);
+                    result.Add(kvp.Value);
                 }
             }
             return result;
@@ -156,15 +168,9 @@ namespace GeneratorsLibrary
         /// <returns></returns>
         private static bool HasSetter(PropertyDeclarationSyntax c)
         {
-#warning может не работать с не авто свойствами 
             return c.AccessorList != null &&
-                                c.AccessorList.ChildNodes().Select(prop => prop.ToString()).Contains("set;");
+                (c.AccessorList.ChildNodes().Select(prop => prop.ToString()).Contains("set;") ||
+                c.AccessorList.ChildNodes().OfType<AccessorDeclarationSyntax>().Count() > 1);
         }
-
-        //public static string GetTableNamePrefix(string assemblyName)
-        //{
-        //    assemblyName.
-        //    return;
-        //}
     }
 }

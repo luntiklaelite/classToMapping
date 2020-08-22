@@ -16,12 +16,32 @@ namespace classToMapping
         static void Main(string[] args)
         {
             CreateOutputDirectorys();
-            MappingGenerator gen = new MappingGenerator("ITS.Core.RoadPipes","rp");
-            var files = Directory.GetFiles(args[0],
-                "*.cs",SearchOption.AllDirectories);
-            gen.SetParsedTextFromFiles(files);
-            var dict = gen.GenerateMappings();
-            foreach (var keyValuePair in dict)
+            if (args.Length < 3)
+            {
+                return;
+            }
+           
+            var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
+            //MappingGenerator gen = new MappingGenerator(args[1], args[2], files);
+            MappingGenerator gen1 = new MappingGenerator(args[1], args[2], @"
+                namespace Test
+                {
+                    class TestClass{
+                        private int _prop1;
+                        public int Prop1 
+                        {
+                            get
+                            {
+                                return _prop1;
+                            }
+                            set
+                            {
+                                _prop1 = value;
+                            }
+                    }
+                }");
+            var mappings = gen1.GenerateMappings();
+            foreach (var keyValuePair in mappings)
             {
                 File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\Mappings\\{keyValuePair.Key}",
                     keyValuePair.Value);

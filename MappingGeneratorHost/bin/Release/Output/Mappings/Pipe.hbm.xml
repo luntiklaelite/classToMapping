@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.RoadPipes.Domain.Pipe, ITS.Core.RoadPipes" table="ITS.Core.RoadPipes_pipe">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="pipe_body_length" name="PipeBodyLength" type="single" />
+		<property column="pipe_length" name="PipeLength" type="single" />
+		<property column="embankment_height_profile" name="EmbankmentHeightProfile" type="single" />
+		<property column="embankment_height_over_pipe" name="EmbankmentHeightOverPipe" type="single" />
+		<property column="segment_count" name="SegmentCount" type="byte" />
+		<property column="main_obstacle_type" name="MainObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.MainObstacleType, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
+		<property column="watercourse_type" name="WatercourseType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.WatercourseType, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
+		<property column="water_flow_type" name="WaterFlowType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.WaterFlowType, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
+		<property column="date_view" name="DateView" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<property column="date_of_commisionning" name="DateOfCommisionning" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<property column="date_overhaul" name="DateOverhaul" class="System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"/>
+		<property column="quality" name="Quality" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.Quality, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
+		<many-to-one column="defects_id" name="Defects" class="ITS.Core.RoadPipes.Domain.IList<Defect>"/>
+		<many-to-one column="input_edge_info_id" name="InputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/>
+		<many-to-one column="output_edge_info_id" name="OutputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/>
+		<property column="pipe_status" name="PipeStatus" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.PipeStatus, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
+		<property column="feature_object" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
+		<property column="established_org" name="EstablishedOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<property column="service_org" name="ServiceOrg" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+	</class>
+</hibernate-mapping>
