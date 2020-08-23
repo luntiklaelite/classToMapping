@@ -93,24 +93,24 @@ namespace GeneratorsLibrary
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<PredefinedTypeSyntax>().Count() > 0)
-                .Where(c => HasSetter(c)); //нужны только свойства, содержащие сеттер
+                .Where(c => !NotMappedPropertyNames.Contains(c.Identifier.ToString()))
+                .Where(c => HasSetter(c));
             var propertiesWithCustomTypes = classDecl.DescendantNodes()
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<IdentifierNameSyntax>().Count() > 0)
                 .Where(c => !NotMappedPropertyNames.Contains(c.Identifier.ToString()))
-                .Where(c => HasSetter(c)); //нужны только свойства, содержащие сеттер
-            if (propertiesWithPredefinedTypes.Count() > 0 || propertiesWithCustomTypes.Count() > 0)
+                .Where(c => HasSetter(c));
+            if ((propertiesWithPredefinedTypes.Count() > 0 || propertiesWithCustomTypes.Count() > 0) &&
+                baseList != null && baseList.Contains("DomainObject<long>"))
             {
                 stringBuilder.AppendLine($"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
-                stringBuilder.AppendLine($"\t<class lazy=\"false\" name=\"{@namespace.Name}.{classDecl.Identifier.ToString()}, {AssemblyName}\" table=\"{AssemblyName}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}\">");
-                if (baseList != null && baseList.Contains("DomainObject<long>"))
-                {
-                    stringBuilder.AppendLine($"\t\t<id name=\"ID\" column=\"id\" type=\"long\" unsaved-value=\"0\">");
-                    stringBuilder.AppendLine($"\t\t\t<generator class=\"hilo\" />");
-                    stringBuilder.AppendLine($"\t\t</id>");
-                }
+                stringBuilder.AppendLine($"\t<class lazy=\"false\" name=\"{@namespace.Name}.{classDecl.Identifier.ToString()}, {AssemblyName}\"" +
+                    $" table=\"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}\">");
+                stringBuilder.AppendLine($"\t\t<id name=\"ID\" column=\"id\" type=\"long\" unsaved-value=\"0\">");
+                stringBuilder.AppendLine($"\t\t\t<generator class=\"hilo\" />");
+                stringBuilder.AppendLine($"\t\t</id>");
                 foreach (var a in propertiesWithPredefinedTypes)
                 {
                     if (TypesForMappings.ContainsKey(a.Type.ToString()))
@@ -148,6 +148,10 @@ namespace GeneratorsLibrary
         }
         public List<KeyValuePair<string, string>> GenerateMappings()
         {
+            if (root == null)
+            {
+                return null;
+            }
             var result = new List<KeyValuePair<string, string>>();
             var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
             var enums = root.DescendantNodes().OfType<EnumDeclarationSyntax>();

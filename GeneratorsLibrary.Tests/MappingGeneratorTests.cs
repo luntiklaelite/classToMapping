@@ -52,7 +52,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class TestClass{
+                    class TestClass : DomainObject<long>{
                         public int Prop1 {get;}
                         public int Prop1 => 1;
                     }
@@ -70,7 +70,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class TestClass{
+                    class TestClass : DomainObject<long>{
                     }
                 }";
             MappingGenerator generator = new MappingGenerator("Tests", "tests", code);
@@ -86,7 +86,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class TestClass{
+                    class TestClass : DomainObject<long>{
                         private int _prop1;
                         public int Prop1 
                         {
@@ -113,7 +113,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class TestClass{
+                    class TestClass : DomainObject<long>{
                         public int Prop1 {get;set;}
                     }
                 }";
@@ -130,7 +130,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class TestClass{
+                    class TestClass : DomainObject<long>{
                         public int Prop1 {get;set;}
                     }
                 }";
@@ -147,7 +147,7 @@ namespace GeneratorsLibrary.Tests
             string code = @"
                 namespace Test
                 {
-                    class Test_0Class{
+                    class Test_0Class : DomainObject<long>{
                         public int Prop1 {get;set;}
                     }
                 }";
@@ -158,7 +158,25 @@ namespace GeneratorsLibrary.Tests
             Assert.Equal("Test_0Class.hbm.xml", result[0].Key);
         }
         [Fact]
-        public void GenerateMappings_IntAutoProperty_TrueMapping()
+        public void GenerateMappings_IntAutoPropertyIgnored_EmptyResult()
+        {
+            //arrange
+            string code = @"
+                namespace Test
+                {
+                    class TestClass : DomainObject<long>{
+                        public int Prop1 {get;set;}
+                    }
+                }";
+            MappingGenerator generator = new MappingGenerator("Tests", "tests", code);
+            generator.NotMappedPropertyNames.Add("Prop1");
+            //act
+            var result = generator.GenerateMappings();
+            //assert
+            Assert.Empty(result);
+        }
+        [Fact]
+        public void GenerateMappings_NotDomainObject_EmptyResult()
         {
             //arrange
             string code = @"
@@ -172,7 +190,29 @@ namespace GeneratorsLibrary.Tests
             //act
             var result = generator.GenerateMappings();
             //assert
-            Assert.Equal("TestClass.hbm.xml", result[0].Key);
+            Assert.Empty(result);
         }
+//        [Fact]
+//        public void GenerateMappings_IntAutoProperty_TrueMapping()
+//        {
+//            //arrange
+//            string code = @"
+//                namespace Test
+//                {
+//                    class TestClass : DomainObject<long>{
+//                        public int Prop1 {get;set;}
+//                    }
+//                }";
+//            MappingGenerator generator = new MappingGenerator("Tests", "tests", code);
+//            //act
+//            var result = generator.GenerateMappings();
+//            //assert
+//            Assert.Equal(@"<?xml version=""1.0"" encoding=""utf-8""?>
+//<hibernate-mapping xmlns=""urn:nhibernate-mapping-2.2"">
+//\t<class lazy=""false"" name =""Tests.TestClass, Tests"" table=""tests_test_class"" >
+//        <property column = ""description"" name =""Prop1"" type =""int""/>
+//    </class>
+//</hibernate-mapping>", result[0].Value);
+//        }
     }
 }

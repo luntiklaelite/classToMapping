@@ -59,3 +59,4 @@ D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\bin\Debug\tr\Micros
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\bin\Debug\zh-Hans\Microsoft.CodeAnalysis.resources.dll
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\bin\Debug\zh-Hant\Microsoft.CodeAnalysis.resources.dll
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\obj\Debug\EnumGeneratorHost.csproj.CopyComplete
+D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\bin\Debug\Input\enum.txt

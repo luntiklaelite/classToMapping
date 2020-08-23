@@ -148,3 +148,4 @@ D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\Generat
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.csproj.CopyComplete
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.dll
 D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.pdb
+D:\ProjectsRepository\repos\classToMapping\GeneratorsLibrary\obj\Release\GeneratorsLibrary.csprojAssemblyReference.cache

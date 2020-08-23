@@ -53,9 +53,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Input\enum.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GeneratorsLibrary\GeneratorsLibrary.csproj">
       <Project>{1ada5808-b98a-4b9c-a28c-a25dcb75d073}</Project>
       <Name>GeneratorsLibrary</Name>

@@ -13,26 +13,27 @@ namespace GeneratorsLibrary
         public string NamespaceOfEnumConverter { get; set; }
         public string NameOfEnum { get; set; }
         public string CommentOfEnum { get; set; }
-        public List<string> EnumElements { get; set; }
-        public List<string> EnumComments { get; set; }
+        public List<string> EnumElements { get; set; } = new List<string>();
+        public List<string> EnumComments { get; set; } = new List<string>();
 
         public EnumGenerator()
         {
 
         }
-        public EnumGenerator(string enumName, string enumComment, List<string> enumElements, List<string> enumComments) : this(enumName)
+        public EnumGenerator(string enumName, string enumComment, List<string> enumElements, List<string> enumComments)
+            : this()
         {
+            NameOfEnum = enumName;
             CommentOfEnum = enumComment;
             EnumElements = enumElements;
             EnumComments = enumComments;
         }
         public EnumGenerator(string values)
+            : this()
         {
-            EnumElements = new List<string>();
-            EnumComments = new List<string>();
-            ParseValues(values);
+            ParseText(values);
         }
-        private void ParseValues(string values)
+        public void ParseText(string values)
         {
             var tmp = new string(values.Where(c=>c!='\r').ToArray()).Split('\n');
             NamespaceOfEnum = tmp[0];

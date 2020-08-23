@@ -58,3 +58,4 @@ D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\obj\Release\EnumGen
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\obj\Release\EnumGeneratorHost.csproj.CopyComplete
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\obj\Release\EnumGeneratorHost.exe
 D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\obj\Release\EnumGeneratorHost.pdb
+D:\ProjectsRepository\repos\classToMapping\EnumGeneratorHost\bin\Release\Input\enum.txt
