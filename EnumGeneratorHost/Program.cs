@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EnumGeneratorHost
@@ -12,7 +13,7 @@ namespace EnumGeneratorHost
     {
         static void Main(string[] args)
         {
-            if (args.Length != 3)
+            if (args.Length != 2)
             {
                 Console.WriteLine("Too few arguments.");
                 return;
@@ -23,23 +24,69 @@ namespace EnumGeneratorHost
                 Console.WriteLine("Not found files.");
                 return;
             }
-            EnumGenerator generator = new EnumGenerator();
+            
             Console.WriteLine("Generated files:");
             for (int i = 0; i < files.Length; i++)
             {
-                generator.ParseText(File.ReadAllText(files[i]));
+                EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]));
                 string enumText = generator.GetEnumText();
                 string enumConverterText = generator.GetEnumStringConverterText();
-                string fileFullNameEnum = args[1] + $"\\{generator.NameOfEnum}.cs";
-                string fileFullNameEnumConverter = args[2] + $"\\{generator.NameOfEnum}Strings.cs";
+                string fileRelativeNameEnum = $"Domain\\Enums\\{generator.NameOfEnum}.cs";
+                string fileRelativeNameEnumConverter = $"Domain\\EnumStrings\\{generator.NameOfEnum}Strings.cs";
+                string fileFullNameEnum = args[1] + "\\" + fileRelativeNameEnum;
+                string fileFullNameEnumConverter = args[1] + "\\" + fileRelativeNameEnumConverter;
                 File.WriteAllText(fileFullNameEnum, enumText);
                 Console.WriteLine(fileFullNameEnum);
                 File.WriteAllText(fileFullNameEnumConverter, enumConverterText);
                 Console.WriteLine(fileFullNameEnumConverter);
+                WriteToCsproj(fileRelativeNameEnum, fileRelativeNameEnumConverter, args[1]);
             }
-#if DEBUG
+//#if DEBUG
             Console.ReadLine();
-#endif
+//#endif
+        }
+        public static void WriteToCsproj(string fileFullNameEnum, string fileFullNameEnumConverter, string projectDir)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("  <ItemGroup>");
+            var csprojPath = Directory.GetFiles(projectDir, "*.csproj");
+            if (csprojPath.Length>0)
+            {
+                string csproj;
+                using (StreamReader reader = new StreamReader(csprojPath[0]))
+                {
+                    csproj = reader.ReadToEnd();
+                }
+                var writedEnum = Regex.IsMatch(csproj, $"{fileFullNameEnum.Replace("\\","\\\\")}");
+                var writedEnumConverter = Regex.IsMatch(csproj, $"{fileFullNameEnumConverter.Replace("\\", "\\\\")}");
+                if (!writedEnum)
+                {
+                    stringBuilder.AppendLine($@"    <Compile Include=""{fileFullNameEnum}""/>");
+                }
+                if (!writedEnumConverter)
+                {
+                    stringBuilder.AppendLine($@"    <Compile Include=""{fileFullNameEnumConverter}""/>");
+                }
+                stringBuilder.AppendLine($"  </ItemGroup>");
+                if (!writedEnum || !writedEnumConverter)
+                {
+                    csproj = csproj.Insert(csproj.Length - "</Project>".Length, 
+                        stringBuilder.ToString());
+                    using (StreamWriter writer = new StreamWriter(csprojPath[0]))
+                    {
+                        writer.Write(csproj);
+                    }
+                    Console.WriteLine(".csproj was modified.");
+                }
+                else
+                {
+                    Console.WriteLine("files is already written to .csproj");
+                }
+            }
+            else
+            {
+                Console.WriteLine(".csproj not found.");
+            }
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿ITS.Core.Bridges.Domain.Enums
+ITS.Core.Bridges.Domain.EnumStrings
+Конструкция проезжей части
+ConstructionRoadway
+Железобетонная плита в составе основной несущей железобетонной конструкции
+FerroconcreteSlabInMainSupStruct
+Железобетонная плита, включенная в совместную работу с металлическими главными балками (в сталежелезобетонных пролетных строениях)
+FerroconcreteSlabWithPiles
+Железобетонная плита по балкам без объединения
+FerroconcreteSlabOnPiles
+Ортотропная плита в составе главных и поперечных балок
+OrthotropicSlab
+Деревянная
+Wood

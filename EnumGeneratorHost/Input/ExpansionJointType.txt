@@ -1,0 +1,16 @@
+﻿ITS.Core.Bridges.Domain.Enums
+ITS.Core.Bridges.Domain.EnumStrings
+Типы деформационных швов 
+ExpansionJointType
+Открытый
+Opened
+Закрытый
+Closed
+Заполненный
+Filled
+Перекрытый
+Overlapped
+Откатный
+Retractable
+нет данных
+NoData

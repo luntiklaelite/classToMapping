@@ -1,0 +1,14 @@
+﻿ITS.Core.Bridges.Domain.Enums
+ITS.Core.Bridges.Domain.EnumStrings
+Опорная часть
+BridgeSupportSpanType
+Эластомерная
+Elastomeric
+Металлическая
+Metal
+Комбинированная
+Combined
+Прочее
+Other
+Нет данных
+NoData
