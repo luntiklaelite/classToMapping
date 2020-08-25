@@ -12,5 +12,5 @@ Filled
 Overlapped
 Откатный
 Retractable
-нет данных
+Нет данных
 NoData

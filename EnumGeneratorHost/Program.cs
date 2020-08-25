@@ -26,6 +26,8 @@ namespace EnumGeneratorHost
             }
             
             Console.WriteLine("Generated files:");
+            string[] relativeNamesEnum = new string[files.Length];
+            string[] relativeNamesEnumConverter = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
                 EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]));
@@ -39,16 +41,18 @@ namespace EnumGeneratorHost
                 Console.WriteLine(fileFullNameEnum);
                 File.WriteAllText(fileFullNameEnumConverter, enumConverterText);
                 Console.WriteLine(fileFullNameEnumConverter);
-                WriteToCsproj(fileRelativeNameEnum, fileRelativeNameEnumConverter, args[1]);
+                relativeNamesEnum[i] = fileRelativeNameEnum;
+                relativeNamesEnumConverter[i] = fileRelativeNameEnumConverter;
             }
-//#if DEBUG
+            WriteToCsproj(relativeNamesEnum, relativeNamesEnumConverter, args[1]);
+#if DEBUG
             Console.ReadLine();
-//#endif
+#endif
         }
-        public static void WriteToCsproj(string fileFullNameEnum, string fileFullNameEnumConverter, string projectDir)
+        public static void WriteToCsproj(string relNameEnum, string relNameEnumConv, string projectDir)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("  <ItemGroup>");
+            stringBuilder.AppendLine($"  <ItemGroup> <!--Generated:{DateTime.Now}-->");
             var csprojPath = Directory.GetFiles(projectDir, "*.csproj");
             if (csprojPath.Length>0)
             {
@@ -57,20 +61,69 @@ namespace EnumGeneratorHost
                 {
                     csproj = reader.ReadToEnd();
                 }
-                var writedEnum = Regex.IsMatch(csproj, $"{fileFullNameEnum.Replace("\\","\\\\")}");
-                var writedEnumConverter = Regex.IsMatch(csproj, $"{fileFullNameEnumConverter.Replace("\\", "\\\\")}");
+                var writedEnum = Regex.IsMatch(csproj, $"{relNameEnum.Replace("\\","\\\\")}");
+                var writedEnumConverter = Regex.IsMatch(csproj, $"{relNameEnumConv.Replace("\\", "\\\\")}");
                 if (!writedEnum)
                 {
-                    stringBuilder.AppendLine($@"    <Compile Include=""{fileFullNameEnum}""/>");
+                    stringBuilder.AppendLine($@"    <Compile Include=""{relNameEnum}""/>");
                 }
                 if (!writedEnumConverter)
                 {
-                    stringBuilder.AppendLine($@"    <Compile Include=""{fileFullNameEnumConverter}""/>");
+                    stringBuilder.AppendLine($@"    <Compile Include=""{relNameEnumConv}""/>");
                 }
                 stringBuilder.AppendLine($"  </ItemGroup>");
                 if (!writedEnum || !writedEnumConverter)
                 {
                     csproj = csproj.Insert(csproj.Length - "</Project>".Length, 
+                        stringBuilder.ToString());
+                    using (StreamWriter writer = new StreamWriter(csprojPath[0]))
+                    {
+                        writer.Write(csproj);
+                    }
+                    Console.WriteLine(".csproj was modified.");
+                }
+                else
+                {
+                    Console.WriteLine("files is already written to .csproj");
+                }
+            }
+            else
+            {
+                Console.WriteLine(".csproj not found.");
+            }
+        }
+        public static void WriteToCsproj(string[] relNamesEnum, string[] relNamesEnumConv, string projectDir)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"  <ItemGroup> <!--Generated:{DateTime.Now}-->");
+            var csprojPath = Directory.GetFiles(projectDir, "*.csproj");
+            if (csprojPath.Length > 0)
+            {
+                string csproj;
+                using (StreamReader reader = new StreamReader(csprojPath[0]))
+                {
+                    csproj = reader.ReadToEnd();
+                }
+                bool newFilesToCsproj = false;
+                for (int i = 0; i < relNamesEnum.Length; i++)
+                {
+                    var writedEnum = Regex.IsMatch(csproj, $"{relNamesEnum[i].Replace("\\", "\\\\")}");
+                    var writedEnumConverter = Regex.IsMatch(csproj, $"{relNamesEnumConv[i].Replace("\\", "\\\\")}");
+                    if (!writedEnum)
+                    {
+                        stringBuilder.AppendLine($@"    <Compile Include=""{relNamesEnum[i]}""/>");
+                        newFilesToCsproj = true;
+                    }
+                    if (!writedEnumConverter)
+                    {
+                        stringBuilder.AppendLine($@"    <Compile Include=""{relNamesEnumConv[i]}""/>");
+                        newFilesToCsproj = true;
+                    }
+                }
+                if (newFilesToCsproj)
+                {
+                    stringBuilder.AppendLine($"  </ItemGroup>");
+                    csproj = csproj.Insert(csproj.Length - "</Project>".Length,
                         stringBuilder.ToString());
                     using (StreamWriter writer = new StreamWriter(csprojPath[0]))
                     {

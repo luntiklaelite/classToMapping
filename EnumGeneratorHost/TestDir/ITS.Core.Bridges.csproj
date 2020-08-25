@@ -161,7 +161,6 @@
     <Compile Include="Domain\BridgeSupport.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\SpanPile.cs" />
-    <Compile Include="Domain\EnumStrings\BridgeSupportSpanTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\BridgeSupportTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\BridgeTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\ConesStrengtheningStrings.cs" />
@@ -177,9 +176,7 @@
     <Compile Include="Domain\EnumStrings\ObstaclesTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\ProtectionTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\QualityStrings.cs" />
-    <Compile Include="Domain\EnumStrings\RailingsTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\RegulatoryStructuresStrings.cs" />
-    <Compile Include="Domain\EnumStrings\SidewalkTypeStrings.cs" />
     <Compile Include="Domain\EnumStrings\SpanStructureMaterialStrings.cs" />
     <Compile Include="Domain\EnumStrings\SpanStructureSystemStrings.cs" />
     <Compile Include="Domain\Enums\BridgeSupportSpanType.cs" />
@@ -195,10 +192,8 @@
     <Compile Include="Domain\Enums\CoverType.cs" />
     <Compile Include="Domain\Enums\MoveType.cs" />
     <Compile Include="Domain\Enums\ObstaclesType.cs" />
-    <Compile Include="Domain\Enums\RailingsType.cs" />
     <Compile Include="Domain\Enums\ConesStrengthening.cs" />
     <Compile Include="Domain\Enums\RegulatoryStructures.cs" />
-    <Compile Include="Domain\Enums\SidewalkType.cs" />
     <Compile Include="Domain\Enums\ProtectionType.cs" />
     <Compile Include="Domain\Enums\Quality .cs" />
     <Compile Include="Domain\Enums\BridgeType.cs" />
@@ -228,8 +223,15 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Compile Include="Domain\Enums\BridgeStatus.cs"/>
-    <Compile Include="Domain\EnumStrings\BridgeStatusStrings.cs"/>
+  <ItemGroup> <!--Generated:25.08.2020 10:59:08-->
+    <Compile Include="Domain\EnumStrings\BridgeSupportSpanTypeStrings.cs"/>
+    <Compile Include="Domain\Enums\ConstructionRoadway.cs"/>
+    <Compile Include="Domain\EnumStrings\ConstructionRoadwayStrings.cs"/>
+    <Compile Include="Domain\Enums\DrainageType.cs"/>
+    <Compile Include="Domain\EnumStrings\DrainageTypeStrings.cs"/>
+    <Compile Include="Domain\Enums\RailingsType.cs"/>
+    <Compile Include="Domain\EnumStrings\RailingsTypeStrings.cs"/>
+    <Compile Include="Domain\Enums\SidewalkType.cs"/>
+    <Compile Include="Domain\EnumStrings\SidewalkTypeStrings.cs"/>
   </ItemGroup>
 </Project>

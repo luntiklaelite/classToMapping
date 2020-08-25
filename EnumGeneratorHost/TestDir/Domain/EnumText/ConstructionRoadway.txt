@@ -12,3 +12,5 @@ FerroconcreteSlabOnPiles
 OrthotropicSlab
 Деревянная
 Wood
+Нет данных
+NoData
