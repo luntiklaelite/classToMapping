@@ -32,7 +32,7 @@ namespace EnumGeneratorHost
             {
                 EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]));
                 string enumText = generator.GetEnumText();
-                string enumConverterText = generator.GetEnumStringConverterText();
+                string enumConverterText = generator.GetEnumStringConverterText(true);
                 string fileRelativeNameEnum = $"Domain\\Enums\\{generator.NameOfEnum}.cs";
                 string fileRelativeNameEnumConverter = $"Domain\\EnumStrings\\{generator.NameOfEnum}Strings.cs";
                 string fileFullNameEnum = args[1] + "\\" + fileRelativeNameEnum;
