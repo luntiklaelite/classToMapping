@@ -127,7 +127,7 @@ namespace GeneratorsLibrary
                     string identifier = a.Identifier.ToString();
                     if (TypesForMappings.ContainsKey(a.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" class=\"{TypesForMappings[a.Type.ToString()]}\"/>");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{TypesForMappings[a.Type.ToString()]}\"/>");
                     }
                     else if (enumNames.Contains(a.Type.ToString()))
                     {
