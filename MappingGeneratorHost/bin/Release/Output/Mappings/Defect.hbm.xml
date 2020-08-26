@@ -5,6 +5,6 @@
 			<generator class="hilo" />
 		</id>
 		<property column="description" name="Description" type="string" />
-		<many-to-one column="pipes_id" name="Pipes" class="ITS.Core.RoadPipes.Domain.IList<Pipe>"/>
+		<!--many-to-one column="pipes_id" name="Pipes" class="ITS.Core.RoadPipes.Domain.IList<Pipe>"/-->
 	</class>
 </hibernate-mapping>

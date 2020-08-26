@@ -137,7 +137,7 @@ namespace GeneratorsLibrary
                     }
                     else
                     {
-                        stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{a.Type.ToString()}\"/>");
+                        stringBuilder.AppendLine($"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{a.Type.ToString()}\"/-->");
                     }
                 }
                 stringBuilder.AppendLine($"\t</class>");

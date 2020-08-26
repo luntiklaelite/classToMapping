@@ -7,7 +7,7 @@
 		<property column="portal_width" name="PortalWidth" type="single" />
 		<property column="trumpet_width" name="TrumpetWidth" type="single" />
 		<property column="type" name="Type" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.Type, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
-		<many-to-one column="material_id" name="Material" class="ITS.Core.RoadPipes.Domain.Material"/>
+		<!--many-to-one column="material_id" name="Material" class="ITS.Core.RoadPipes.Domain.Material"/-->
 		<property column="tip_element_type" name="TipElementType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.TipElementType, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
 	</class>
 </hibernate-mapping>
