@@ -129,7 +129,7 @@ namespace GeneratorsLibrary
             {
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
-                    stringBuilder.AppendLine($"\t\tprivate static readonly string _{CamelCaseToUnderscore(EnumElements[i])} = \"{EnumComments[i]}\";");
+                    stringBuilder.AppendLine($"\t\tprivate static readonly string Str{EnumElements[i]} = \"{EnumComments[i]}\";");
                 }
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"\t\tpublic {NameOfEnum}Strings() {{ }}");
@@ -154,7 +154,7 @@ namespace GeneratorsLibrary
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
                     stringBuilder.AppendLine($"\t\t\t\tcase {NameOfEnum}.{EnumElements[i]}:");
-                    stringBuilder.AppendLine($"\t\t\t\t\treturn _{CamelCaseToUnderscore(EnumElements[i])};");
+                    stringBuilder.AppendLine($"\t\t\t\t\treturn Str{EnumElements[i]};");
                 }
                 stringBuilder.AppendLine($"\t\t\t\tdefault:");
                 stringBuilder.AppendLine($"\t\t\t\t\tbreak;");
@@ -166,7 +166,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t{{");
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
-                    stringBuilder.AppendLine($"\t\t\tif (name == _{CamelCaseToUnderscore(EnumElements[i])})");
+                    stringBuilder.AppendLine($"\t\t\tif (name == Str{EnumElements[i]})");
                     stringBuilder.AppendLine($"\t\t\t\treturn {NameOfEnum}.{EnumElements[i]};");
                 }
                 stringBuilder.AppendLine($"\t\t\treturn {NameOfEnum}.{EnumElements[EnumElements.Count-1]};");
