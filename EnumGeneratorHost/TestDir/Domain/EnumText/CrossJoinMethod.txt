@@ -1,0 +1,20 @@
+﻿Cпособ поперечного объединения
+CrossJoinMethod
+Не объединены
+None
+По шпонкам
+Dowels
+По диафрагмам
+Diaphragms
+По плите
+Stove
+По плите и диафрагмам
+PlateAndDiaphragms
+По поперечным балкам и связям
+TransverseBeamsAndTies
+По продольным и поперечным связям
+LongitudinalAndTransverseLinks
+По плите и поперечным связям
+SlabAndCrossBraces
+Нет данных
+NoData

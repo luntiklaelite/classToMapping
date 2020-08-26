@@ -234,4 +234,14 @@
     <Compile Include="Domain\Enums\SidewalkType.cs"/>
     <Compile Include="Domain\EnumStrings\SidewalkTypeStrings.cs"/>
   </ItemGroup>
+  <ItemGroup> <!--Generated:26.08.2020 11:37:37-->
+    <Compile Include="Domain\Enums\Arrangements.cs"/>
+    <Compile Include="Domain\EnumStrings\ArrangementsStrings.cs"/>
+    <Compile Include="Domain\Enums\Communications.cs"/>
+    <Compile Include="Domain\EnumStrings\CommunicationsStrings.cs"/>
+    <Compile Include="Domain\Enums\CrossJoinMethod.cs"/>
+    <Compile Include="Domain\EnumStrings\CrossJoinMethodStrings.cs"/>
+    <Compile Include="Domain\Enums\Strenghtening.cs"/>
+    <Compile Include="Domain\EnumStrings\StrenghteningStrings.cs"/>
+  </ItemGroup>
 </Project>

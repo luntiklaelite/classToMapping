@@ -1,18 +1,24 @@
-﻿ITS.Core.Bridges.Domain.Enums
-ITS.Core.Bridges.Domain.EnumStrings
-Тип тротуара
+﻿Тип тротуара
 SidewalkType
 Тротуаров нет (зоны для прохода пешеходов)
 None
-Металлические (секционные или непрерывные)
-Metallic
-Железобетонный поручень с металлической решеткой
-FerroncreteMetalGrating
-Железобетонные (решетчатые или со сплошной стенкой)
-FerroconcreteLlatticeOrSolidWall
-Деревянные
+Повышенного типа из сборных типовых блоков
+IncreasedFromBlocks
+Повышенного типа из свай
+IncreasedFromPiles
+Пониженные в уровне проезжей части из сборных плит (блоков)
+LoweredCarriagewayBlocks
+Пониженные в уровне проезжей части с монолитной плитой
+LoweredCarriagewayMonolithicSlab
+В уровне одежды по плите проезжей части
+ClothingAlongTheSlab
+Деревянные конструкции
 Wood
-Комбинированные
-Combined
+На консолях, повышенного типа
+ConsolesIncreased
+На консолях, в уровне проезжей части	
+ConsolesCarriageway
+На консолях, пониженного типа
+ConsolesLowered
 Нет данных
 NoData

@@ -1,6 +1,4 @@
-﻿ITS.Core.Bridges.Domain.Enums
-ITS.Core.Bridges.Domain.EnumStrings
-Конструкция проезжей части
+﻿Конструкция проезжей части
 ConstructionRoadway
 Железобетонная плита в составе основной несущей железобетонной конструкции
 FerroconcreteSlabInMainSupStruct

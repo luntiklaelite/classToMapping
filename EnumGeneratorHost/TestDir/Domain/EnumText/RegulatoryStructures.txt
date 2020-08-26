@@ -1,0 +1,16 @@
+﻿Регуляционные сооружения
+RegulatoryStructures
+Струенаправляющая дамба с различными видами укрепления откосов
+JetGuideSlopeReinforcement
+Струенаправляющая дамба с траверсами
+JetGuideWithTraverses
+Укрепление берега различными конструкциями
+StrengtheningCoastVariousStructures
+Струенаправляющая дамба и укрепление берега
+JetGuideShoreReinforcement
+Конус
+Cone
+Подпорная или заборная стенка
+RetainingOrFenceWall
+Регуляционных сооружений нет
+None

@@ -28,19 +28,24 @@ namespace GeneratorsLibrary
             EnumElements = enumElements;
             EnumComments = enumComments;
         }
-        public EnumGenerator(string values)
+        public EnumGenerator(string values, string configText)
             : this()
         {
+            SetEnumFromConfig(configText);
             ParseText(values);
+        }
+        public void SetEnumFromConfig(string configText)
+        {
+            var tmp = new string(configText.Where(c => c != '\r').ToArray()).Split('\n');
+            NamespaceOfEnum = tmp[0];
+            NamespaceOfEnumConverter = tmp[1];
         }
         public void ParseText(string values)
         {
             var tmp = new string(values.Where(c=>c!='\r').ToArray()).Split('\n');
-            NamespaceOfEnum = tmp[0];
-            NamespaceOfEnumConverter = tmp[1];
-            CommentOfEnum = tmp[2];
-            NameOfEnum = tmp[3];
-            for (int i = 4; i < tmp.Length; i++)
+            CommentOfEnum = tmp[0];
+            NameOfEnum = tmp[1];
+            for (int i = 2; i < tmp.Length; i++)
             {
                 if (i % 2 == 0)
                 {

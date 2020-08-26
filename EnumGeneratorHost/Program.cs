@@ -24,13 +24,13 @@ namespace EnumGeneratorHost
                 Console.WriteLine("Not found files.");
                 return;
             }
-            
+            var configText = File.ReadAllText(Directory.GetFiles(args[0], "namespaces.cfg")[0]);
             Console.WriteLine("Generated files:");
             string[] relativeNamesEnum = new string[files.Length];
             string[] relativeNamesEnumConverter = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]));
+                EnumGenerator generator = new EnumGenerator(File.ReadAllText(files[i]), configText);
                 string enumText = generator.GetEnumText();
                 string enumConverterText = generator.GetEnumStringConverterText(true);
                 string fileRelativeNameEnum = $"Domain\\Enums\\{generator.NameOfEnum}.cs";

@@ -1,0 +1,14 @@
+﻿Коммуникации
+Communications
+Теплосеть
+HeatingNetwork
+Водопровод
+WaterPipeline
+Газопровод
+GasPipeline
+Электрокабель 
+ElectricCable
+Кабель связи
+CommunicationCable
+Телекабель
+Telecable

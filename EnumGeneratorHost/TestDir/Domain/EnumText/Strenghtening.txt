@@ -1,0 +1,20 @@
+﻿Укрепление
+Strenghtening
+Одерновка
+Odernovka
+Каменная наброска, мощение
+RoughPaving
+Монолитный бетон
+MonolithicConcrete
+Сборные ж.б. плиты
+FerroconcreteSlabs
+Тюфяки, матрасы-рено
+Mattresses
+Решетчатые ж.б. конструкции с щебеночной засыпкой
+LatticeFerroconcreteGravelBackfill
+Габионы
+Gabions
+Геотекстиль с щебеночной засыпкой
+GeotextileGravelBackfill
+Нет укрепления
+None

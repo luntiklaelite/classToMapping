@@ -1,6 +1,4 @@
-﻿ITS.Core.Bridges.Domain.Enums
-ITS.Core.Bridges.Domain.EnumStrings
-Тип ограждения
+﻿Тип ограждения
 ProtectionType
 Парапетное
 Parapet

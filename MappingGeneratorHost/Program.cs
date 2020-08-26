@@ -10,9 +10,6 @@ namespace classToMapping
 {
     class Program
     {
-        //TO DO: сделать разбор входных параметров приложения, 
-        //в качестве параметров могут быть пути файлов с исходным кодом,
-        //названия свойств, которые не надо вносить в маппинг и другое
         static void Main(string[] args)
         {
             CreateOutputDirectorys();
