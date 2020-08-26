@@ -20,7 +20,7 @@
 		<!--many-to-one column="input_edge_info_id" name="InputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/-->
 		<!--many-to-one column="output_edge_info_id" name="OutputEdgeInfo" class="ITS.Core.RoadPipes.Domain.PipeEdgeInfo"/-->
 		<property column="pipe_status" name="PipeStatus" type="NHibernate.Type.EnumStringType`1[[ITS.Core.RoadPipes.Domain.Enums.PipeStatus, ITS.Core.RoadPipes]], NHibernate" not-null="true"/>
-		<property column="feature_object" name="FeatureObject" type="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
+		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
 		<property column="established_org" name="EstablishedOrg" type="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<property column="service_org" name="ServiceOrg" type="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 	</class>

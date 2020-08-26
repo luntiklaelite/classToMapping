@@ -15,7 +15,7 @@ namespace GeneratorsLibrary
     //TO DO: сделать поддержку связи многие-ко-многим
     public class MappingGenerator
     {
-        public static Dictionary<string, string> TypesForMappings = new Dictionary<string, string>()
+        public static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
             {"short","int16"},
             {"int","int"},
@@ -31,6 +31,9 @@ namespace GeneratorsLibrary
             {"DateTime","date"},
             {"DateTime?","System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"},
             {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
+        };
+        public static Dictionary<string, string> CustomTypesForMappings = new Dictionary<string, string>()
+        {
             {"FeatureObject","ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"},
         };
         public List<string> NotMappedPropertyNames { get; private set; } = new List<string>()
@@ -113,9 +116,9 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t</id>");
                 foreach (var a in propertiesWithPredefinedTypes)
                 {
-                    if (TypesForMappings.ContainsKey(a.Type.ToString()))
+                    if (PredefinedTypesForMappings.ContainsKey(a.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" type=\"{TypesForMappings[a.Type.ToString()]}\" />");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" type=\"{PredefinedTypesForMappings[a.Type.ToString()]}\" />");
                     }
                     else
                     {
@@ -125,9 +128,13 @@ namespace GeneratorsLibrary
                 foreach (var a in propertiesWithCustomTypes)
                 {
                     string identifier = a.Identifier.ToString();
-                    if (TypesForMappings.ContainsKey(a.Type.ToString()))
+                    if (PredefinedTypesForMappings.ContainsKey(a.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{TypesForMappings[a.Type.ToString()]}\"/>");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{PredefinedTypesForMappings[a.Type.ToString()]}\"/>");
+                    }
+                    else if (CustomTypesForMappings.ContainsKey(a.Type.ToString()))
+                    {
+                        stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[a.Type.ToString()]}\"/>");
                     }
                     else if (enumNames.Contains(a.Type.ToString()))
                     {
