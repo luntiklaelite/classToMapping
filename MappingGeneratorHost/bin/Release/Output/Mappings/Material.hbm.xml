@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class lazy="false" name="ITS.Core.RoadPipes.Domain.Material, ITS.Core.RoadPipes" table="rp_material">
+	<class lazy="false" name="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges" table="bridges_material">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>

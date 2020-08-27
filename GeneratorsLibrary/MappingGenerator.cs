@@ -15,7 +15,7 @@ namespace GeneratorsLibrary
     //TO DO: сделать поддержку связи многие-ко-многим
     public class MappingGenerator
     {
-        public static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
+        private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
             {"short","int16"},
             {"int","int"},
@@ -32,7 +32,7 @@ namespace GeneratorsLibrary
             {"DateTime?","System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"},
             {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
         };
-        public static Dictionary<string, string> CustomTypesForMappings = new Dictionary<string, string>()
+        private static Dictionary<string, string> CustomTypesForMappings = new Dictionary<string, string>()
         {
             {"FeatureObject","ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"},
         };
@@ -86,6 +86,27 @@ namespace GeneratorsLibrary
             root = tree.GetCompilationUnitRoot();
         }
 
+        public List<KeyValuePair<string, string>> GenerateMappings()
+        {
+            if (root == null)
+            {
+                return null;
+            }
+            var result = new List<KeyValuePair<string, string>>();
+            var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                .Where(cls => cls.Parent is NamespaceDeclarationSyntax); //кроме вложенных классов
+            var enums = root.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                .Where(en => en.Parent is NamespaceDeclarationSyntax); //кроме вложенных перечислений
+            foreach (var cls in classes)
+            {
+                var kvp = GenerateMapping(cls, enums);
+                if (kvp != null)
+                {
+                    result.Add(kvp.Value);
+                }
+            }
+            return result;
+        }
         private KeyValuePair<string, string>? GenerateMapping(ClassDeclarationSyntax classDecl, IEnumerable<EnumDeclarationSyntax> enums)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -140,7 +161,7 @@ namespace GeneratorsLibrary
                     {
                         var thisType = enums.First(n => n.Identifier.ToString() == a.Type.ToString());
                         var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{identifier}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{a.Type.ToString()}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>");
                     }
                     else
                     {
@@ -153,25 +174,7 @@ namespace GeneratorsLibrary
             }
             return null;
         }
-        public List<KeyValuePair<string, string>> GenerateMappings()
-        {
-            if (root == null)
-            {
-                return null;
-            }
-            var result = new List<KeyValuePair<string, string>>();
-            var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
-            var enums = root.DescendantNodes().OfType<EnumDeclarationSyntax>();
-            foreach (var cls in classes)
-            {
-                var kvp = GenerateMapping(cls,enums);
-                if (kvp != null)
-                {
-                    result.Add(kvp.Value);
-                }
-            }
-            return result;
-        }
+        
         /// <summary>
         /// Возвращает true, если свойство имеет сеттер
         /// </summary>

@@ -21,11 +21,15 @@ namespace classToMapping
             var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
             MappingGenerator gen = new MappingGenerator(args[1], args[2], files);
             var mappings = gen.GenerateMappings();
+            Console.WriteLine("Generated files:");
             foreach (var keyValuePair in mappings)
             {
-                File.WriteAllText(Environment.CurrentDirectory + $"\\Output\\Mappings\\{keyValuePair.Key}",
+                var path = Environment.CurrentDirectory + $"\\Output\\Mappings\\{keyValuePair.Key}";
+                Console.WriteLine(path);
+                File.WriteAllText(path,
                     keyValuePair.Value);
             }
+            Console.ReadLine();
         }
 
         private static void CreateOutputDirectorys()
