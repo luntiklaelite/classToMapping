@@ -30,11 +30,11 @@ namespace GeneratorsLibrary
             {"Guid","Guid"},
             {"DateTime","date"},
             {"DateTime?","System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"},
-            {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
         };
         private static Dictionary<string, string> CustomTypesForMappings = new Dictionary<string, string>()
         {
             {"FeatureObject","ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"},
+            {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
         };
         public List<string> NotMappedPropertyNames { get; private set; } = new List<string>()
         {
