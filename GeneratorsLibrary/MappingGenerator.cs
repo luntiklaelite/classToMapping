@@ -85,7 +85,6 @@ namespace GeneratorsLibrary
             SyntaxTree tree = CSharpSyntaxTree.ParseText(textForParsing);
             root = tree.GetCompilationUnitRoot();
         }
-
         public List<KeyValuePair<string, string>> GenerateMappings()
         {
             if (root == null)
