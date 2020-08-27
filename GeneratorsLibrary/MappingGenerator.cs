@@ -99,6 +99,11 @@ namespace GeneratorsLibrary
                 .Where(en => en.Parent is NamespaceDeclarationSyntax); //кроме вложенных перечислений
             foreach (var cls in classes)
             {
+                CustomTypesForMappings.Add(cls.Identifier.ToString(),
+                    $"{(cls.Parent as NamespaceDeclarationSyntax).Name}.{cls.Identifier.ToString()}, {AssemblyName}");
+            }
+            foreach (var cls in classes)
+            {
                 var kvp = GenerateMapping(cls, enums);
                 if (kvp != null)
                 {
@@ -135,37 +140,37 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t<id name=\"ID\" column=\"id\" type=\"long\" unsaved-value=\"0\">");
                 stringBuilder.AppendLine($"\t\t\t<generator class=\"hilo\" />");
                 stringBuilder.AppendLine($"\t\t</id>");
-                foreach (var a in propertiesWithPredefinedTypes)
+                foreach (var prop in propertiesWithPredefinedTypes)
                 {
-                    if (PredefinedTypesForMappings.ContainsKey(a.Type.ToString()))
+                    if (PredefinedTypesForMappings.ContainsKey(prop.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" type=\"{PredefinedTypesForMappings[a.Type.ToString()]}\" />");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{PredefinedTypesForMappings[prop.Type.ToString()]}\" />");
                     }
                     else
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(a.Identifier.ToString())}\" name=\"{a.Identifier}\" type=\"{a.Type.ToString()}\" />");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" />");
                     }
                 }
-                foreach (var a in propertiesWithCustomTypes)
+                foreach (var prop in propertiesWithCustomTypes)
                 {
-                    string identifier = a.Identifier.ToString();
-                    if (PredefinedTypesForMappings.ContainsKey(a.Type.ToString()))
+                    string identifier = prop.Identifier.ToString();
+                    if (PredefinedTypesForMappings.ContainsKey(prop.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{PredefinedTypesForMappings[a.Type.ToString()]}\"/>");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{PredefinedTypesForMappings[prop.Type.ToString()]}\"/>");
                     }
-                    else if (CustomTypesForMappings.ContainsKey(a.Type.ToString()))
+                    else if (CustomTypesForMappings.ContainsKey(prop.Type.ToString()))
                     {
-                        stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[a.Type.ToString()]}\"/>");
+                        stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[prop.Type.ToString()]}\"/>");
                     }
-                    else if (enumNames.Contains(a.Type.ToString()))
+                    else if (enumNames.Contains(prop.Type.ToString()))
                     {
-                        var thisType = enums.First(n => n.Identifier.ToString() == a.Type.ToString());
+                        var thisType = enums.First(n => n.Identifier.ToString() == prop.Type.ToString());
                         var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{a.Type.ToString()}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>");
+                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{prop.Type.ToString()}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>");
                     }
                     else
                     {
-                        stringBuilder.AppendLine($"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{a.Type.ToString()}\"/-->");
+                        stringBuilder.AppendLine($"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{prop.Type.ToString()}, {AssemblyName}\"/-->");
                     }
                 }
                 stringBuilder.AppendLine($"\t</class>");
