@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="Test.Test, ITS.Core.Bridges" table="bridges_test">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="a_k_l_j1" name="AKLJ1" type="int" />
+		<property column="a_k_l_j4" name="AKLJ4" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib" />
+		<property column="a_k_l_j5" name="AKLJ5" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib" />
+		<property column="a_k_l_j7" name="AKLJ7" type="System.Nullable<int>" />
+		<property column="a_k_l_j2" name="AKLJ2" type="int"/>
+		<property column="a_k_l_j3" name="AKLJ3" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib"/>
+		<property column="a_k_l_j6" name="AKLJ6" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib"/>
+		<property column="a_k_l_j7" name="AKLJ7" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib"/>
+		<property column="a_k_l_j8" name="AKLJ8" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib"/>
+		<property column="a_k_l_j8" name="AKLJ8" type="System.Nullable`1[[System.Int32, mscorlib]], mscorlib"/>
+		<!--many-to-one column="a_k_l_j8_id" name="AKLJ8" class="Test.Nullable<System.Int32>, ITS.Core.Bridges"/-->
+	</class>
+</hibernate-mapping>

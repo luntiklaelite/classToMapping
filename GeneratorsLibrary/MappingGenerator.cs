@@ -17,19 +17,79 @@ namespace GeneratorsLibrary
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
+            {"Int16","int16"},
             {"short","int16"},
+            {"short?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
+            {"Int16?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
+            {"Nullable<Int16>","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
+            {"Nullable<short>","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
+
+            {"Int32","int"},
             {"int","int"},
+            {"int?","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
+            {"Int32?","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
+            {"Nullable<int>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
+            {"Nullable<Int32>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
+
+            {"Int64","int64"},
             {"long","int64"},
+            {"long?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+            {"Int64?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+            {"Nullable<long>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+            {"Nullable<int64>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+
+            {"Single","single"},
             {"float","single"},
+            {"float?","System.Nullable`1[[System.Single, mscorlib]], mscorlib"},
+            {"Single?","System.Nullable`1[[System.Single, mscorlib]], mscorlib"},
+            {"Nullable<float>","System.Nullable`1[[System.Single, mscorlib]], mscorlib"},
+            {"Nullable<Single>","System.Nullable`1[[System.Single, mscorlib]], mscorlib"},
+
+            {"Double","double"},
             {"double","double"},
+            {"double?","System.Nullable`1[[System.Double, mscorlib]], mscorlib"},
+            {"Double?","System.Nullable`1[[System.Double, mscorlib]], mscorlib"},
+            {"Nullable<double>","System.Nullable`1[[System.Double, mscorlib]], mscorlib"},
+            {"Nullable<Double>","System.Nullable`1[[System.Double, mscorlib]], mscorlib"},
+
+            {"Decimal","decimal"},
             {"decimal","decimal"},
+            {"decimal?","System.Nullable`1[[System.Decimal, mscorlib]], mscorlib"},
+            {"Decimal?","System.Nullable`1[[System.Decimal, mscorlib]], mscorlib"},
+            {"Nullable<decimal>","System.Nullable`1[[System.Decimal, mscorlib]], mscorlib"},
+            {"Nullable<Decimal>","System.Nullable`1[[System.Decimal, mscorlib]], mscorlib"},
+
             {"string","string"},
+            {"String","string"},
+
             {"byte","byte"},
+            {"Byte","byte"},
+            {"byte?","System.Nullable`1[[System.Byte, mscorlib]], mscorlib"},
+            {"Byte?","System.Nullable`1[[System.Byte, mscorlib]], mscorlib"},
+            {"Nullable<byte>","System.Nullable`1[[System.Byte, mscorlib]], mscorlib"},
+            {"Nullable<Byte>","System.Nullable`1[[System.Byte, mscorlib]], mscorlib"},
+
             {"char","char"},
+            {"Char","char"},
+            {"char?","System.Nullable`1[[System.Char, mscorlib]], mscorlib"},
+            {"Char?","System.Nullable`1[[System.Char, mscorlib]], mscorlib"},
+            {"Nullable<char>","System.Nullable`1[[System.Char, mscorlib]], mscorlib"},
+            {"Nullable<Char>","System.Nullable`1[[System.Char, mscorlib]], mscorlib"},
+
             {"bool","bool"},
+            {"Boolean","bool"},
+            {"bool?","System.Nullable`1[[System.Boolean, mscorlib]], mscorlib"},
+            {"Boolean?","System.Nullable`1[[System.Boolean, mscorlib]], mscorlib"},
+            {"Nullable<bool>","System.Nullable`1[[System.Boolean, mscorlib]], mscorlib"},
+            {"Nullable<Boolean>","System.Nullable`1[[System.Boolean, mscorlib]], mscorlib"},
+
             {"Guid","Guid"},
+            {"Guid?","System.Nullable`1[[System.Guid, mscorlib]], mscorlib"},
+            {"Nullable<Guid>","System.Nullable`1[[System.Guid, mscorlib]], mscorlib"},
+
             {"DateTime","date"},
             {"DateTime?","System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"},
+            {"Nullable<DateTime>","System.Nullable`1[[System.DateTime, mscorlib]], mscorlib"},
         };
         private static Dictionary<string, string> CustomTypesForMappings = new Dictionary<string, string>()
         {
@@ -141,36 +201,15 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t</id>");
                 foreach (var prop in propertiesWithPredefinedTypes)
                 {
-                    if (PredefinedTypesForMappings.ContainsKey(prop.Type.ToString()))
-                    {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{PredefinedTypesForMappings[prop.Type.ToString()]}\" />");
-                    }
-                    else
-                    {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" />");
-                    }
+                    string line = GetPredefinedPropLine(prop);
+                    stringBuilder.AppendLine(line);
                 }
                 foreach (var prop in propertiesWithCustomTypes)
                 {
                     string identifier = prop.Identifier.ToString();
-                    if (PredefinedTypesForMappings.ContainsKey(prop.Type.ToString()))
-                    {
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{PredefinedTypesForMappings[prop.Type.ToString()]}\"/>");
-                    }
-                    else if (CustomTypesForMappings.ContainsKey(prop.Type.ToString()))
-                    {
-                        stringBuilder.AppendLine($"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[prop.Type.ToString()]}\"/>");
-                    }
-                    else if (enumNames.Contains(prop.Type.ToString()))
-                    {
-                        var thisType = enums.First(n => n.Identifier.ToString() == prop.Type.ToString());
-                        var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                        stringBuilder.AppendLine($"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{prop.Type.ToString()}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>");
-                    }
-                    else
-                    {
-                        stringBuilder.AppendLine($"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{prop.Type.ToString()}, {AssemblyName}\"/-->");
-                    }
+                    string type = GetTypeName(prop.Type);
+                    string line = GetCustomPropLine(enums, @namespace, enumNames, identifier, type);
+                    stringBuilder.AppendLine(line);
                 }
                 stringBuilder.AppendLine($"\t</class>");
                 stringBuilder.AppendLine($"</hibernate-mapping>");
@@ -178,7 +217,41 @@ namespace GeneratorsLibrary
             }
             return null;
         }
-        
+
+        public string GetPredefinedPropLine(PropertyDeclarationSyntax prop)
+        {
+            if (PredefinedTypesForMappings.ContainsKey(prop.Type.ToString()))
+            {
+                return $"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{PredefinedTypesForMappings[prop.Type.ToString()]}\" />";
+            }
+            else
+            {
+                return  $"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" />";
+            }
+        }
+        public string GetCustomPropLine(IEnumerable<EnumDeclarationSyntax> enums, NamespaceDeclarationSyntax @namespace, List<string> enumNames, string identifier, string type)
+        {
+            if (PredefinedTypesForMappings.ContainsKey(type))
+            {
+                return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{PredefinedTypesForMappings[type]}\"/>";
+            }
+            else if (CustomTypesForMappings.ContainsKey(type))
+            {
+                return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\"/>";
+            }
+            else if (enumNames.Contains(type))
+            {
+                var thisType = enums.First(n => n.Identifier.ToString() == type);
+                var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
+                return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{type}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>";
+            }
+            else
+            {
+                // добавить поддержку IList<>
+                return $"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{type}, {AssemblyName}\"/-->";
+            }
+        }
+
         /// <summary>
         /// Возвращает true, если свойство имеет сеттер
         /// </summary>
@@ -189,6 +262,21 @@ namespace GeneratorsLibrary
             return c.AccessorList != null &&
                 (c.AccessorList.ChildNodes().Select(prop => prop.ToString()).Contains("set;") ||
                 c.AccessorList.ChildNodes().OfType<AccessorDeclarationSyntax>().Count() > 1);
+        }
+        private static string GetTypeName(TypeSyntax fullType)
+        {
+            if (fullType is QualifiedNameSyntax qualifiedNameSyntax)
+            {
+                //if (qualifiedNameSyntax.Right is GenericNameSyntax genericNameSyntax)
+                //{
+                //    if (genericNameSyntax.TypeArgumentList?.Arguments?.Count > 0)
+                //    {
+                //        genericNameSyntax.TypeArgumentList.Arguments
+                //    }
+                //}
+                return qualifiedNameSyntax.Right.ToString();
+            }
+            return fullType.ToString();
         }
     }
 }

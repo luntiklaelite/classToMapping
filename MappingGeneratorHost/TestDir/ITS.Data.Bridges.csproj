@@ -212,4 +212,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:28.08.2020 11:45:15-->
+    <EmbeddedResource Include="Mappings\Test.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
