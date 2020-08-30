@@ -18,8 +18,23 @@ namespace classToMapping
                 Console.WriteLine("Too few arguments.");
                 return;
             }
-            var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
-            MappingGenerator gen = new MappingGenerator(args[2], args[3], files);
+            //var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
+            //MappingGenerator gen = new MappingGenerator(args[2], args[3], files);
+            var gen = new MappingGenerator(args[2], args[3], @"using System;
+namespace Test{
+    class Test:DomainObject<long>{
+        public int AKLJ1{get;set;}
+        public Int32 AKLJ2{get;set;}
+        public Int32? AKLJ3{get;set;}
+        public int? AKLJ4{get;set;}
+        public Nullable<int> AKLJ5{get;set;}
+        public Nullable<Int32> AKLJ6{get;set;}
+        public System.Nullable<int> AKLJ7{get;set;}
+        public System.Nullable<Int32> AKLJ8{get;set;}
+        public System.Flkd.Fkk.Nullable<Int32> AKLJ8{get;set;}
+        public System.Flkd.Fkk.Nullable<System.Int32> AKLJ8{get;set;}
+    }
+}");
             var mappings = gen.GenerateMappings();
             Console.WriteLine("Generated files:");
             var relPaths = new string[mappings.Count];
