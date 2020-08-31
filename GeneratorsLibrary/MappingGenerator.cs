@@ -36,7 +36,7 @@ namespace GeneratorsLibrary
             {"long?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Int64?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Nullable<long>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
-            {"Nullable<int64>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+            {"Nullable<Int64>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
 
             {"Single","single"},
             {"float","single"},
@@ -197,6 +197,7 @@ namespace GeneratorsLibrary
                 baseList != null && baseList.Contains("DomainObject<long>"))
             {
                 stringBuilder.AppendLine($"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+                stringBuilder.AppendLine($"<!--Generated:{DateTime.Now}-->");
                 stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
                 stringBuilder.AppendLine($"\t<class lazy=\"false\" name=\"{@namespace.Name}.{classDecl.Identifier.ToString()}, {AssemblyName}\"" +
                     $" table=\"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}\">");

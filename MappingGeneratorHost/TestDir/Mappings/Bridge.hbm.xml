@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Generated:31.08.2020 13:49:58-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -8,6 +9,8 @@
 		<property column="first_obstacle_name" name="FirstObstacleName" type="string" />
 		<property column="second_obstacle_name" name="SecondObstacleName" type="string" />
 		<property column="road_name" name="RoadName" type="string" />
+		<property column="subject_code" name="SubjectCode" type="int16" />
+		<property column="territorial_road_control_code" name="TerritorialRoadControlCode" type="int" />
 		<property column="road_code" name="RoadCode" type="string" />
 		<property column="kilometer" name="Kilometer" type="int" />
 		<property column="quantity_line_bridge" name="QuantityLineBridge" type="int" />
@@ -22,12 +25,13 @@
 		<property column="underbridge_clearance" name="UnderbridgeClearance" type="single" />
 		<property column="length" name="Length" type="single" />
 		<property column="hole" name="Hole" type="single" />
-		<property column="height_dimension" name="HeightDimension" type="single" />
+		<property column="height_dimension" name="HeightDimension" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="width_dimension_b" name="WidthDimensionB" type="single" />
 		<property column="width_dimension_t1" name="WidthDimensionT1" type="single" />
 		<property column="width_dimension_t2" name="WidthDimensionT2" type="single" />
 		<property column="width_dimension_c" name="WidthDimensionC" type="single" />
 		<property column="width_dimension_c1" name="WidthDimensionC1" type="single" />
+		<property column="width_dimension_c2" name="WidthDimensionC2" type="single" />
 		<property column="width_dimension_вriveway_count" name="WidthDimensionВrivewayCount" type="int" />
 		<property column="width_dimension_вriveway_width" name="WidthDimensionВrivewayWidth" type="single" />
 		<property column="design_burden" name="DesignBurden" type="string" />
@@ -36,7 +40,7 @@
 		<property column="slope_longitudinal" name="SlopeLongitudinal" type="single" />
 		<property column="slope_lateral" name="SlopeLateral" type="single" />
 		<property column="railings_height" name="RailingsHeight" type="single" />
-		<property column="adapter_plates_length" name="AdapterPlatesLength" type="single" />
+		<property column="adapter_plates_length" name="AdapterPlatesLength" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="road_signs_before" name="RoadSignsBefore" type="bool" />
 		<property column="road_signs_after" name="RoadSignsAfter" type="bool" />
 		<property column="info_of_reconstruction" name="InfoOfReconstruction" type="string" />
