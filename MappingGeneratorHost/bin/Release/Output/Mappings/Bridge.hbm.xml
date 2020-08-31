@@ -44,37 +44,37 @@
 		<property column="security" name="Security" type="bool" />
 		<property column="notes" name="Notes" type="string" />
 		<property column="num_line_road" name="NumLineRoad" type="string" />
-		<property column="first_obstacle_type" name="FirstObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
-		<property column="second_obstacle_type" name="SecondObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
-		<property column="road_category" name="RoadCategory" type="ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges" not-null="true"/>
+		<property column="first_obstacle_type" name="FirstObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="second_obstacle_type" name="SecondObstacleType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="road_category" name="RoadCategory" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<property column="construction_year" name="ConstructionYear" type="date"/>
 		<property column="reconstruction_year" name="ReconstructionYear" type="date"/>
 		<property column="repairs_year" name="RepairsYear" type="date"/>
-		<property column="location_in_plan" name="LocationInPlan" type="ITS.Core.Bridges.Domain.Enums.LocationInPlan, ITS.Core.Bridges" not-null="true"/>
-		<property column="cover_type" name="CoverType" type="ITS.Core.Bridges.Domain.Enums.CoverType, ITS.Core.Bridges" not-null="true"/>
-		<property column="drainage_type" name="DrainageType" type="ITS.Core.Bridges.Domain.Enums.DrainageType, ITS.Core.Bridges" not-null="true"/>
-		<property column="expansion_joints_type" name="ExpansionJointsType" type="ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges" not-null="true"/>
+		<property column="location_in_plan" name="LocationInPlan" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.LocationInPlan, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="cover_type" name="CoverType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.CoverType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="drainage_type" name="DrainageType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.DrainageType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="expansion_joints_type" name="ExpansionJointsType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="protection_on_bridge_id" name="ProtectionOnBridge" class="ITS.Core.Bridges.Domain.Protection, ITS.Core.Bridges"/>
 		<many-to-one column="protection_on_approach_id" name="ProtectionOnApproach" class="ITS.Core.Bridges.Domain.Protection, ITS.Core.Bridges"/>
-		<property column="sidewalks" name="Sidewalks" type="ITS.Core.Bridges.Domain.Enums.SidewalkType, ITS.Core.Bridges" not-null="true"/>
-		<property column="railings" name="Railings" type="ITS.Core.Bridges.Domain.Enums.RailingsType, ITS.Core.Bridges" not-null="true"/>
+		<property column="sidewalks" name="Sidewalks" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.SidewalkType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="railings" name="Railings" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.RailingsType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="start_bridge_side_id" name="StartBridgeSide" class="ITS.Core.Bridges.Domain.BridgeSide, ITS.Core.Bridges"/>
 		<many-to-one column="end_bridge_side_id" name="EndBridgeSide" class="ITS.Core.Bridges.Domain.BridgeSide, ITS.Core.Bridges"/>
-		<property column="regulatory_structures" name="RegulatoryStructures" type="ITS.Core.Bridges.Domain.Enums.RegulatoryStructures, ITS.Core.Bridges" not-null="true"/>
-		<property column="cones_strengthening" name="ConesStrengthening" type="ITS.Core.Bridges.Domain.Enums.Strenghtening, ITS.Core.Bridges" not-null="true"/>
+		<property column="regulatory_structures" name="RegulatoryStructures" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.RegulatoryStructures, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="cones_strengthening" name="ConesStrengthening" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Strenghtening, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<!--many-to-one column="adapter_plates_id" name="AdapterPlates" class="ITS.Core.Bridges.Domain.AdapterPlatesAvailability, ITS.Core.Bridges"/-->
 		<many-to-one column="project_organization_id" name="ProjectOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<many-to-one column="building_company_id" name="BuildingCompany" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<many-to-one column="exploit_organization_id" name="ExploitOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
-		<property column="communications" name="Communications" type="ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges" not-null="true"/>
-		<property column="arrangements" name="Arrangements" type="ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges" not-null="true"/>
+		<property column="communications" name="Communications" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="arrangements" name="Arrangements" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<property column="date_view" name="DateView" type="date"/>
 		<!--many-to-one column="supports_id" name="Supports" class="ITS.Core.Bridges.Domain.IList<BridgeSupport>, ITS.Core.Bridges"/-->
 		<!--many-to-one column="span_structures_id" name="SpanStructures" class="ITS.Core.Bridges.Domain.IList<SpanStructure>, ITS.Core.Bridges"/-->
-		<property column="status" name="Status" type="ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges" not-null="true"/>
+		<property column="status" name="Status" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
-		<property column="quality_bridge_type" name="QualityBridgeType" type="ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges" not-null="true"/>
-		<property column="construction_type" name="ConstructionType" type="ITS.Core.Bridges.Domain.Enums.ConstructionType, ITS.Core.Bridges" not-null="true"/>
-		<property column="move_type" name="MoveType" type="ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges" not-null="true"/>
+		<property column="quality_bridge_type" name="QualityBridgeType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="construction_type" name="ConstructionType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.ConstructionType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="move_type" name="MoveType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 	</class>
 </hibernate-mapping>

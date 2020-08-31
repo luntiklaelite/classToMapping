@@ -96,15 +96,21 @@ namespace GeneratorsLibrary
             {"FeatureObject","ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"},
             {"Organization","ITS.Core.Domain.Organizations.Organization, ITS.Core"},
         };
-        public List<string> NotMappedPropertyNames { get; private set; } = new List<string>()
+        private CompilationUnitSyntax root;
+        private string textForParsing;
+
+        public List<string> NotMappedPropertyNames { get; set; } = new List<string>()
         {
             "Photos",
             "PhotoableType",
         };
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
-        private CompilationUnitSyntax root;
-        private string textForParsing;
+        /// <summary>
+        /// Отображать ли перечисления в байт, по-умолчанию false
+        /// </summary>
+        public bool MapEnumToByte { get; set; } = false;
+
         public MappingGenerator(){}
         public MappingGenerator(string assemblyName, string tablePrefix)
         {
@@ -112,15 +118,13 @@ namespace GeneratorsLibrary
             TablePrefix = tablePrefix;
         }
         public MappingGenerator(string assemblyName, string tablePrefix, string[] paths)
+            :this(assemblyName, tablePrefix)
         {
-            AssemblyName = assemblyName;
-            TablePrefix = tablePrefix;
             SetParsedTextFromFiles(paths);
         }
         public MappingGenerator(string assemblyName, string tablePrefix, string code)
+            : this(assemblyName, tablePrefix)
         {
-            AssemblyName = assemblyName;
-            TablePrefix = tablePrefix;
             SetParsedTextFromCode(code);
         }
         public void SetParsedTextFromFiles(string[] paths)
@@ -243,7 +247,11 @@ namespace GeneratorsLibrary
             {
                 var thisType = enums.First(n => n.Identifier.ToString() == type);
                 var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{type}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>";
+                if (!MapEnumToByte)
+                {
+                    return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{type}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>";
+                }
+                return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"{enumNamespace}.{type}, {AssemblyName}\" not-null=\"true\"/>";
             }
             else
             {

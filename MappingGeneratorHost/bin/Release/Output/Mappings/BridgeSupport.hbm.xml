@@ -17,8 +17,8 @@
 		<property column="pile_cross_section_width" name="PileCrossSectionWidth" type="single" />
 		<property column="pile_cross_section_height" name="PileCrossSectionHeight" type="single" />
 		<property column="notes" name="Notes" type="string" />
-		<property column="support_type" name="SupportType" type="ITS.Core.Bridges.Domain.Enums.BridgeSupportType, ITS.Core.Bridges" not-null="true"/>
-		<property column="foundation_type" name="FoundationType" type="ITS.Core.Bridges.Domain.Enums.FoundationType, ITS.Core.Bridges" not-null="true"/>
+		<property column="support_type" name="SupportType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.BridgeSupportType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
+		<property column="foundation_type" name="FoundationType" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.FoundationType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
 		<many-to-one column="typical_project_id" name="TypicalProject" class="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges"/>
 	</class>

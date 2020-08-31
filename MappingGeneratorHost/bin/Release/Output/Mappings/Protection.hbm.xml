@@ -5,6 +5,6 @@
 			<generator class="hilo" />
 		</id>
 		<property column="height" name="Height" type="single" />
-		<property column="type" name="Type" type="ITS.Core.Bridges.Domain.Enums.ProtectionType, ITS.Core.Bridges" not-null="true"/>
+		<property column="type" name="Type" type="NHibernate.Type.EnumStringType`1[[ITS.Core.Bridges.Domain.Enums.ProtectionType, ITS.Core.Bridges]], NHibernate" not-null="true"/>
 	</class>
 </hibernate-mapping>
