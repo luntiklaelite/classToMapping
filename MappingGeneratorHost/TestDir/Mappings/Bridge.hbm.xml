@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:31.08.2020 13:49:58-->
+<!--Generated:01.09.2020 11:01:10-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -9,7 +9,7 @@
 		<property column="first_obstacle_name" name="FirstObstacleName" type="string" />
 		<property column="second_obstacle_name" name="SecondObstacleName" type="string" />
 		<property column="road_name" name="RoadName" type="string" />
-		<property column="subject_code" name="SubjectCode" type="int16" />
+		<property column="subject_code" name="SubjectCode" type="short" />
 		<property column="territorial_road_control_code" name="TerritorialRoadControlCode" type="int" />
 		<property column="road_code" name="RoadCode" type="string" />
 		<property column="kilometer" name="Kilometer" type="int" />
@@ -51,9 +51,9 @@
 		<property column="first_obstacle_type" name="FirstObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
 		<property column="second_obstacle_type" name="SecondObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
 		<property column="road_category" name="RoadCategory" type="ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges" not-null="true"/>
-		<property column="construction_year" name="ConstructionYear" type="date"/>
-		<property column="reconstruction_year" name="ReconstructionYear" type="date"/>
-		<property column="repairs_year" name="RepairsYear" type="date"/>
+		<property column="construction_date" name="ConstructionDate" type="date"/>
+		<property column="reconstruction_date" name="ReconstructionDate" type="date"/>
+		<property column="repairs_date" name="RepairsDate" type="date"/>
 		<property column="location_in_plan" name="LocationInPlan" type="ITS.Core.Bridges.Domain.Enums.LocationInPlan, ITS.Core.Bridges" not-null="true"/>
 		<property column="cover_type" name="CoverType" type="ITS.Core.Bridges.Domain.Enums.CoverType, ITS.Core.Bridges" not-null="true"/>
 		<property column="drainage_type" name="DrainageType" type="ITS.Core.Bridges.Domain.Enums.DrainageType, ITS.Core.Bridges" not-null="true"/>

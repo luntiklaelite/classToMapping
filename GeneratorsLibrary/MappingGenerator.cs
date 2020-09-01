@@ -17,8 +17,8 @@ namespace GeneratorsLibrary
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
-            {"Int16","int16"},
-            {"short","int16"},
+            {"Int16","short"},
+            {"short","short"},
             {"short?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
             {"Int16?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
             {"Nullable<Int16>","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
@@ -31,8 +31,8 @@ namespace GeneratorsLibrary
             {"Nullable<int>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
             {"Nullable<Int32>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
 
-            {"Int64","int64"},
-            {"long","int64"},
+            {"Int64","long"},
+            {"long","long"},
             {"long?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Int64?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Nullable<long>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
@@ -231,7 +231,7 @@ namespace GeneratorsLibrary
             }
             else
             {
-                return  $"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" />";
+                return  $"\t\t<!--property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" /-->";
             }
         }
         public string GetCustomPropLine(IEnumerable<EnumDeclarationSyntax> enums, NamespaceDeclarationSyntax @namespace, List<string> enumNames, string identifier, string type)

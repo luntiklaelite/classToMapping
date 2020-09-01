@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:31.08.2020 13:49:58-->
+<!--Generated:01.09.2020 11:01:10-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges" table="bridges_bridge_support">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="support_type_additional_info" name="SupportTypeAdditionalInfo" type="string" />
-		<property column="heights" name="Heights" type="float[]" />
+		<!--property column="heights" name="Heights" type="float[]" /-->
 		<property column="laying_depth" name="LayingDepth" type="single" />
 		<property column="massive_part_size_along" name="MassivePartSizeAlong" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="massive_part_size_across" name="MassivePartSizeAcross" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
@@ -14,7 +14,7 @@
 		<property column="max_distance_between_axis" name="MaxDistanceBetweenAxis" type="single" />
 		<property column="scheme_k_left" name="SchemeKLeft" type="single" />
 		<property column="scheme_k_right" name="SchemeKRight" type="single" />
-		<property column="scheme_pile_distances" name="SchemePileDistances" type="float[]" />
+		<!--property column="scheme_pile_distances" name="SchemePileDistances" type="float[]" /-->
 		<property column="scheme_pile_row_distance1" name="SchemePileRowDistance1" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="scheme_pile_row_distance2" name="SchemePileRowDistance2" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="crossbar_width" name="CrossbarWidth" type="single" />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:31.08.2020 13:49:58-->
+<!--Generated:01.09.2020 11:01:10-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges" table="bridges_span_structure">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -7,7 +7,7 @@
 		</id>
 		<property column="cross_scheme_ka" name="CrossSchemeKa" type="single" />
 		<property column="cross_scheme_kb" name="CrossSchemeKb" type="single" />
-		<property column="cross_scheme_pile_distances" name="CrossSchemePileDistances" type="float[]" />
+		<!--property column="cross_scheme_pile_distances" name="CrossSchemePileDistances" type="float[]" /-->
 		<property column="plate_thikness" name="PlateThikness" type="single" />
 		<property column="roadway_clothing_thikness" name="RoadwayClothingThikness" type="single" />
 		<property column="roadway_clothing_add_layer_thikness" name="RoadwayClothingAddLayerThikness" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
