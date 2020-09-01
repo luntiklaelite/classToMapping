@@ -17,6 +17,8 @@ namespace GeneratorsLibrary
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
+            {"float[]", "System.Byte[], mscorlib"},
+
             {"Int16","short"},
             {"short","short"},
             {"short?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
@@ -113,7 +115,7 @@ namespace GeneratorsLibrary
         /// <summary>
         /// Отображать ли перечисления в байт, по-умолчанию false
         /// </summary>
-        public bool MapEnumToByte { get; set; } = false;
+        public bool MapEnumToIntegerType { get; set; } = false;
 
         public MappingGenerator(){}
         public MappingGenerator(string assemblyName, string tablePrefix)
@@ -263,7 +265,7 @@ namespace GeneratorsLibrary
             {
                 var thisType = enums.First(n => n.Identifier.ToString() == type);
                 var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                if (!MapEnumToByte)
+                if (!MapEnumToIntegerType)
                 {
                     return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{type}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>";
                 }

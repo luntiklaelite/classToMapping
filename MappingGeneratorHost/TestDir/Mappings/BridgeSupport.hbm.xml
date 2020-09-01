@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:01.09.2020 12:23:33-->
+<!--Generated:01.09.2020 16:56:08-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges" table="bridges_bridge_support">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
+		<property column="is_movable" name="isMovable" type="bool" />
 		<property column="support_type_additional_info" name="SupportTypeAdditionalInfo" type="string" />
-		<!--property column="heights" name="Heights" type="float[]" /-->
+		<property column="heights" name="Heights" type="System.Byte[], mscorlib" />
 		<property column="laying_depth" name="LayingDepth" type="single" />
 		<property column="massive_part_size_along" name="MassivePartSizeAlong" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="massive_part_size_across" name="MassivePartSizeAcross" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
@@ -14,7 +15,7 @@
 		<property column="max_distance_between_axis" name="MaxDistanceBetweenAxis" type="single" />
 		<property column="scheme_k_left" name="SchemeKLeft" type="single" />
 		<property column="scheme_k_right" name="SchemeKRight" type="single" />
-		<!--property column="scheme_pile_distances" name="SchemePileDistances" type="float[]" /-->
+		<property column="scheme_pile_distances" name="SchemePileDistances" type="System.Byte[], mscorlib" />
 		<property column="scheme_pile_row_distance1" name="SchemePileRowDistance1" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="scheme_pile_row_distance2" name="SchemePileRowDistance2" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="crossbar_width" name="CrossbarWidth" type="single" />
@@ -23,7 +24,8 @@
 		<property column="pile_cross_section_width" name="PileCrossSectionWidth" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="pile_cross_section_height" name="PileCrossSectionHeight" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="notes" name="Notes" type="string" />
-		<property column="support_type" name="SupportType" type="ITS.Core.Bridges.Domain.Enums.BridgeSupportType, ITS.Core.Bridges" not-null="true"/>
+		<property column="support_movable_type" name="SupportMovableType" type="ITS.Core.Bridges.Domain.Enums.BridgeMovableSupport, ITS.Core.Bridges" not-null="true"/>
+		<property column="support_motionless_type" name="SupportMotionlessType" type="ITS.Core.Bridges.Domain.Enums.BridgeMotionlessSupport, ITS.Core.Bridges" not-null="true"/>
 		<property column="foundation_type" name="FoundationType" type="ITS.Core.Bridges.Domain.Enums.FoundationType, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
 		<many-to-one column="typical_project_id" name="TypicalProject" class="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges"/>

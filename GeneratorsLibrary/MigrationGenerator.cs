@@ -107,7 +107,7 @@ namespace GeneratorsLibrary
         /// <summary>
         /// Отображать ли перечисления в байт, по-умолчанию false
         /// </summary>
-        public bool MapEnumToByte { get; set; } = false;
+        public bool MapEnumToIntegerType { get; set; } = false;
         private CompilationUnitSyntax root;
         private string textForParsing;
 
@@ -266,10 +266,12 @@ namespace GeneratorsLibrary
                     var type = prop.Type.ToString();
                     if (enumNames.Contains(type))
                     {
-                        if (MapEnumToByte)
+                        if (MapEnumToIntegerType)
                         {
+                            int count = enums.First(n => n.Identifier.ToString() == type).Members.Count;
+                            string typeOfEnum = GetEnumTypeFromCount(count);
                             sb.Append(indent);
-                            sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}\", DbType.Byte, 0),");
+                            sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}\", DbType.{typeOfEnum}, 0),");
                         }
                         else
                         {
@@ -366,6 +368,21 @@ namespace GeneratorsLibrary
             //    return qualifiedNameSyntax.Right.ToString();
             //}
             return fullType.ToString();
+        }
+        private static string GetEnumTypeFromCount(int count)
+        {
+            if (count < byte.MaxValue)
+            {
+                return "Byte";
+            }
+            else if (count < ushort.MaxValue)
+            {
+                return "UInt16";
+            }
+            else
+            {
+                return "UInt32";
+            }
         }
     }
 }

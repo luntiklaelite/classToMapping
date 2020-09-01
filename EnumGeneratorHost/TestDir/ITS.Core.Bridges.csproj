@@ -244,4 +244,8 @@
     <Compile Include="Domain\Enums\Strenghtening.cs"/>
     <Compile Include="Domain\EnumStrings\StrenghteningStrings.cs"/>
   </ItemGroup>
+  <ItemGroup> <!--Generated:01.09.2020 16:46:29-->
+    <Compile Include="Domain\Enums\Test.cs"/>
+    <Compile Include="Domain\EnumStrings\TestStrings.cs"/>
+  </ItemGroup>
 </Project>

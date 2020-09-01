@@ -15,6 +15,7 @@ namespace GeneratorsLibrary
         public string CommentOfEnum { get; set; }
         public List<string> EnumElements { get; set; } = new List<string>();
         public List<string> EnumComments { get; set; } = new List<string>();
+        public string Type { get; private set; }
 
         public EnumGenerator()
         {
@@ -27,13 +28,32 @@ namespace GeneratorsLibrary
             CommentOfEnum = enumComment;
             EnumElements = enumElements;
             EnumComments = enumComments;
+            SetTypeString();
         }
         public EnumGenerator(string values, string configText)
             : this()
         {
             SetEnumFromConfig(configText);
             ParseText(values);
+            SetTypeString();
         }
+
+        private void SetTypeString()
+        {
+            if (EnumElements.Count < byte.MaxValue)
+            {
+                Type = "byte";
+            }
+            else if (EnumElements.Count < ushort.MaxValue)
+            {
+                Type = "ushort";
+            }
+            else
+            {
+                Type = "uint";
+            }
+        }
+
         public void SetEnumFromConfig(string configText)
         {
             var tmp = new string(configText.Where(c => c != '\r').ToArray()).Split('\n');
@@ -69,7 +89,7 @@ namespace GeneratorsLibrary
             stringBuilder.AppendLine($"\t/// {CommentOfEnum}");
             stringBuilder.AppendLine("\t/// </summary>");
             stringBuilder.AppendLine("\t[Serializable]");
-            stringBuilder.AppendLine($"\tpublic enum {NameOfEnum}");
+            stringBuilder.AppendLine($"\tpublic enum {NameOfEnum} : {Type}");
             stringBuilder.AppendLine("\t{");
             for (int i = 0; i < EnumElements.Count; i++)
             {
