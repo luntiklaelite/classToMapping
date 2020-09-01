@@ -104,6 +104,10 @@ namespace GeneratorsLibrary
             "Photos",
             "PhotoableType",
         };
+        public List<string> AlreadyExistsClassNames { get; set; } = new List<string>()
+        {
+            "Material",
+        };
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
         /// <summary>
@@ -198,7 +202,14 @@ namespace GeneratorsLibrary
             {
                 stringBuilder.AppendLine($"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 stringBuilder.AppendLine($"<!--Generated:{DateTime.Now}-->");
-                stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
+                if (AlreadyExistsClassNames.Contains(classDecl.Identifier.ToString()))
+                {
+                    stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" auto-import=\"false\">");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
+                }
                 stringBuilder.AppendLine($"\t<class lazy=\"false\" name=\"{@namespace.Name}.{classDecl.Identifier.ToString()}, {AssemblyName}\"" +
                     $" table=\"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}\">");
                 stringBuilder.AppendLine($"\t\t<id name=\"ID\" column=\"id\" type=\"long\" unsaved-value=\"0\">");
@@ -242,6 +253,10 @@ namespace GeneratorsLibrary
             }
             else if (CustomTypesForMappings.ContainsKey(type))
             {
+                if (type == "FeatureObject")
+                {
+                    return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\" not-null=\"true\"/>";
+                }
                 return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\"/>";
             }
             else if (enumNames.Contains(type))

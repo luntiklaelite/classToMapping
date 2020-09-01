@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:01.09.2020 11:01:10-->
+<!--Generated:01.09.2020 12:23:33-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -76,7 +76,7 @@
 		<!--many-to-one column="supports_id" name="Supports" class="ITS.Core.Bridges.Domain.IList<BridgeSupport>, ITS.Core.Bridges"/-->
 		<!--many-to-one column="span_structures_id" name="SpanStructures" class="ITS.Core.Bridges.Domain.IList<SpanStructure>, ITS.Core.Bridges"/-->
 		<property column="status" name="Status" type="ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges" not-null="true"/>
-		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
+		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core" cascade="all" not-null="true"/>
 		<property column="quality_bridge_type" name="QualityBridgeType" type="ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges" not-null="true"/>
 		<property column="construction_type" name="ConstructionType" type="ITS.Core.Bridges.Domain.Enums.ConstructionType, ITS.Core.Bridges" not-null="true"/>
 		<property column="move_type" name="MoveType" type="ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges" not-null="true"/>
