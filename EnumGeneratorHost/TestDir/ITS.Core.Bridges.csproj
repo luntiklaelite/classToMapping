@@ -248,4 +248,10 @@
     <Compile Include="Domain\Enums\Test.cs"/>
     <Compile Include="Domain\EnumStrings\TestStrings.cs"/>
   </ItemGroup>
+  <ItemGroup> <!--Generated:02.09.2020 11:18:19-->
+    <Compile Include="Domain\Enums\Test1.cs"/>
+    <Compile Include="Domain\EnumStrings\Test1Strings.cs"/>
+    <Compile Include="Domain\Enums\Test2.cs"/>
+    <Compile Include="Domain\EnumStrings\Test2Strings.cs"/>
+  </ItemGroup>
 </Project>
