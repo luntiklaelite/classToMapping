@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:01.09.2020 16:56:08-->
+<!--Generated:02.09.2020 11:06:42-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -43,8 +43,6 @@
 		<property column="adapter_plates_length" name="AdapterPlatesLength" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="road_signs_before" name="RoadSignsBefore" type="bool" />
 		<property column="road_signs_after" name="RoadSignsAfter" type="bool" />
-		<property column="info_of_reconstruction" name="InfoOfReconstruction" type="string" />
-		<property column="info_of_repairs" name="InfoOfRepairs" type="string" />
 		<property column="security" name="Security" type="bool" />
 		<property column="notes" name="Notes" type="string" />
 		<property column="first_obstacle_type" name="FirstObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
@@ -71,6 +69,8 @@
 		<many-to-one column="project_organization_id" name="ProjectOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<many-to-one column="building_organization_id" name="BuildingOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<many-to-one column="exploit_organization_id" name="ExploitOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<property column="info_of_reconstruction" name="InfoOfReconstruction" type="ITS.Core.Bridges.Domain.Enums.ReconstructionJobs, ITS.Core.Bridges" not-null="true"/>
+		<property column="info_of_repairs" name="InfoOfRepairs" type="ITS.Core.Bridges.Domain.Enums.ReconstructionJobs, ITS.Core.Bridges" not-null="true"/>
 		<property column="communications" name="Communications" type="ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges" not-null="true"/>
 		<property column="arrangements" name="Arrangements" type="ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges" not-null="true"/>
 		<property column="date_view" name="DateView" type="date"/>

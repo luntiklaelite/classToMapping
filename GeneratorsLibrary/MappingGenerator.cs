@@ -18,6 +18,7 @@ namespace GeneratorsLibrary
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
             {"float[]", "System.Byte[], mscorlib"},
+            {"byte[]", "System.Byte[], mscorlib"},
 
             {"Int16","short"},
             {"short","short"},

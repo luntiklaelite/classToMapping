@@ -269,7 +269,11 @@ namespace GeneratorsLibrary
                         if (MapEnumToIntegerType)
                         {
                             int count = enums.First(n => n.Identifier.ToString() == type).Members.Count;
-                            string typeOfEnum = GetEnumTypeFromCount(count);
+                            var thisType = enums.First(n => n.Identifier.ToString() == type);
+                            var attributes =
+                                thisType.AttributeLists.Select(al => al.Attributes).Select(a=>a.ToString()).ToList();
+                            bool isFlagsEnum = attributes.Contains("Flags") || attributes.Contains("System.Flags");
+                            string typeOfEnum = GetEnumTypeFromCount(count, isFlagsEnum);
                             sb.Append(indent);
                             sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}\", DbType.{typeOfEnum}, 0),");
                         }
@@ -369,8 +373,12 @@ namespace GeneratorsLibrary
             //}
             return fullType.ToString();
         }
-        private static string GetEnumTypeFromCount(int count)
+        private static string GetEnumTypeFromCount(int count, bool isFlagsEnum=  false)
         {
+            if (isFlagsEnum)
+            {
+                count = (int)Math.Pow(2, count - 2);
+            }
             if (count < byte.MaxValue)
             {
                 return "Byte";
