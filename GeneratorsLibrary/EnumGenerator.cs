@@ -15,6 +15,8 @@ namespace GeneratorsLibrary
         public string CommentOfEnum { get; set; }
         public List<string> EnumElements { get; set; } = new List<string>();
         public List<string> EnumComments { get; set; } = new List<string>();
+        public string Type { get; private set; }
+        public bool IsFlags { get; private set; }
 
         public EnumGenerator()
         {
@@ -27,13 +29,37 @@ namespace GeneratorsLibrary
             CommentOfEnum = enumComment;
             EnumElements = enumElements;
             EnumComments = enumComments;
+            SetTypeString();
         }
         public EnumGenerator(string values, string configText)
             : this()
         {
             SetEnumFromConfig(configText);
             ParseText(values);
+            SetTypeString();
         }
+
+        private void SetTypeString()
+        {
+            int count = EnumElements.Count;
+            if (IsFlags)
+            {
+                count = (int)Math.Pow(2, count - 2);
+            }
+            if (count < byte.MaxValue)
+            {
+                Type = "byte";
+            }
+            else if (count < ushort.MaxValue)
+            {
+                Type = "ushort";
+            }
+            else
+            {
+                Type = "uint";
+            }
+        }
+
         public void SetEnumFromConfig(string configText)
         {
             var tmp = new string(configText.Where(c => c != '\r').ToArray()).Split('\n');
@@ -43,17 +69,37 @@ namespace GeneratorsLibrary
         public void ParseText(string values)
         {
             var tmp = new string(values.Where(c=>c!='\r').ToArray()).Split('\n');
-            CommentOfEnum = tmp[0];
-            NameOfEnum = tmp[1];
-            for (int i = 2; i < tmp.Length; i++)
+            if (tmp[0] == "[Flags]")
             {
-                if (i % 2 == 0)
+                IsFlags = true;
+                CommentOfEnum = tmp[1];
+                NameOfEnum = tmp[2];
+                for (int i = 3; i < tmp.Length; i++)
                 {
-                    EnumComments.Add(tmp[i]);
+                    if (i % 2 == 0)
+                    {
+                        EnumComments.Add(tmp[i]);
+                    }
+                    else
+                    {
+                        EnumElements.Add(tmp[i]);
+                    }
                 }
-                else
+            }
+            else
+            {
+                CommentOfEnum = tmp[0];
+                NameOfEnum = tmp[1];
+                for (int i = 2; i < tmp.Length; i++)
                 {
-                    EnumElements.Add(tmp[i]);
+                    if (i % 2 == 0)
+                    {
+                        EnumComments.Add(tmp[i]);
+                    }
+                    else
+                    {
+                        EnumElements.Add(tmp[i]);
+                    }
                 }
             }
         }
@@ -69,14 +115,35 @@ namespace GeneratorsLibrary
             stringBuilder.AppendLine($"\t/// {CommentOfEnum}");
             stringBuilder.AppendLine("\t/// </summary>");
             stringBuilder.AppendLine("\t[Serializable]");
-            stringBuilder.AppendLine($"\tpublic enum {NameOfEnum}");
+            if (IsFlags)
+            {
+                stringBuilder.AppendLine("\t[Flags]");
+            }
+            stringBuilder.AppendLine($"\tpublic enum {NameOfEnum} : {Type}");
             stringBuilder.AppendLine("\t{");
-            for (int i = 0; i < EnumElements.Count; i++)
+            if (IsFlags)
             {
                 stringBuilder.AppendLine("\t\t/// <summary>");
-                stringBuilder.AppendLine($"\t\t/// {EnumComments[i]}");
+                stringBuilder.AppendLine($"\t\t/// Нет данных");
                 stringBuilder.AppendLine("\t\t/// </summary>");
-                stringBuilder.AppendLine($"\t\t{EnumElements[i]},");
+                stringBuilder.AppendLine($"\t\tNoData = 0,");
+                for (int i = 0; i < EnumElements.Count; i++)
+                {
+                    stringBuilder.AppendLine("\t\t/// <summary>");
+                    stringBuilder.AppendLine($"\t\t/// {EnumComments[i]}");
+                    stringBuilder.AppendLine("\t\t/// </summary>");
+                    stringBuilder.AppendLine($"\t\t{EnumElements[i]} = {(int)Math.Pow(2, i)},");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < EnumElements.Count; i++)
+                {
+                    stringBuilder.AppendLine("\t\t/// <summary>");
+                    stringBuilder.AppendLine($"\t\t/// {EnumComments[i]}");
+                    stringBuilder.AppendLine("\t\t/// </summary>");
+                    stringBuilder.AppendLine($"\t\t{EnumElements[i]},");
+                }
             }
             stringBuilder.AppendLine("\t}");
             stringBuilder.AppendLine("}");
@@ -86,7 +153,10 @@ namespace GeneratorsLibrary
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"//Generated by EnumGenerator, {DateTime.Now}");
-            stringBuilder.AppendLine($"using {NamespaceOfEnum};");
+            if (NamespaceOfEnum != NamespaceOfEnumConverter)
+            {
+                stringBuilder.AppendLine($"using {NamespaceOfEnum};");
+            }
             stringBuilder.AppendLine("using System.Collections.Generic;");
             stringBuilder.AppendLine("using System.Linq;");
             stringBuilder.AppendLine();

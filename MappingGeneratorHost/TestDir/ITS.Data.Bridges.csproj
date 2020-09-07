@@ -217,4 +217,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:31.08.2020 16:02:10-->
+    <EmbeddedResource Include="Mappings\SpanPile.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

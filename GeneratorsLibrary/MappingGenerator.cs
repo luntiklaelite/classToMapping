@@ -17,8 +17,11 @@ namespace GeneratorsLibrary
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
         {
-            {"Int16","int16"},
-            {"short","int16"},
+            {"float[]", "System.Byte[], mscorlib"},
+            {"byte[]", "System.Byte[], mscorlib"},
+
+            {"Int16","short"},
+            {"short","short"},
             {"short?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
             {"Int16?","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
             {"Nullable<Int16>","System.Nullable`1[[System.Int16, mscorlib]], mscorlib"},
@@ -31,12 +34,12 @@ namespace GeneratorsLibrary
             {"Nullable<int>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
             {"Nullable<Int32>","System.Nullable`1[[System.Int32, mscorlib]], mscorlib"},
 
-            {"Int64","int64"},
-            {"long","int64"},
+            {"Int64","long"},
+            {"long","long"},
             {"long?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Int64?","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
             {"Nullable<long>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
-            {"Nullable<int64>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
+            {"Nullable<Int64>","System.Nullable`1[[System.Int64, mscorlib]], mscorlib"},
 
             {"Single","single"},
             {"float","single"},
@@ -104,12 +107,16 @@ namespace GeneratorsLibrary
             "Photos",
             "PhotoableType",
         };
+        public List<string> AlreadyExistsClassNames { get; set; } = new List<string>()
+        {
+            "Material",
+        };
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
         /// <summary>
         /// Отображать ли перечисления в байт, по-умолчанию false
         /// </summary>
-        public bool MapEnumToByte { get; set; } = false;
+        public bool MapEnumToIntegerType { get; set; } = false;
 
         public MappingGenerator(){}
         public MappingGenerator(string assemblyName, string tablePrefix)
@@ -197,7 +204,15 @@ namespace GeneratorsLibrary
                 baseList != null && baseList.Contains("DomainObject<long>"))
             {
                 stringBuilder.AppendLine($"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-                stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
+                stringBuilder.AppendLine($"<!--Generated:{DateTime.Now}-->");
+                if (AlreadyExistsClassNames.Contains(classDecl.Identifier.ToString()))
+                {
+                    stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" auto-import=\"false\">");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\">");
+                }
                 stringBuilder.AppendLine($"\t<class lazy=\"false\" name=\"{@namespace.Name}.{classDecl.Identifier.ToString()}, {AssemblyName}\"" +
                     $" table=\"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}\">");
                 stringBuilder.AppendLine($"\t\t<id name=\"ID\" column=\"id\" type=\"long\" unsaved-value=\"0\">");
@@ -230,7 +245,7 @@ namespace GeneratorsLibrary
             }
             else
             {
-                return  $"\t\t<property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" />";
+                return  $"\t\t<!--property column=\"{CamelCaseToUnderscore(prop.Identifier.ToString())}\" name=\"{prop.Identifier}\" type=\"{prop.Type.ToString()}\" /-->";
             }
         }
         public string GetCustomPropLine(IEnumerable<EnumDeclarationSyntax> enums, NamespaceDeclarationSyntax @namespace, List<string> enumNames, string identifier, string type)
@@ -241,13 +256,17 @@ namespace GeneratorsLibrary
             }
             else if (CustomTypesForMappings.ContainsKey(type))
             {
+                if (type == "FeatureObject")
+                {
+                    return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\" not-null=\"true\"/>";
+                }
                 return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\"/>";
             }
             else if (enumNames.Contains(type))
             {
                 var thisType = enums.First(n => n.Identifier.ToString() == type);
                 var enumNamespace = (thisType.Parent as NamespaceDeclarationSyntax).Name.ToString();
-                if (!MapEnumToByte)
+                if (!MapEnumToIntegerType)
                 {
                     return $"\t\t<property column=\"{CamelCaseToUnderscore(identifier)}\" name=\"{identifier}\" type=\"NHibernate.Type.EnumStringType`1[[{enumNamespace}.{type}, {AssemblyName}]], NHibernate\" not-null=\"true\"/>";
                 }

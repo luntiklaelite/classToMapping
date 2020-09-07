@@ -45,9 +45,7 @@ namespace EnumGeneratorHost
                 relativeNamesEnumConverter[i] = fileRelativeNameEnumConverter;
             }
             WriteToCsproj(relativeNamesEnum, relativeNamesEnumConverter, args[1]);
-#if DEBUG
-            Console.ReadLine();
-#endif
+            Console.ReadKey();
         }
         public static void WriteToCsproj(string[] relNamesEnum, string[] relNamesEnumConv, string projectDir)
         {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Generated:02.09.2020 11:06:42-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -8,6 +9,8 @@
 		<property column="first_obstacle_name" name="FirstObstacleName" type="string" />
 		<property column="second_obstacle_name" name="SecondObstacleName" type="string" />
 		<property column="road_name" name="RoadName" type="string" />
+		<property column="subject_code" name="SubjectCode" type="short" />
+		<property column="territorial_road_control_code" name="TerritorialRoadControlCode" type="int" />
 		<property column="road_code" name="RoadCode" type="string" />
 		<property column="kilometer" name="Kilometer" type="int" />
 		<property column="quantity_line_bridge" name="QuantityLineBridge" type="int" />
@@ -22,12 +25,13 @@
 		<property column="underbridge_clearance" name="UnderbridgeClearance" type="single" />
 		<property column="length" name="Length" type="single" />
 		<property column="hole" name="Hole" type="single" />
-		<property column="height_dimension" name="HeightDimension" type="single" />
+		<property column="height_dimension" name="HeightDimension" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="width_dimension_b" name="WidthDimensionB" type="single" />
 		<property column="width_dimension_t1" name="WidthDimensionT1" type="single" />
 		<property column="width_dimension_t2" name="WidthDimensionT2" type="single" />
 		<property column="width_dimension_c" name="WidthDimensionC" type="single" />
 		<property column="width_dimension_c1" name="WidthDimensionC1" type="single" />
+		<property column="width_dimension_c2" name="WidthDimensionC2" type="single" />
 		<property column="width_dimension_вriveway_count" name="WidthDimensionВrivewayCount" type="int" />
 		<property column="width_dimension_вriveway_width" name="WidthDimensionВrivewayWidth" type="single" />
 		<property column="design_burden" name="DesignBurden" type="string" />
@@ -36,21 +40,20 @@
 		<property column="slope_longitudinal" name="SlopeLongitudinal" type="single" />
 		<property column="slope_lateral" name="SlopeLateral" type="single" />
 		<property column="railings_height" name="RailingsHeight" type="single" />
-		<property column="adapter_plates_length" name="AdapterPlatesLength" type="single" />
+		<property column="adapter_plates_length" name="AdapterPlatesLength" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="road_signs_before" name="RoadSignsBefore" type="bool" />
 		<property column="road_signs_after" name="RoadSignsAfter" type="bool" />
-		<property column="info_of_reconstruction" name="InfoOfReconstruction" type="string" />
-		<property column="info_of_repairs" name="InfoOfRepairs" type="string" />
 		<property column="security" name="Security" type="bool" />
 		<property column="notes" name="Notes" type="string" />
-		<property column="num_line_road" name="NumLineRoad" type="string" />
 		<property column="first_obstacle_type" name="FirstObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
 		<property column="second_obstacle_type" name="SecondObstacleType" type="ITS.Core.Bridges.Domain.Enums.ObstacleType, ITS.Core.Bridges" not-null="true"/>
 		<property column="road_category" name="RoadCategory" type="ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges" not-null="true"/>
-		<property column="construction_year" name="ConstructionYear" type="date"/>
-		<property column="reconstruction_year" name="ReconstructionYear" type="date"/>
-		<property column="repairs_year" name="RepairsYear" type="date"/>
+		<property column="construction_date" name="ConstructionDate" type="date"/>
+		<property column="reconstruction_date" name="ReconstructionDate" type="date"/>
+		<property column="repairs_date" name="RepairsDate" type="date"/>
 		<property column="location_in_plan" name="LocationInPlan" type="ITS.Core.Bridges.Domain.Enums.LocationInPlan, ITS.Core.Bridges" not-null="true"/>
+		<property column="slope_longitudinal_profile" name="SlopeLongitudinalProfile" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
+		<property column="slope_lateral_profile" name="SlopeLateralProfile" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
 		<property column="cover_type" name="CoverType" type="ITS.Core.Bridges.Domain.Enums.CoverType, ITS.Core.Bridges" not-null="true"/>
 		<property column="drainage_type" name="DrainageType" type="ITS.Core.Bridges.Domain.Enums.DrainageType, ITS.Core.Bridges" not-null="true"/>
 		<property column="expansion_joints_type" name="ExpansionJointsType" type="ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges" not-null="true"/>
@@ -62,19 +65,20 @@
 		<many-to-one column="end_bridge_side_id" name="EndBridgeSide" class="ITS.Core.Bridges.Domain.BridgeSide, ITS.Core.Bridges"/>
 		<property column="regulatory_structures" name="RegulatoryStructures" type="ITS.Core.Bridges.Domain.Enums.RegulatoryStructures, ITS.Core.Bridges" not-null="true"/>
 		<property column="cones_strengthening" name="ConesStrengthening" type="ITS.Core.Bridges.Domain.Enums.Strenghtening, ITS.Core.Bridges" not-null="true"/>
-		<!--many-to-one column="adapter_plates_id" name="AdapterPlates" class="ITS.Core.Bridges.Domain.AdapterPlatesAvailability, ITS.Core.Bridges"/-->
+		<property column="adapter_plates" name="AdapterPlates" type="ITS.Core.Bridges.Domain.Enums.AdapterPlatesAvailability, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="project_organization_id" name="ProjectOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
-		<many-to-one column="building_company_id" name="BuildingCompany" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<many-to-one column="building_organization_id" name="BuildingOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
 		<many-to-one column="exploit_organization_id" name="ExploitOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core"/>
+		<property column="info_of_reconstruction" name="InfoOfReconstruction" type="ITS.Core.Bridges.Domain.Enums.ReconstructionJobs, ITS.Core.Bridges" not-null="true"/>
+		<property column="info_of_repairs" name="InfoOfRepairs" type="ITS.Core.Bridges.Domain.Enums.ReconstructionJobs, ITS.Core.Bridges" not-null="true"/>
 		<property column="communications" name="Communications" type="ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges" not-null="true"/>
 		<property column="arrangements" name="Arrangements" type="ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges" not-null="true"/>
 		<property column="date_view" name="DateView" type="date"/>
 		<!--many-to-one column="supports_id" name="Supports" class="ITS.Core.Bridges.Domain.IList<BridgeSupport>, ITS.Core.Bridges"/-->
 		<!--many-to-one column="span_structures_id" name="SpanStructures" class="ITS.Core.Bridges.Domain.IList<SpanStructure>, ITS.Core.Bridges"/-->
 		<property column="status" name="Status" type="ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges" not-null="true"/>
-		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core"/>
+		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core" cascade="all" not-null="true"/>
 		<property column="quality_bridge_type" name="QualityBridgeType" type="ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges" not-null="true"/>
-		<property column="construction_type" name="ConstructionType" type="ITS.Core.Bridges.Domain.Enums.ConstructionType, ITS.Core.Bridges" not-null="true"/>
 		<property column="move_type" name="MoveType" type="ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges" not-null="true"/>
 	</class>
 </hibernate-mapping>

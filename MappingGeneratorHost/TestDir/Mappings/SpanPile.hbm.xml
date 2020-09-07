@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Generated:02.09.2020 11:06:42-->
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.Bridges.Domain.SpanPile, ITS.Core.Bridges" table="bridges_span_pile">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="count_in_span" name="CountInSpan" type="int" />
+		<property column="height" name="Height" type="single" />
+		<many-to-one column="roadway_cover_material_id" name="RoadwayCoverMaterial" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
+	</class>
+</hibernate-mapping>

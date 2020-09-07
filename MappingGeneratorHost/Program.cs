@@ -21,7 +21,7 @@ namespace classToMapping
             var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
             MappingGenerator gen = new MappingGenerator(args[2], args[3], files)
             {
-                MapEnumToByte = true
+                MapEnumToIntegerType = true
             };
             //            var gen = new MappingGenerator(args[2], args[3], @"using System;
             //namespace Test{
@@ -49,7 +49,18 @@ namespace classToMapping
                 File.WriteAllText(path,mappings[i].Value);
             }
             WriteToCsproj(relPaths, args[1]);
-            Console.ReadLine();
+
+            MigrationGenerator gen1 = new MigrationGenerator("ITS.DbMigration.Bridges", "bridges",
+                files)
+            {
+                MapEnumToIntegerType = true,
+            };
+            var migr = gen1.GenerateMigration();
+            Console.WriteLine("Generated migration:");
+            var path1 = args[1] + "\\" + $"Migrations\\{gen1.MigrationFileName}";
+            Console.WriteLine(path1);
+            File.WriteAllText(path1, migr);
+            Console.ReadKey();
         }
         public static void WriteToCsproj(string[] relPath, string projectDir)
         {
