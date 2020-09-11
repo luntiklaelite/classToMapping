@@ -50,13 +50,17 @@ namespace GeneratorsLibrary
             {
                 Type = "byte";
             }
-            else if (count < ushort.MaxValue)
+            else if (count < short.MaxValue)
             {
-                Type = "ushort";
+                Type = "short";
+            }
+            else if (count < int.MaxValue)
+            {
+                Type = "int";
             }
             else
             {
-                Type = "uint";
+                Type = "long";
             }
         }
 
@@ -69,20 +73,20 @@ namespace GeneratorsLibrary
         public void ParseText(string values)
         {
             var tmp = new string(values.Where(c=>c!='\r').ToArray()).Split('\n');
-            if (tmp[0] == "[Flags]")
+            if (tmp[0].Trim(' ') == "[Flags]")
             {
                 IsFlags = true;
                 CommentOfEnum = tmp[1];
                 NameOfEnum = tmp[2];
                 for (int i = 3; i < tmp.Length; i++)
                 {
-                    if (i % 2 == 0)
+                    if (i % 2 != 0)
                     {
-                        EnumComments.Add(tmp[i]);
+                        EnumComments.Add(tmp[i].Trim(' '));
                     }
                     else
                     {
-                        EnumElements.Add(tmp[i]);
+                        EnumElements.Add(tmp[i].Trim(' '));
                     }
                 }
             }
@@ -94,11 +98,11 @@ namespace GeneratorsLibrary
                 {
                     if (i % 2 == 0)
                     {
-                        EnumComments.Add(tmp[i]);
+                        EnumComments.Add(tmp[i].Trim(' '));
                     }
                     else
                     {
-                        EnumElements.Add(tmp[i]);
+                        EnumElements.Add(tmp[i].Trim(' '));
                     }
                 }
             }
@@ -157,8 +161,8 @@ namespace GeneratorsLibrary
             {
                 stringBuilder.AppendLine($"using {NamespaceOfEnum};");
             }
-            stringBuilder.AppendLine("using System.Collections.Generic;");
-            stringBuilder.AppendLine("using System.Linq;");
+            stringBuilder.AppendLine("using System;");
+            stringBuilder.AppendLine("using System.Text;");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine($"namespace {NamespaceOfEnumConverter}");
             stringBuilder.AppendLine("{");
@@ -198,6 +202,72 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\treturn Strings.FirstOrDefault(s => s.Value == name).Key;");
+                stringBuilder.AppendLine($"\t\t}}");
+            }
+            else if(IsFlags)
+            {
+                for (int i = 0; i < EnumElements.Count; i++)
+                {
+                    stringBuilder.AppendLine($"\t\tprivate static readonly string Str{EnumElements[i]} = \"{EnumComments[i]}\";");
+                }
+                stringBuilder.AppendLine($"\t\tprivate static readonly StringBuilder stringBuilder = new StringBuilder();");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine($"\t\tpublic {NameOfEnum}Strings() {{ }}");
+                stringBuilder.AppendLine($"\t\tprivate static {NameOfEnum}Strings instance;");
+                stringBuilder.AppendLine($"\t\tpublic static {NameOfEnum}Strings Instance");
+                stringBuilder.AppendLine($"\t\t{{");
+                stringBuilder.AppendLine($"\t\t\tget");
+                stringBuilder.AppendLine($"\t\t\t{{");
+                stringBuilder.AppendLine($"\t\t\t\tif (instance == null)");
+                stringBuilder.AppendLine($"\t\t\t\t{{");
+                stringBuilder.AppendLine($"\t\t\t\t\tinstance = new {NameOfEnum}Strings();");
+                stringBuilder.AppendLine($"\t\t\t\t}}");
+                stringBuilder.AppendLine($"\t\t\t\treturn instance;");
+                stringBuilder.AppendLine($"\t\t\t}}");
+                stringBuilder.AppendLine($"\t\t}}");
+                stringBuilder.AppendLine();
+                var nameOfParam = CamelCaseToUnderscore(NameOfEnum);
+                stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
+                stringBuilder.AppendLine($"\t\t{{");
+                stringBuilder.AppendLine($"\t\t\tstringBuilder.Clear();");
+                stringBuilder.AppendLine($"\t\t\tbool first = true;");
+                stringBuilder.AppendLine($"\t\t\tif({nameOfParam} == {NameOfEnum}.NoData)");
+                stringBuilder.AppendLine($"\t\t\t{{");
+                stringBuilder.AppendLine($"\t\t\t\treturn \"Нет данных\";");
+                stringBuilder.AppendLine($"\t\t\t}}");
+                for (int i = 0; i < EnumElements.Count; i++)
+                {
+                    stringBuilder.AppendLine($"\t\t\tif (({nameOfParam} & {NameOfEnum}.{EnumElements[i]}) == {NameOfEnum}.{EnumElements[i]})");
+                    stringBuilder.AppendLine($"\t\t\t{{");
+                    stringBuilder.AppendLine($"\t\t\t\tif(!first) stringBuilder.Append(\", \");");
+                    stringBuilder.AppendLine($"\t\t\t\tstringBuilder.Append(Str{EnumElements[i]});");
+                    stringBuilder.AppendLine($"\t\t\t\tfirst = false;");
+                    stringBuilder.AppendLine($"\t\t\t}}");
+                }
+                stringBuilder.AppendLine($"\t\t\treturn stringBuilder.ToString();");
+                stringBuilder.AppendLine($"\t\t}}");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
+                stringBuilder.AppendLine($"\t\t{{");
+                stringBuilder.AppendLine($"\t\t\tvar tmp = name.Split(new[] {{ \", \" }}, StringSplitOptions.RemoveEmptyEntries);");
+                stringBuilder.AppendLine($"\t\t\tvar res = {NameOfEnum}.NoData;");
+                stringBuilder.AppendLine($"\t\t\tforeach (var item in tmp)");
+                stringBuilder.AppendLine($"\t\t\t{{");
+                for (int i = 0; i < EnumElements.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        stringBuilder.AppendLine($"\t\t\t\tif (item == Str{EnumElements[i]})");
+                        stringBuilder.AppendLine($"\t\t\t\t\tres |= {NameOfEnum}.{EnumElements[i]};");
+                    }
+                    else
+                    {
+                        stringBuilder.AppendLine($"\t\t\t\telse if (item == Str{EnumElements[i]})");
+                        stringBuilder.AppendLine($"\t\t\t\t\tres |= {NameOfEnum}.{EnumElements[i]};");
+                    }
+                }
+                stringBuilder.AppendLine($"\t\t\t}}");
+                stringBuilder.AppendLine($"\t\t\treturn res;");
                 stringBuilder.AppendLine($"\t\t}}");
             }
             else

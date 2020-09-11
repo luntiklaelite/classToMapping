@@ -383,13 +383,17 @@ namespace GeneratorsLibrary
             {
                 return "Byte";
             }
-            else if (count < ushort.MaxValue)
+            else if (count < short.MaxValue)
             {
-                return "UInt16";
+                return "Int16";
+            }
+            else if (count < int.MaxValue)
+            {
+                return "Int32";
             }
             else
             {
-                return "UInt32";
+                return "Int64";
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿Обустройство
+﻿[Flags]
+Обустройство
 Arrangements
 Тележки смотровые
 InspectionTrolleys

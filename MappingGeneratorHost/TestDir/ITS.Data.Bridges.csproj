@@ -222,4 +222,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:02.09.2020 17:31:44-->
+    <EmbeddedResource Include="Mappings\BridgeObstacle.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:04.09.2020 16:10:51-->
+    <EmbeddedResource Include="Mappings\SpanBeam.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:02.09.2020 11:06:42-->
+<!--Generated:09.09.2020 15:35:34-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges" table="bridges_span_structure">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -22,14 +22,15 @@
 		<property column="span_structure_type" name="SpanStructureType" type="ITS.Core.Bridges.Domain.Enums.MainSupportingStructureType, ITS.Core.Bridges" not-null="true"/>
 		<property column="construction_roadway" name="ConstructionRoadway" type="ITS.Core.Bridges.Domain.Enums.ConstructionRoadway, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
-		<property column="construction_year" name="ConstructionYear" type="date"/>
+		<property column="joint_type" name="JointType" type="ITS.Core.Bridges.Domain.Enums.JointType, ITS.Core.Bridges" not-null="true"/>
+		<property column="construction_date" name="ConstructionDate" type="date"/>
 		<many-to-one column="typical_project_id" name="TypicalProject" class="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges"/>
 		<property column="span_type_movable" name="SpanTypeMovable" type="ITS.Core.Bridges.Domain.Enums.BridgeMovableSupport, ITS.Core.Bridges" not-null="true"/>
 		<property column="span_type_motionless" name="SpanTypeMotionless" type="ITS.Core.Bridges.Domain.Enums.BridgeMotionlessSupport, ITS.Core.Bridges" not-null="true"/>
-		<property column="joint_type" name="JointType" type="ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges" not-null="true"/>
+		<property column="expansion_joint_type" name="ExpansionJointType" type="ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges" not-null="true"/>
 		<property column="cross_join" name="CrossJoin" type="ITS.Core.Bridges.Domain.Enums.CrossJoinMethod, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="plate_material_id" name="PlateMaterial" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
-		<many-to-one column="cross_pile_id" name="CrossPile" class="ITS.Core.Bridges.Domain.SpanPile, ITS.Core.Bridges"/>
-		<many-to-one column="longitudinal_pile_id" name="LongitudinalPile" class="ITS.Core.Bridges.Domain.SpanPile, ITS.Core.Bridges"/>
+		<many-to-one column="cross_pile_id" name="CrossPile" class="ITS.Core.Bridges.Domain.SpanBeam, ITS.Core.Bridges"/>
+		<many-to-one column="longitudinal_pile_id" name="LongitudinalPile" class="ITS.Core.Bridges.Domain.SpanBeam, ITS.Core.Bridges"/>
 	</class>
 </hibernate-mapping>
