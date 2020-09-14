@@ -260,7 +260,7 @@ namespace GeneratorsLibrary
                 {
                     return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\" not-null=\"true\"/>";
                 }
-                return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\"/>";
+                return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\"/>";
             }
             else if (enumNames.Contains(type))
             {

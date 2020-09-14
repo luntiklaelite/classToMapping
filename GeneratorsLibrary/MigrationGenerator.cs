@@ -275,7 +275,7 @@ namespace GeneratorsLibrary
                             bool isFlagsEnum = attributes.Contains("Flags") || attributes.Contains("System.Flags");
                             string typeOfEnum = GetEnumTypeFromCount(count, isFlagsEnum);
                             sb.Append(indent);
-                            sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}\", DbType.{typeOfEnum}, 0),");
+                            sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}\", DbType.{typeOfEnum}, (object)0),");
                         }
                         else
                         {
