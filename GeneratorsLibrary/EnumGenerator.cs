@@ -291,7 +291,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t\t}}");
                 stringBuilder.AppendLine($"\t\t}}");
                 stringBuilder.AppendLine();
-                var nameOfParam = CamelCaseToUnderscore(NameOfEnum);
+                var nameOfParam = "enumElement";
                 stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\tswitch({nameOfParam})");
@@ -312,7 +312,7 @@ namespace GeneratorsLibrary
                     stringBuilder.AppendLine($"\t\t\tif (name == Str{EnumElements[i]})");
                     stringBuilder.AppendLine($"\t\t\t\treturn {NameOfEnum}.{EnumElements[i]};");
                 }
-                stringBuilder.AppendLine($"\t\t\treturn {NameOfEnum}.{EnumElements[EnumElements.Count-1]};");
+                stringBuilder.AppendLine($"\t\t\tthrow new ArgumentException(\"Некорректный элемент перечисления\", \"name\");");
                 stringBuilder.AppendLine($"\t\t}}");
             }
             stringBuilder.AppendLine("\t}");
