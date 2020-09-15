@@ -274,6 +274,9 @@ namespace GeneratorsLibrary
             {
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
+                    stringBuilder.AppendLine($"\t\t/// <summary>");
+                    stringBuilder.AppendLine($"\t\t/// {EnumComments[i]}");
+                    stringBuilder.AppendLine($"\t\t/// </summary>");
                     stringBuilder.AppendLine($"\t\tprivate static readonly string Str{EnumElements[i]} = \"{EnumComments[i]}\";");
                 }
                 stringBuilder.AppendLine();
@@ -312,7 +315,7 @@ namespace GeneratorsLibrary
                     stringBuilder.AppendLine($"\t\t\tif (name == Str{EnumElements[i]})");
                     stringBuilder.AppendLine($"\t\t\t\treturn {NameOfEnum}.{EnumElements[i]};");
                 }
-                stringBuilder.AppendLine($"\t\t\tthrow new ArgumentException(\"Некорректный элемент перечисления\", \"name\");");
+                stringBuilder.AppendLine($"\t\t\tthrow new ArgumentException(\"Некорректная входная строка\", \"name\");");
                 stringBuilder.AppendLine($"\t\t}}");
             }
             stringBuilder.AppendLine("\t}");
