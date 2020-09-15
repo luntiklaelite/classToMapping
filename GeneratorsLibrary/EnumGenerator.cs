@@ -199,6 +199,9 @@ namespace GeneratorsLibrary
             {
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
+                    stringBuilder.AppendLine($"\t\t/// <summary>");
+                    stringBuilder.AppendLine($"\t\t/// {EnumComments[i]}");
+                    stringBuilder.AppendLine($"\t\t/// </summary>");
                     stringBuilder.AppendLine($"\t\tprivate static readonly string Str{EnumElements[i]} = \"{EnumComments[i]}\";");
                 }
                 stringBuilder.AppendLine($"\t\tprivate static readonly StringBuilder stringBuilder = new StringBuilder();");
