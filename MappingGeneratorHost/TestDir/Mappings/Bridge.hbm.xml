@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:14.09.2020 10:08:27-->
+<!--Generated:15.09.2020 11:07:59-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -37,6 +37,12 @@
 		<property column="slope_longitudinal" name="SlopeLongitudinal" type="single" />
 		<property column="slope_lateral" name="SlopeLateral" type="single" />
 		<property column="railings_height" name="RailingsHeight" type="single" />
+		<property column="carriageway_width_before" name="CarriagewayWidthBefore" type="single" />
+		<property column="slope_longitudinal_before" name="SlopeLongitudinalBefore" type="single" />
+		<property column="embankment_height_before" name="EmbankmentHeightBefore" type="single" />
+		<property column="carriageway_width_after" name="CarriagewayWidthAfter" type="single" />
+		<property column="slope_longitudinal_after" name="SlopeLongitudinalAfter" type="single" />
+		<property column="embankment_height_after" name="EmbankmentHeightAfter" type="single" />
 		<property column="adapter_plates_length" name="AdapterPlatesLength" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="road_signs_before" name="RoadSignsBefore" type="bool" />
 		<property column="road_signs_after" name="RoadSignsAfter" type="bool" />
@@ -57,11 +63,11 @@
 		<many-to-one column="protection_on_approach_id" name="ProtectionOnApproach" class="ITS.Core.Bridges.Domain.Protection, ITS.Core.Bridges" cascade="all"/>
 		<property column="sidewalks" name="Sidewalks" type="ITS.Core.Bridges.Domain.Enums.SidewalkType, ITS.Core.Bridges" not-null="true"/>
 		<property column="railings" name="Railings" type="ITS.Core.Bridges.Domain.Enums.RailingsType, ITS.Core.Bridges" not-null="true"/>
-		<many-to-one column="start_bridge_side_id" name="StartBridgeSide" class="ITS.Core.Bridges.Domain.BridgeSide, ITS.Core.Bridges" cascade="all"/>
-		<many-to-one column="end_bridge_side_id" name="EndBridgeSide" class="ITS.Core.Bridges.Domain.BridgeSide, ITS.Core.Bridges" cascade="all"/>
+		<property column="slope_longitudinal_profile_before" name="SlopeLongitudinalProfileBefore" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
+		<property column="slope_longitudinal_profile_after" name="SlopeLongitudinalProfileAfter" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
 		<property column="regulatory_structures" name="RegulatoryStructures" type="ITS.Core.Bridges.Domain.Enums.RegulatoryStructures, ITS.Core.Bridges" not-null="true"/>
 		<property column="cones_strengthening" name="ConesStrengthening" type="ITS.Core.Bridges.Domain.Enums.Strenghtening, ITS.Core.Bridges" not-null="true"/>
-		<property column="adapter_plates" name="AdapterPlates" type="ITS.Core.Bridges.Domain.Enums.AdapterPlatesAvailability, ITS.Core.Bridges" not-null="true"/>
+		<property column="adapter_plates_availability" name="AdapterPlatesAvailability" type="ITS.Core.Bridges.Domain.Enums.AdapterPlatesAvailability, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="project_organization_id" name="ProjectOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core" cascade="all"/>
 		<many-to-one column="building_organization_id" name="BuildingOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core" cascade="all"/>
 		<many-to-one column="exploit_organization_id" name="ExploitOrganization" class="ITS.Core.Domain.Organizations.Organization, ITS.Core" cascade="all"/>

@@ -301,10 +301,8 @@ namespace GeneratorsLibrary
                     stringBuilder.AppendLine($"\t\t\t\tcase {NameOfEnum}.{EnumElements[i]}:");
                     stringBuilder.AppendLine($"\t\t\t\t\treturn Str{EnumElements[i]};");
                 }
-                stringBuilder.AppendLine($"\t\t\t\tdefault:");
-                stringBuilder.AppendLine($"\t\t\t\t\tbreak;");
                 stringBuilder.AppendLine($"\t\t\t}}");
-                stringBuilder.AppendLine($"\t\t\treturn null;");
+                stringBuilder.AppendLine($"\t\t\tthrow new ArgumentException(\"Некорректный элемент перечисления\", \"{nameOfParam}\");");
                 stringBuilder.AppendLine($"\t\t}}");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
