@@ -317,7 +317,7 @@ namespace GeneratorsLibrary
                         }
                         else
                         {
-                            FKs.Add($"//Database.AddForeignKey(\"{tableName}\", \"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\", " +
+                            FKs.Add($"//Database.AddForeignKey(\"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\", " +
                                    $"\"{tableName}\", " +
                                    $"\"{CamelCaseToUnderscore(identifier)}_id\", " +
                                    $"\"{CamelCaseToUnderscore(type)}\", " +

@@ -5869,11 +5869,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\i.nefedov\\source\\repos\\classToMapping\\GeneratorsLibrary.Tests\\GeneratorsLibrary.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\i.nefedov\\Source\\Repos\\luntiklaelite\\classToMapping\\GeneratorsLibrary.Tests\\GeneratorsLibrary.Tests.csproj",
       "projectName": "GeneratorsLibrary.Tests",
-      "projectPath": "C:\\Users\\i.nefedov\\source\\repos\\classToMapping\\GeneratorsLibrary.Tests\\GeneratorsLibrary.Tests.csproj",
+      "projectPath": "C:\\Users\\i.nefedov\\Source\\Repos\\luntiklaelite\\classToMapping\\GeneratorsLibrary.Tests\\GeneratorsLibrary.Tests.csproj",
       "packagesPath": "C:\\Users\\i.nefedov\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\i.nefedov\\source\\repos\\classToMapping\\GeneratorsLibrary.Tests\\obj\\",
+      "outputPath": "C:\\Users\\i.nefedov\\Source\\Repos\\luntiklaelite\\classToMapping\\GeneratorsLibrary.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5892,8 +5892,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\i.nefedov\\source\\repos\\classToMapping\\GeneratorsLibrary\\GeneratorsLibrary.csproj": {
-              "projectPath": "C:\\Users\\i.nefedov\\source\\repos\\classToMapping\\GeneratorsLibrary\\GeneratorsLibrary.csproj"
+            "C:\\Users\\i.nefedov\\Source\\Repos\\luntiklaelite\\classToMapping\\GeneratorsLibrary\\GeneratorsLibrary.csproj": {
+              "projectPath": "C:\\Users\\i.nefedov\\Source\\Repos\\luntiklaelite\\classToMapping\\GeneratorsLibrary\\GeneratorsLibrary.csproj"
             }
           }
         }
