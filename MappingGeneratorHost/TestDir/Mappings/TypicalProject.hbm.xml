@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:18.09.2020 16:26:37-->
+<!--Generated:21.09.2020 14:18:00-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges" table="bridges_typical_project">
 		<id name="ID" column="id" type="long" unsaved-value="0">

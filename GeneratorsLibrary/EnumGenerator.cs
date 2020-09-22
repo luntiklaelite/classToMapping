@@ -16,7 +16,8 @@ namespace GeneratorsLibrary
         public List<string> EnumElements { get; set; } = new List<string>();
         public List<string> EnumComments { get; set; } = new List<string>();
         public string Type { get; private set; }
-        public bool IsFlags { get; private set; }
+        private static List<string> AllowedOptions = new List<string>() { "[Flags]", "[IgnoreCase]" };
+        private List<string> Options { get; set; } = new List<string>();
 
         public EnumGenerator()
         {
@@ -42,7 +43,7 @@ namespace GeneratorsLibrary
         private void SetTypeString()
         {
             int count = EnumElements.Count;
-            if (IsFlags)
+            if (Options.Contains("[Flags]"))
             {
                 count = (int)Math.Pow(2, count - 2);
             }
@@ -72,41 +73,42 @@ namespace GeneratorsLibrary
         }
         public void ParseText(string values)
         {
-            var tmp = new string(values.Where(c=>c!='\r').ToArray()).Split('\n');
-            if (tmp[0].Trim(' ') == "[Flags]")
+            var tmp = new string(values.Where(c => c != '\r').ToArray()).Split('\n');
+            int startIndex = 0;
+            Options = GetOptions(tmp, startIndex);
+            if (Options.Count > 0)
             {
-                IsFlags = true;
-                CommentOfEnum = tmp[1];
-                NameOfEnum = tmp[2];
-                for (int i = 3; i < tmp.Length; i++)
-                {
-                    if (i % 2 != 0)
-                    {
-                        EnumComments.Add(tmp[i].Trim(' '));
-                    }
-                    else
-                    {
-                        EnumElements.Add(tmp[i].Trim(' '));
-                    }
-                }
+                startIndex++;
             }
-            else
+            CommentOfEnum = tmp[startIndex++];
+            NameOfEnum = tmp[startIndex++];
+            for (int i = startIndex; i < tmp.Length; i++)
             {
-                CommentOfEnum = tmp[0];
-                NameOfEnum = tmp[1];
-                for (int i = 2; i < tmp.Length; i++)
+                if (i % 2 != 0)
                 {
-                    if (i % 2 == 0)
-                    {
-                        EnumComments.Add(tmp[i].Trim(' '));
-                    }
-                    else
-                    {
-                        EnumElements.Add(tmp[i].Trim(' '));
-                    }
+                    EnumComments.Add(tmp[i].Trim(' '));
+                }
+                else
+                {
+                    EnumElements.Add(tmp[i].Trim(' '));
                 }
             }
         }
+
+        private static List<string> GetOptions(string[] tmp, int startIndex)
+        {
+            var a = tmp[startIndex].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var res = new List<string>();
+            foreach (var item in a)
+            {
+                if (AllowedOptions.Contains(item))
+                {
+                    res.Add(item);
+                }
+            }
+            return res;
+        }
+
         public string GetEnumText()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -119,13 +121,13 @@ namespace GeneratorsLibrary
             stringBuilder.AppendLine($"\t/// {CommentOfEnum}");
             stringBuilder.AppendLine("\t/// </summary>");
             stringBuilder.AppendLine("\t[Serializable]");
-            if (IsFlags)
+            if (Options.Contains("[Flags]"))
             {
                 stringBuilder.AppendLine("\t[Flags]");
             }
             stringBuilder.AppendLine($"\tpublic enum {NameOfEnum} : {Type}");
             stringBuilder.AppendLine("\t{");
-            if (IsFlags)
+            if (Options.Contains("[Flags]"))
             {
                 stringBuilder.AppendLine("\t\t/// <summary>");
                 stringBuilder.AppendLine($"\t\t/// Нет данных");
@@ -195,7 +197,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t\treturn Strings.FirstOrDefault(s => s.Value == name).Key;");
                 stringBuilder.AppendLine($"\t\t}}");
             }
-            else if(IsFlags)
+            else if(Options.Contains("[Flags]"))
             {
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
@@ -242,12 +244,18 @@ namespace GeneratorsLibrary
                 {
                     if (i == 0)
                     {
-                        stringBuilder.AppendLine($"\t\t\t\tif (item == Str{EnumElements[i]})");
+                        if (Options.Contains("[IgnoreCase]"))
+                            stringBuilder.AppendLine($"\t\t\t\tif (item.Equals(Str{EnumElements[i]}, StringComparison.OrdinalIgnoreCase))");
+                        else
+                            stringBuilder.AppendLine($"\t\t\t\tif (item == Str{EnumElements[i]})");
                         stringBuilder.AppendLine($"\t\t\t\t\tres |= {NameOfEnum}.{EnumElements[i]};");
                     }
                     else
                     {
-                        stringBuilder.AppendLine($"\t\t\t\telse if (item == Str{EnumElements[i]})");
+                        if (Options.Contains("[IgnoreCase]"))
+                            stringBuilder.AppendLine($"\t\t\t\telse if (item.Equals(Str{EnumElements[i]}, StringComparison.OrdinalIgnoreCase))");
+                        else
+                            stringBuilder.AppendLine($"\t\t\t\telse if (item == Str{EnumElements[i]})");
                         stringBuilder.AppendLine($"\t\t\t\t\tres |= {NameOfEnum}.{EnumElements[i]};");
                     }
                 }
@@ -288,7 +296,10 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t{{");
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
-                    stringBuilder.AppendLine($"\t\t\tif (name == Str{EnumElements[i]})");
+                    if (Options.Contains("[IgnoreCase]"))
+                        stringBuilder.AppendLine($"\t\t\tif (name.Equals(Str{EnumElements[i]}, StringComparison.OrdinalIgnoreCase))");
+                    else
+                        stringBuilder.AppendLine($"\t\t\tif (name == Str{EnumElements[i]})");
                     stringBuilder.AppendLine($"\t\t\t\treturn {NameOfEnum}.{EnumElements[i]};");
                 }
                 stringBuilder.AppendLine($"\t\t\tthrow new ArgumentException(\"Некорректная входная строка\", \"name\");");

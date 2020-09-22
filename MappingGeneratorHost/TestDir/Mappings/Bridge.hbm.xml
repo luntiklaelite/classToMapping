@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:18.09.2020 16:26:37-->
+<!--Generated:21.09.2020 14:18:00-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
-		<property column="construction" name="Construction" type="string" />
+		<property column="construction_name" name="ConstructionName" type="string" />
 		<property column="road_name" name="RoadName" type="string" />
 		<property column="subject_code" name="SubjectCode" type="short" />
 		<property column="territorial_road_control_code" name="TerritorialRoadControlCode" type="int" />
@@ -48,7 +48,7 @@
 		<property column="road_signs_after" name="RoadSignsAfter" type="bool" />
 		<property column="security" name="Security" type="bool" />
 		<property column="notes" name="Notes" type="string" />
-		<!--many-to-one column="obstacles_id" name="Obstacles" class="ITS.Core.Bridges.Domain.List<BridgeObstacle>, ITS.Core.Bridges"/-->
+		<property column="construction_type" name="ConstructionType" type="ITS.Core.Bridges.Domain.Enums.BridgeType, ITS.Core.Bridges" not-null="true"/>
 		<property column="road_category" name="RoadCategory" type="ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges" not-null="true"/>
 		<property column="construction_date" name="ConstructionDate" type="date"/>
 		<property column="reconstruction_date" name="ReconstructionDate" type="date"/>

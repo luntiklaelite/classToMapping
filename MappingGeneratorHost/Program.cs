@@ -23,6 +23,7 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true
             };
+            gen.NotMappedPropertyNames.Add("Obstacles");
             //            var gen = new MappingGenerator(args[2], args[3], @"using System;
             //namespace Test{
             //    class Test:DomainObject<long>{
@@ -55,6 +56,7 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true,
             };
+            gen1.NotMappedPropertyNames.Add("Obstacles");
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");
             var path1 = args[1] + "\\" + $"Migrations\\{gen1.MigrationFileName}";

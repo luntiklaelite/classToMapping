@@ -1,4 +1,5 @@
-﻿Опорная часть
+﻿[IgnoreCase]
+Опорная часть
 BridgeSupportSpanType
 Эластомерная
 Elastomeric

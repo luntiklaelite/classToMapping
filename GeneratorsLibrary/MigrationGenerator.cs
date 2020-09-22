@@ -182,10 +182,11 @@ namespace GeneratorsLibrary
             sb.AppendLine($"\t\t{{");
             var removeTables = new List<string>();
             var removeFKs = new List<string>();
+            var clearTables = new List<string>();
             var FKs = new List<string>();
             foreach (var cls in classes)
             {
-                sb.Append(GenerateTable(enums, classes, cls, "\t\t\t", FKs, removeTables, removeFKs));
+                sb.Append(GenerateTable(enums, classes, cls, "\t\t\t", FKs, removeTables, removeFKs, clearTables));
             }
             sb.AppendLine();
             foreach (var t in FKs)
@@ -197,6 +198,12 @@ namespace GeneratorsLibrary
             sb.AppendLine();
             sb.AppendLine($"\t\tpublic override void Down()");
             sb.AppendLine($"\t\t{{");
+            foreach (var ct in clearTables)
+            {
+                sb.Append($"\t\t\t");
+                sb.AppendLine(ct);
+            }
+            sb.AppendLine();
             foreach (var r in removeFKs)
             {
                 sb.Append($"\t\t\t");
@@ -214,7 +221,7 @@ namespace GeneratorsLibrary
             return sb.ToString();
         }
         public string GenerateTable(IEnumerable<EnumDeclarationSyntax> enums, IEnumerable<ClassDeclarationSyntax> classes,
-            ClassDeclarationSyntax classDecl, string indent, List<string> FKs, List<string> removeTables, List<string> removeFKs)
+            ClassDeclarationSyntax classDecl, string indent, List<string> FKs, List<string> removeTables, List<string> removeFKs, List<string> clearTables)
         {
             StringBuilder sb = new StringBuilder();
             var @namespace = classDecl.Parent as NamespaceDeclarationSyntax;
@@ -240,6 +247,7 @@ namespace GeneratorsLibrary
                 string tableName = $"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}";
                 sb.AppendLine($@"Database.AddTable(""{tableName}"", new[]");
                 removeTables.Add($"Database.RemoveTable(\"{tableName}\");");
+                clearTables.Add($"Database.ExecuteQuery(\"DELETE FROM {tableName}\");");
                 sb.Append(indent);
                 sb.AppendLine($"\t{{");
                 sb.Append(indent);
