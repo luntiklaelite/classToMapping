@@ -75,6 +75,7 @@ namespace GeneratorsLibrary
         {
             var tmp = new string(values.Where(c => c != '\r').ToArray()).Split('\n');
             int startIndex = 0;
+            bool comment = true;
             Options = GetOptions(tmp, startIndex);
             if (Options.Count > 0)
             {
@@ -84,7 +85,7 @@ namespace GeneratorsLibrary
             NameOfEnum = tmp[startIndex++];
             for (int i = startIndex; i < tmp.Length; i++)
             {
-                if (i % 2 != 0)
+                if (comment)
                 {
                     EnumComments.Add(tmp[i].Trim(' '));
                 }
@@ -92,6 +93,7 @@ namespace GeneratorsLibrary
                 {
                     EnumElements.Add(tmp[i].Trim(' '));
                 }
+                comment = !comment;
             }
         }
 

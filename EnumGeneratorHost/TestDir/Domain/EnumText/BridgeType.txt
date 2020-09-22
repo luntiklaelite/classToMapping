@@ -1,0 +1,27 @@
+﻿[IgnoreCase]
+Тип сооружения
+BridgeType
+Путепровод
+Overpass
+Эстакада
+Estacada
+Скотопрогон
+CattleDrive
+Понтон
+Pontoon
+Засыпного типа
+FillType
+Виадук
+Viaduct
+Акведук
+Aqueduct
+Летающий паром
+FlyingFerry
+Разводной мост
+Drawbridge
+Мост
+Bridge
+Тоннель
+Tunnel
+Нет данных
+NoData
