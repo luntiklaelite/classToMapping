@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:21.09.2020 14:18:00-->
+<!--Generated:25.09.2020 13:58:23-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges" table="bridges_bridge_support">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
-		<property column="is_movable" name="isMovable" type="bool" />
+		<property column="is_movable" name="IsMovable" type="bool" />
 		<property column="support_type_additional_info" name="SupportTypeAdditionalInfo" type="string" />
 		<property column="heights" name="Heights" type="System.Byte[], mscorlib" />
 		<property column="laying_depth" name="LayingDepth" type="single" />
 		<property column="massive_part_size_along" name="MassivePartSizeAlong" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="massive_part_size_across" name="MassivePartSizeAcross" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="pile_count" name="PileCount" type="int" />
-		<property column="max_distance_between_axis" name="MaxDistanceBetweenAxis" type="single" />
 		<property column="scheme_k_left" name="SchemeKLeft" type="single" />
 		<property column="scheme_k_right" name="SchemeKRight" type="single" />
 		<property column="scheme_pile_distances" name="SchemePileDistances" type="System.Byte[], mscorlib" />

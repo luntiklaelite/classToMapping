@@ -247,7 +247,7 @@ namespace GeneratorsLibrary
                 string tableName = $"{TablePrefix}_{CamelCaseToUnderscore(classDecl.Identifier.ToString())}";
                 sb.AppendLine($@"Database.AddTable(""{tableName}"", new[]");
                 removeTables.Add($"Database.RemoveTable(\"{tableName}\");");
-                clearTables.Add($"Database.ExecuteQuery(\"DELETE FROM {tableName}\");");
+                clearTables.Add($"//Database.ExecuteQuery(\"DELETE FROM {tableName}\");");
                 sb.Append(indent);
                 sb.AppendLine($"\t{{");
                 sb.Append(indent);

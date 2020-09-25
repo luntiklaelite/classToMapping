@@ -1,4 +1,4 @@
-﻿[Flags]
+﻿[Flags] [IgnoreCase]
 Обустройство
 Arrangements
 Тележки смотровые
