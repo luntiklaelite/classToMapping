@@ -14,6 +14,29 @@ EnumGenerator
 (например, символ обратного слеша \ нужно писать как \\). Необходимо задать два аргумента при вызове: первый аргумент - путь к папке с входными файлами (.txt и .cfg), 
 второй аргумент - путь к директории проекта (если делать через внешние инструменты visual studio - "$(ProjectDir)").
 
+Пример файла namespaces.cfg
+---------
+	ITS.Core.Spectrum.Domain.Enums  
+	ITS.Core.Spectrum.Domain.EnumStrings
+
+Пример входного файла
+---------
+	[Flags]
+	Обустройство
+	Arrangements
+	Тележки смотровые
+	InspectionTrolleys
+	Люльки
+	Cradles
+	Смотровые хода
+	ObservationMoves
+	Люки
+	Hatches
+	Двери
+	Doors
+	Лестницы
+	Stairs
+
 Интеграция с Visual Studio
 ---------
 Удобно добавить файл .exe генератора как внешний инструмент в visual studio: Средства->Внешние инструменты->Добавить, ввести любое название,
@@ -33,7 +56,7 @@ EnumGenerator
 ---------
 
 	using System;
-	namespace ITS.Core.Bridges.Domain.EnumStrings
+	namespace ITS.Core.Spectrum.Domain.EnumStrings
 	{
       public interface IEnumStrings<T>
           where T : struct, IConvertible
@@ -42,11 +65,5 @@ EnumGenerator
           T GetElement(string name);
       }
 	}
-
-Пример файла namespaces.cfg
----------
-ITS.Core.Spectrum.Domain.Enums  
-
-ITS.Core.Spectrum.Domain.EnumStrings
 
 
