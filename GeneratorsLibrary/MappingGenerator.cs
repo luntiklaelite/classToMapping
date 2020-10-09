@@ -12,7 +12,7 @@ using static GeneratorsLibrary.StringUtilities;
 
 namespace GeneratorsLibrary
 {
-    //TO DO: сделать поддержку связи многие-ко-многим
+    //TO DO: сделать поддержку связи многие-ко-многим и один-ко-многим
     public class MappingGenerator
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()
@@ -110,6 +110,7 @@ namespace GeneratorsLibrary
         public List<string> AlreadyExistsClassNames { get; set; } = new List<string>()
         {
             "Material",
+            "Defect"
         };
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
