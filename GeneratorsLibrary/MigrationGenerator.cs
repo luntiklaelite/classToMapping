@@ -101,6 +101,7 @@ namespace GeneratorsLibrary
             {"FeatureObject","featureobject"},
             {"Organization","info_organization"},
         };
+        public string CustomCodeUp { get; set; }
         public string MigrationFileName { get; private set; }
         public string MigrationNamespace { get; set; }
         public string TablePrefix { get; set; }
@@ -194,6 +195,8 @@ namespace GeneratorsLibrary
                 sb.Append("\t\t\t");
                 sb.AppendLine(t);
             }
+            sb.Append($"\t\t\t");
+            sb.AppendLine(CustomCodeUp);
             sb.AppendLine($"\t\t}}");
             sb.AppendLine();
             sb.AppendLine($"\t\tpublic override void Down()");
@@ -323,16 +326,16 @@ namespace GeneratorsLibrary
                             removeFKs.Add($"Database.RemoveForeignKey(\"{tableName}\", \"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\");");
                             num++;
                         }
-                        else
-                        {
-                            FKs.Add($"//Database.AddForeignKey(\"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\", " +
-                                   $"\"{tableName}\", " +
-                                   $"\"{CamelCaseToUnderscore(identifier)}_id\", " +
-                                   $"\"{CamelCaseToUnderscore(type)}\", " +
-                                   $"\"id\");");
-                            removeFKs.Add($"//Database.RemoveForeignKey(\"{tableName}\", \"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\");");
-                            num++;
-                        }
+                        //else
+                        //{
+                        //    FKs.Add($"//Database.AddForeignKey(\"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\", " +
+                        //           $"\"{tableName}\", " +
+                        //           $"\"{CamelCaseToUnderscore(identifier)}_id\", " +
+                        //           $"\"{CamelCaseToUnderscore(type)}\", " +
+                        //           $"\"id\");");
+                        //    removeFKs.Add($"//Database.RemoveForeignKey(\"{tableName}\", \"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\");");
+                        //    num++;
+                        //}
                     }
                 }
                 sb.Append(indent);

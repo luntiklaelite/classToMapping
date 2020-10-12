@@ -24,21 +24,23 @@ namespace classToMapping
                 MapEnumToIntegerType = true
             };
             gen.NotMappedPropertyNames.Add("Obstacles");
-            //            var gen = new MappingGenerator(args[2], args[3], @"using System;
-            //namespace Test{
-            //    class Test:DomainObject<long>{
-            //        public int AKLJ1{get;set;}
-            //        public Int32 AKLJ2{get;set;}
-            //        public Int32? AKLJ3{get;set;}
-            //        public int? AKLJ4{get;set;}
-            //        public Nullable<int> AKLJ5{get;set;}
-            //        public Nullable<Int32> AKLJ6{get;set;}
-            //        public System.Nullable<int> AKLJ7{get;set;}
-            //        public System.Nullable<Int32> AKLJ8{get;set;}
-            //        public System.Flkd.Fkk.Nullable<Int32> AKLJ8{get;set;}
-            //        public System.Flkd.Fkk.Nullable<Int32> AKLJ8{get;set;}
-            //    }
-            //}");
+            gen.NotMappedPropertyNames.Add("Defects");
+            gen.CustomXmlInMainMapping = @"     <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
+          <key column = ""bridge_id""/>
+        <one-to-many class=""ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges""/>
+    </bag>
+    <bag name = ""Supports"" lazy =""false"" cascade =""all-delete-orphan"" >
+      <key column = ""bridge_id"" />
+      <one-to-many class=""ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges"" />
+    </bag>
+    <bag name = ""SpanStructures"" lazy =""false"" cascade =""all-delete-orphan"" >
+      <key column = ""bridge_id"" />
+      <one-to-many class=""ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges"" />
+    </bag>
+    <bag name = ""Defects"" lazy =""false"" cascade =""all-delete-orphan"" >
+      <key column = ""bridge_id"" />
+      <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
+    </bag>";
             var mappings = gen.GenerateMappings();
             Console.WriteLine("Generated files:");
             var relPaths = new string[mappings.Count];
@@ -56,6 +58,7 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true,
             };
+            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(""INSERT INTO bridges_material(id, name) VALUES (1, 'Железобетон'), (2, 'Бетон'), (3, 'Бутобетон'), (4, 'Каменная или бетонная кладка'), (5, 'Древесина'), (6, 'Железобетон преднапряженный'), (7, 'Сталь'), (8, 'Сталежелезобетон'), (9, 'Древесина клееная'), (10, 'Алюминий'), (11, 'Композитный материал'), (12, 'Прочее'), (13, 'Нет данных')""); ";
             gen1.NotMappedPropertyNames.Add("Obstacles");
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");

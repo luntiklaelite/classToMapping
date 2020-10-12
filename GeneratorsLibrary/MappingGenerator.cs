@@ -112,6 +112,7 @@ namespace GeneratorsLibrary
             "Material",
             "Defect"
         };
+        public string CustomXmlInMainMapping { get; set; }
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
         /// <summary>
@@ -231,6 +232,12 @@ namespace GeneratorsLibrary
                     string line = GetCustomPropLine(enums, @namespace, enumNames, identifier, type);
                     stringBuilder.AppendLine(line);
                 }
+                //todo: работает только в частном случае
+                if ($"{ TablePrefix}_{ CamelCaseToUnderscore(classDecl.Identifier.ToString())}" 
+                    == "bridges_bridge")
+                {
+                    stringBuilder.AppendLine(CustomXmlInMainMapping);
+                }
                 stringBuilder.AppendLine($"\t</class>");
                 stringBuilder.AppendLine($"</hibernate-mapping>");
                 return new KeyValuePair<string, string>(classDecl.Identifier.ToString() + ".hbm.xml", stringBuilder.ToString());
@@ -276,7 +283,8 @@ namespace GeneratorsLibrary
             else
             {
                 // добавить поддержку IList<>
-                return $"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{type}, {AssemblyName}\"/-->";
+                //return $"\t\t<!--many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{@namespace.Name}.{type}, {AssemblyName}\"/-->";
+                return $"";
             }
         }
 

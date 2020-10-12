@@ -232,4 +232,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:12.10.2020 11:06:51-->
+    <EmbeddedResource Include="Mappings\Defect.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

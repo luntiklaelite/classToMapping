@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:05.10.2020 16:45:45-->
+<!--Generated:12.10.2020 15:00:30-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -76,11 +76,27 @@
 		<property column="communications" name="Communications" type="ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges" not-null="true"/>
 		<property column="arrangements" name="Arrangements" type="ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges" not-null="true"/>
 		<property column="date_view" name="DateView" type="date"/>
-		<!--many-to-one column="supports_id" name="Supports" class="ITS.Core.Bridges.Domain.IList<BridgeSupport>, ITS.Core.Bridges"/-->
-		<!--many-to-one column="span_structures_id" name="SpanStructures" class="ITS.Core.Bridges.Domain.IList<SpanStructure>, ITS.Core.Bridges"/-->
+
+
 		<property column="status" name="Status" type="ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core" cascade="all" not-null="true"/>
 		<property column="quality_bridge_type" name="QualityBridgeType" type="ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges" not-null="true"/>
 		<property column="move_type" name="MoveType" type="ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges" not-null="true"/>
+     <bag name="Obstacles" lazy="false" cascade="all-delete-orphan">
+          <key column = "bridge_id"/>
+        <one-to-many class="ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges"/>
+    </bag>
+    <bag name = "Supports" lazy ="false" cascade ="all-delete-orphan" >
+      <key column = "bridge_id" />
+      <one-to-many class="ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges" />
+    </bag>
+    <bag name = "SpanStructures" lazy ="false" cascade ="all-delete-orphan" >
+      <key column = "bridge_id" />
+      <one-to-many class="ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges" />
+    </bag>
+    <bag name = "Defects" lazy ="false" cascade ="all -delete-orphan" >
+      <key column = "bridge_id" />
+      <one-to-many class="ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges" />
+    </bag>
 	</class>
 </hibernate-mapping>
