@@ -57,7 +57,8 @@ namespace classToMapping
                 MapEnumToIntegerType = true,
             };
             gen1.CustomCodeUp = @"Database.ExecuteNonQuery(""INSERT INTO bridges_material(id, name) VALUES(1, 'Железобетон'), (2, 'Бетон'), (3, 'Сталь'), (4, 'Сталежелезобетон'), (5, 'Бутобетон'), (6, 'Каменная или бетонная кладка'), (7, 'Железобетон преднапряженный'), (8, 'Алюминий'), (9, 'Композитный материал'), (10, 'Древесина'), (11, 'Древесина клееная'), (12, 'Прочее'), (13, 'Нет данных')"");
-            Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);";
+                Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
+                Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);";
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");
             var path1 = args[1] + $"\\Migrations\\{gen1.MigrationFileName}";
