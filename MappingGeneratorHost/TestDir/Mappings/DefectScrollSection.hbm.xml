@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Generated:15.10.2020 14:49:17-->
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="false">
-	<class lazy="false" name="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges" table="bridges_material">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.Bridges.Domain.DefectScrollSection, ITS.Core.Bridges" table="bridges_defect_scroll_section">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="name" name="Name" type="string" />
+		<property column="full_name" name="FullName" type="string" />
 	</class>
 </hibernate-mapping>

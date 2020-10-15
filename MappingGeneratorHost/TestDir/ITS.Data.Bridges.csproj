@@ -237,4 +237,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:13.10.2020 16:31:10-->
+    <EmbeddedResource Include="Mappings\DefectType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:15.10.2020 14:35:03-->
+    <EmbeddedResource Include="Mappings\DefectScrollSection.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

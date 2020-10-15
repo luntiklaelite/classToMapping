@@ -23,22 +23,20 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true
             };
-            gen.NotMappedPropertyNames.Add("Obstacles");
-            gen.NotMappedPropertyNames.Add("Defects");
             gen.CustomXmlInMainMapping = @"     <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
-          <key column = ""bridge_id""/>
+          <key column=""bridge_id""/>
         <one-to-many class=""ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges""/>
     </bag>
-    <bag name = ""Supports"" lazy =""false"" cascade =""all-delete-orphan"" >
-      <key column = ""bridge_id"" />
+    <bag name=""Supports"" lazy =""false"" cascade=""all-delete-orphan"" >
+      <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges"" />
     </bag>
-    <bag name = ""SpanStructures"" lazy =""false"" cascade =""all-delete-orphan"" >
-      <key column = ""bridge_id"" />
+    <bag name=""SpanStructures"" lazy =""false"" cascade=""all-delete-orphan"" >
+      <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges"" />
     </bag>
-    <bag name = ""Defects"" lazy =""false"" cascade =""all-delete-orphan"" >
-      <key column = ""bridge_id"" />
+    <bag name=""Defects"" lazy =""false"" cascade=""all-delete-orphan"" >
+      <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
     </bag>";
             var mappings = gen.GenerateMappings();
@@ -58,11 +56,16 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true,
             };
-            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(""INSERT INTO bridges_material(id, name) VALUES (1, 'Железобетон'), (2, 'Бетон'), (3, 'Бутобетон'), (4, 'Каменная или бетонная кладка'), (5, 'Древесина'), (6, 'Железобетон преднапряженный'), (7, 'Сталь'), (8, 'Сталежелезобетон'), (9, 'Древесина клееная'), (10, 'Алюминий'), (11, 'Композитный материал'), (12, 'Прочее'), (13, 'Нет данных')""); ";
-            gen1.NotMappedPropertyNames.Add("Obstacles");
+            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(""INSERT INTO bridges_material(id, name) VALUES(1, 'Железобетон'), (2, 'Бетон'), (3, 'Сталь'), (4, 'Сталежелезобетон'), (5, 'Бутобетон'), (6, 'Каменная или бетонная кладка'), (7, 'Железобетон преднапряженный'), (8, 'Алюминий'), (9, 'Композитный материал'), (10, 'Древесина'), (11, 'Древесина клееная'), (12, 'Прочее'), (13, 'Нет данных')"");
+            Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);";
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");
-            var path1 = args[1] + "\\" + $"Migrations\\{gen1.MigrationFileName}";
+            var path1 = args[1] + $"\\Migrations\\{gen1.MigrationFileName}";
+            DirectoryInfo di = new DirectoryInfo(args[1] + $"\\Migrations");
+            foreach (var item in di.GetFiles())
+            {
+                item.Delete();
+            }
             Console.WriteLine(path1);
             File.WriteAllText(path1, migr);
             Console.ReadKey();

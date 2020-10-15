@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Generated:15.10.2020 14:49:17-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class lazy="false" name="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges" table="bridges_typical_project">
+	<class lazy="false" name="ITS.Core.Bridges.Domain.DefectType, ITS.Core.Bridges" table="bridges_defect_type">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="name" name="Name" type="string" />
+		<property column="pattern" name="Pattern" type="string" />
+		<many-to-one column="section_id" name="Section" class="ITS.Core.Bridges.Domain.DefectScrollSection, ITS.Core.Bridges" cascade="all"/>
 	</class>
 </hibernate-mapping>
