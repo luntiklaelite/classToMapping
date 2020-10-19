@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:15.10.2020 16:51:40-->
+<!--Generated:19.10.2020 13:29:21-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.Bridge, ITS.Core.Bridges" table="bridges_bridge">
 		<id name="ID" column="id" type="long" unsaved-value="0">
@@ -50,7 +50,6 @@
 		<property column="notes" name="Notes" type="string" />
 		<property column="height_level_number" name="HeightLevelNumber" type="int" />
 		<property column="construction_type" name="ConstructionType" type="ITS.Core.Bridges.Domain.Enums.BridgeType, ITS.Core.Bridges" not-null="true"/>
-
 		<property column="road_category" name="RoadCategory" type="ITS.Core.Bridges.Domain.Enums.RoadCategory, ITS.Core.Bridges" not-null="true"/>
 		<property column="construction_date" name="ConstructionDate" type="date"/>
 		<property column="reconstruction_date" name="ReconstructionDate" type="date"/>
@@ -64,7 +63,7 @@
 		<many-to-one column="protection_on_bridge_id" name="ProtectionOnBridge" class="ITS.Core.Bridges.Domain.Protection, ITS.Core.Bridges" cascade="all"/>
 		<many-to-one column="protection_on_approach_id" name="ProtectionOnApproach" class="ITS.Core.Bridges.Domain.Protection, ITS.Core.Bridges" cascade="all"/>
 		<property column="sidewalks" name="Sidewalks" type="ITS.Core.Bridges.Domain.Enums.SidewalkType, ITS.Core.Bridges" not-null="true"/>
-		<property column="railings" name="Railings" type="ITS.Core.Bridges.Domain.Enums.RailingsType, ITS.Core.Bridges" not-null="true"/>
+		<property column="railings_type" name="RailingsType" type="ITS.Core.Bridges.Domain.Enums.RailingsType, ITS.Core.Bridges" not-null="true"/>
 		<property column="slope_longitudinal_profile_before" name="SlopeLongitudinalProfileBefore" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
 		<property column="slope_longitudinal_profile_after" name="SlopeLongitudinalProfileAfter" type="ITS.Core.Bridges.Domain.Enums.SlopeProfile, ITS.Core.Bridges" not-null="true"/>
 		<property column="regulatory_structures" name="RegulatoryStructures" type="ITS.Core.Bridges.Domain.Enums.RegulatoryStructures, ITS.Core.Bridges" not-null="true"/>
@@ -77,14 +76,11 @@
 		<property column="communications" name="Communications" type="ITS.Core.Bridges.Domain.Enums.Communications, ITS.Core.Bridges" not-null="true"/>
 		<property column="arrangements" name="Arrangements" type="ITS.Core.Bridges.Domain.Enums.Arrangements, ITS.Core.Bridges" not-null="true"/>
 		<property column="date_view" name="DateView" type="date"/>
-
-
 		<property column="status" name="Status" type="ITS.Core.Bridges.Domain.Enums.BridgeStatus, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="feature_object_id" name="FeatureObject" class="ITS.Core.Domain.FeatureObjects.FeatureObject, ITS.Core" cascade="all" not-null="true"/>
 		<property column="quality_bridge_type" name="QualityBridgeType" type="ITS.Core.Bridges.Domain.Enums.Quality, ITS.Core.Bridges" not-null="true"/>
 		<property column="move_type" name="MoveType" type="ITS.Core.Bridges.Domain.Enums.MoveType, ITS.Core.Bridges" not-null="true"/>
-
-     <bag name="Obstacles" lazy="false" cascade="all-delete-orphan">
+    <bag name="Obstacles" lazy="false" cascade="all-delete-orphan">
           <key column="bridge_id"/>
         <one-to-many class="ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges"/>
     </bag>

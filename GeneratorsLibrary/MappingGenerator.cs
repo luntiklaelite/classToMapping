@@ -112,6 +112,7 @@ namespace GeneratorsLibrary
             "Material",
             "Defect"
         };
+        public List<string> PropertyWithCascadeAll { get; } = new List<string>();
         public string CustomXmlInMainMapping { get; set; }
         public string AssemblyName { get; set; }
         public string TablePrefix { get; set; }
@@ -223,14 +224,20 @@ namespace GeneratorsLibrary
                 foreach (var prop in propertiesWithPredefinedTypes)
                 {
                     string line = GetPredefinedPropLine(prop);
-                    stringBuilder.AppendLine(line);
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        stringBuilder.AppendLine(line);
+                    }
                 }
                 foreach (var prop in propertiesWithCustomTypes)
                 {
                     string identifier = prop.Identifier.ToString();
                     string type = GetTypeName(prop.Type);
                     string line = GetCustomPropLine(enums, @namespace, enumNames, identifier, type);
-                    stringBuilder.AppendLine(line);
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        stringBuilder.AppendLine(line);
+                    }
                 }
                 //todo: работает только в частном случае
                 if ($"{ TablePrefix}_{ CamelCaseToUnderscore(classDecl.Identifier.ToString())}" 
@@ -268,7 +275,11 @@ namespace GeneratorsLibrary
                 {
                     return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\" not-null=\"true\"/>";
                 }
-                return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\"/>";
+                else if(PropertyWithCascadeAll.Contains(identifier))
+                {
+                    return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\" cascade=\"all\"/>";
+                }
+                return $"\t\t<many-to-one column=\"{CamelCaseToUnderscore(identifier)}_id\" name=\"{identifier}\" class=\"{CustomTypesForMappings[type]}\"/>";
             }
             else if (enumNames.Contains(type))
             {

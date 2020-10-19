@@ -23,7 +23,7 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true
             };
-            gen.CustomXmlInMainMapping = @"     <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
+            gen.CustomXmlInMainMapping = @"    <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
           <key column=""bridge_id""/>
         <one-to-many class=""ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges""/>
     </bag>
@@ -39,6 +39,15 @@ namespace classToMapping
       <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
     </bag>";
+            gen.PropertyWithCascadeAll.AddRange(new[] 
+            {
+                "ProtectionOnBridge",
+                "ProtectionOnApproach",
+                "ProtectionOnApproach",
+                "Section",
+                "CrossPile",
+                "LongitudinalPile",
+            });
             var mappings = gen.GenerateMappings();
             Console.WriteLine("Generated files:");
             var relPaths = new string[mappings.Count];
@@ -56,9 +65,9 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true,
             };
-            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(""INSERT INTO bridges_material(id, name) VALUES(1, 'Железобетон'), (2, 'Бетон'), (3, 'Сталь'), (4, 'Сталежелезобетон'), (5, 'Бутобетон'), (6, 'Каменная или бетонная кладка'), (7, 'Железобетон преднапряженный'), (8, 'Алюминий'), (9, 'Композитный материал'), (10, 'Древесина'), (11, 'Древесина клееная'), (12, 'Прочее'), (13, 'Нет данных')"");
-                Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
-                Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);";
+            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
+            Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);
+            Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);";
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");
             var path1 = args[1] + $"\\Migrations\\{gen1.MigrationFileName}";
