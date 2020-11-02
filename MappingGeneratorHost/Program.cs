@@ -18,7 +18,7 @@ namespace classToMapping
                 Console.WriteLine("Too few arguments.");
                 return;
             }
-            var files = Directory.GetFiles(args[0],"*.cs",SearchOption.AllDirectories);
+            var files = Directory.GetFiles(args[0], "*.cs", SearchOption.AllDirectories);
             MappingGenerator gen = new MappingGenerator(args[2], args[3], files)
             {
                 MapEnumToIntegerType = true
@@ -39,7 +39,7 @@ namespace classToMapping
       <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
     </bag>";
-            gen.PropertyWithCascadeAll.AddRange(new[] 
+            gen.PropertyWithCascadeAll.AddRange(new[]
             {
                 "ProtectionOnBridge",
                 "ProtectionOnApproach",
@@ -56,7 +56,7 @@ namespace classToMapping
                 relPaths[i] = $"Mappings\\{mappings[i].Key}";
                 var path = args[1] + "\\" + relPaths[i];
                 Console.WriteLine(path);
-                File.WriteAllText(path,mappings[i].Value);
+                File.WriteAllText(path, mappings[i].Value);
             }
             WriteToCsproj(relPaths, args[1]);
 
@@ -67,19 +67,34 @@ namespace classToMapping
             };
             gen1.CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
             Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);
-            Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);";
+            Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);
+            Database.ExecuteNonQuery(Properties.Resources.InsertTypicalProjects);";
+
+            ClearDir(args);
             var migr = gen1.GenerateMigration();
             Console.WriteLine("Generated migration:");
             var path1 = args[1] + $"\\Migrations\\{gen1.MigrationFileName}";
+            File.WriteAllText(path1, migr);
+            Console.WriteLine(path1);
+
+            migr = gen1.GenerateEmptyMigration();
+            Console.WriteLine("Generated migration:");
+            var path2 = args[1] + $"\\Migrations\\{gen1.MigrationFileName}";
+            Console.WriteLine(path2);
+            File.WriteAllText(path2, migr);
+
+            Console.ReadKey();
+        }
+
+        private static void ClearDir(string[] args)
+        {
             DirectoryInfo di = new DirectoryInfo(args[1] + $"\\Migrations");
             foreach (var item in di.GetFiles())
             {
                 item.Delete();
             }
-            Console.WriteLine(path1);
-            File.WriteAllText(path1, migr);
-            Console.ReadKey();
         }
+
         public static void WriteToCsproj(string[] relPath, string projectDir)
         {
             var csprojPath = Directory.GetFiles(projectDir, "*.csproj");

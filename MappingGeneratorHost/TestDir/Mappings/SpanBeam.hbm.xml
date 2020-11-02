@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:19.10.2020 13:29:21-->
+<!--Generated:02.11.2020 13:23:32-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.SpanBeam, ITS.Core.Bridges" table="bridges_span_beam">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
-		<property column="type" name="Type" type="bool" />
 		<property column="count_in_span" name="CountInSpan" type="int" />
 		<property column="height" name="Height" type="single" />
+		<property column="type" name="Type" type="ITS.Core.Bridges.Domain.Enums.SpanBeamType, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
 	</class>
 </hibernate-mapping>
