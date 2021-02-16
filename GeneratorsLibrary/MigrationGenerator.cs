@@ -244,7 +244,7 @@ namespace GeneratorsLibrary
             sb.AppendLine($"namespace {MigrationNamespace}");
             sb.AppendLine($"{{");
             sb.AppendLine($"\t/// <summary>");
-            sb.AppendLine($"\t/// Миграция для создания схемы");
+            sb.AppendLine($"\t/// Миграция для корректного удаления всех структур БД при откате");
             sb.AppendLine($"\t/// </summary>");
             sb.AppendLine($"\t[Migration({numberOfMigration})]");
             sb.AppendLine($"\tpublic class Migration{numberOfMigration} : Migration");
@@ -345,6 +345,7 @@ namespace GeneratorsLibrary
                         sb.Append(indent);
                         sb.AppendLine($"\t\tnew Column(\"{CamelCaseToUnderscore(identifier)}_id\", DbType.Int64),");
                         //генерация внешнего ключа
+                        
                         if (KnownTables.ContainsKey(type))
                         {
                             FKs.Add($"Database.AddForeignKey(\"{CamelCaseToUnderscore(classDecl.Identifier.ToString())}_to_{CamelCaseToUnderscore(type)}_{num}\", " +

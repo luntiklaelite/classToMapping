@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:02.11.2020 13:23:32-->
+<!--Generated:16.02.2021 11:51:14-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges" table="bridges_span_structure">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="number" name="Number" type="int" />
+		<property column="longitude_scheme" name="LongitudeScheme" type="string" />
+		<property column="expansion_joint_add_info" name="ExpansionJointAddInfo" type="string" />
 		<property column="cross_scheme_ka" name="CrossSchemeKa" type="single" />
 		<property column="cross_scheme_kb" name="CrossSchemeKb" type="single" />
 		<property column="cross_scheme_pile_distances" name="CrossSchemePileDistances" type="Serializable" />
@@ -26,8 +28,8 @@
 		<property column="joint_type" name="JointType" type="ITS.Core.Bridges.Domain.Enums.JointType, ITS.Core.Bridges" not-null="true"/>
 		<property column="construction_date" name="ConstructionDate" type="date"/>
 		<many-to-one column="typical_project_id" name="TypicalProject" class="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges"/>
-		<property column="span_type_movable" name="SpanTypeMovable" type="ITS.Core.Bridges.Domain.Enums.BridgeMovableSupport, ITS.Core.Bridges" not-null="true"/>
-		<property column="span_type_motionless" name="SpanTypeMotionless" type="ITS.Core.Bridges.Domain.Enums.BridgeMotionlessSupport, ITS.Core.Bridges" not-null="true"/>
+		<property column="span_type_movable" name="SpanTypeMovable" type="ITS.Core.Bridges.Domain.Enums.BridgeMovablePartSupport, ITS.Core.Bridges" not-null="true"/>
+		<property column="span_type_motionless" name="SpanTypeMotionless" type="ITS.Core.Bridges.Domain.Enums.BridgeMotionlessPartSupport, ITS.Core.Bridges" not-null="true"/>
 		<property column="expansion_joint_type" name="ExpansionJointType" type="ITS.Core.Bridges.Domain.Enums.ExpansionJointType, ITS.Core.Bridges" not-null="true"/>
 		<property column="cross_join" name="CrossJoin" type="ITS.Core.Bridges.Domain.Enums.CrossJoinMethod, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="plate_material_id" name="PlateMaterial" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>

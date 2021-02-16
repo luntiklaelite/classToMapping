@@ -12,7 +12,7 @@ using static GeneratorsLibrary.StringUtilities;
 
 namespace GeneratorsLibrary
 {
-    //TO DO: сделать поддержку связи многие-ко-многим и один-ко-многим
+    //todo: сделать поддержку связи многие-ко-многим и один-ко-многим
     public class MappingGenerator
     {
         private static Dictionary<string, string> PredefinedTypesForMappings = new Dictionary<string, string>()

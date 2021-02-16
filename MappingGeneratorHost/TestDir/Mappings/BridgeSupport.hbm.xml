@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:02.11.2020 13:23:32-->
+<!--Generated:16.02.2021 11:51:14-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
 	<class lazy="false" name="ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges" table="bridges_bridge_support">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="number" name="Number" type="int" />
-		<property column="is_movable" name="IsMovable" type="bool" />
+		<property column="is_shore" name="IsShore" type="bool" />
 		<property column="support_type_additional_info" name="SupportTypeAdditionalInfo" type="string" />
 		<property column="heights" name="Heights" type="Serializable" />
 		<property column="laying_depth" name="LayingDepth" type="single" />
@@ -24,8 +24,8 @@
 		<property column="pile_cross_section_width" name="PileCrossSectionWidth" type="single" />
 		<property column="pile_cross_section_height" name="PileCrossSectionHeight" type="System.Nullable`1[[System.Single, mscorlib]], mscorlib" />
 		<property column="notes" name="Notes" type="string" />
-		<property column="support_movable_type" name="SupportMovableType" type="ITS.Core.Bridges.Domain.Enums.BridgeMovableSupport, ITS.Core.Bridges" not-null="true"/>
-		<property column="support_motionless_type" name="SupportMotionlessType" type="ITS.Core.Bridges.Domain.Enums.BridgeMotionlessSupport, ITS.Core.Bridges" not-null="true"/>
+		<property column="shore_type" name="ShoreType" type="ITS.Core.Bridges.Domain.Enums.ShoreSupportType, ITS.Core.Bridges" not-null="true"/>
+		<property column="intermediate_type" name="IntermediateType" type="ITS.Core.Bridges.Domain.Enums.IntermediateSupportType, ITS.Core.Bridges" not-null="true"/>
 		<property column="foundation_type" name="FoundationType" type="ITS.Core.Bridges.Domain.Enums.FoundationType, ITS.Core.Bridges" not-null="true"/>
 		<many-to-one column="material_id" name="Material" class="ITS.Core.Bridges.Domain.Material, ITS.Core.Bridges"/>
 		<many-to-one column="typical_project_id" name="TypicalProject" class="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges"/>

@@ -38,6 +38,14 @@ namespace classToMapping
     <bag name=""Defects"" lazy =""false"" cascade=""all-delete-orphan"" >
       <key column=""bridge_id"" />
       <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
+    </bag>
+    <bag name=""InfoOfRepairs"" lazy=""false"" cascade=""all-delete-orphan"" >
+          <key column = ""bridge_id"" />
+          <one-to-many class=""ITS.Core.Bridges.Domain.InfoOfRepairs, ITS.Core.Bridges"" />
+    </bag>
+    <bag name=""Documentations"" lazy=""false"" cascade=""all-delete-orphan"">
+          <key column=""bridge_id""/>
+          <one-to-many class=""ITS.Core.Bridges.Domain.DocumentationInfo, ITS.Core.Bridges""/>
     </bag>";
             gen.PropertyWithCascadeAll.AddRange(new[]
             {
@@ -64,11 +72,18 @@ namespace classToMapping
                 files)
             {
                 MapEnumToIntegerType = true,
-            };
-            gen1.CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
+                CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
             Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);
             Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);
-            Database.ExecuteNonQuery(Properties.Resources.InsertTypicalProjects);";
+            Database.ExecuteNonQuery(Properties.Resources.InsertTypicalProjects);
+            Database.ExecuteNonQuery(Properties.Resources.InsertTerritories);",
+            };
+            gen1.NotMappedPropertyNames.Add("Obstacles");
+            gen1.NotMappedPropertyNames.Add("InfoOfRepairs");
+            gen1.NotMappedPropertyNames.Add("Supports");
+            gen1.NotMappedPropertyNames.Add("SpanStructures");
+            gen1.NotMappedPropertyNames.Add("Defects");
+            gen1.NotMappedPropertyNames.Add("Documentations");
 
             ClearDir(args);
             var migr = gen1.GenerateMigration();

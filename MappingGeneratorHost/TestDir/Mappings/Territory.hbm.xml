@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Generated:16.02.2021 11:51:14-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class lazy="false" name="ITS.Core.Bridges.Domain.TypicalProject, ITS.Core.Bridges" table="bridges_typical_project">
+	<class lazy="false" name="ITS.Core.Bridges.Domain.Territory, ITS.Core.Bridges" table="bridges_territory">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="name" name="Name" type="string" />
-		<property column="target" name="Target" type="string" />
 	</class>
 </hibernate-mapping>

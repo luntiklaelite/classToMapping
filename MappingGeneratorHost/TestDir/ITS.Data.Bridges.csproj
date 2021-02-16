@@ -247,4 +247,19 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:23.11.2020 11:55:18-->
+    <EmbeddedResource Include="Mappings\InfoOfRepairs.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:30.11.2020 12:14:21-->
+    <EmbeddedResource Include="Mappings\Territory.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:29.12.2020 13:26:18-->
+    <EmbeddedResource Include="Mappings\DocumentationInfo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
