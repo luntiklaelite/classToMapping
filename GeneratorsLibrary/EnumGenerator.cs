@@ -11,7 +11,6 @@ namespace GeneratorsLibrary
     {
         public string NamespaceOfEnum { get; set; }
         public string NamespaceOfEnumConverter { get; set; }
-        public string FullNameOfInterface { get; set; }
         public string FullNameOfBaseClass { get; set; }
 
 
@@ -73,14 +72,7 @@ namespace GeneratorsLibrary
             var tmp = new string(configText.Where(c => c != '\r').ToArray()).Split('\n');
             NamespaceOfEnum = tmp[0];
             NamespaceOfEnumConverter = tmp[1];
-            if (tmp.Length > 2)
-            {
-                FullNameOfInterface = tmp[2];
-            }
-            if (tmp.Length > 3)
-            {
-                FullNameOfBaseClass = tmp[3];
-            }
+            FullNameOfBaseClass = tmp[2];
         }
         public void ParseText(string values)
         {
@@ -183,12 +175,7 @@ namespace GeneratorsLibrary
             stringBuilder.AppendLine("\t/// <summary>");
             stringBuilder.AppendLine($"\t/// Класс-преобразователь перечисления {NameOfEnum} ({CommentOfEnum}) в строку и обратно");
             stringBuilder.AppendLine("\t/// </summary>");
-            stringBuilder.Append($"\tpublic class {NameOfEnum}Strings : ");
-            if (!string.IsNullOrEmpty(FullNameOfBaseClass))
-            {
-                stringBuilder.Append($"{FullNameOfBaseClass}, ");
-            }
-            stringBuilder.AppendLine($"{FullNameOfInterface}<{NameOfEnum}>");
+            stringBuilder.Append($"\tpublic class {NameOfEnum}Strings : {FullNameOfBaseClass}<{NameOfEnum}>");
             stringBuilder.AppendLine("\t{");
             if (!needMaxPerfomance)
             {
@@ -216,7 +203,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"{nameOfParam}\">Элемент перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Строка-результат преобразования</returns>");
-                stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
+                stringBuilder.AppendLine($"\t\tpublic override string GetFullName({NameOfEnum} {nameOfParam})");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\treturn Strings[{nameOfParam}];");
                 stringBuilder.AppendLine($"\t\t}}");
@@ -225,7 +212,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"name\">Строковое представление элемента перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Соответствующий элемент перечисления</returns>");
-                stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
+                stringBuilder.AppendLine($"\t\tpublic override {NameOfEnum} GetElement(string name)");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\treturn Strings.FirstOrDefault(s => s.Value == name).Key;");
                 stringBuilder.AppendLine($"\t\t}}");
@@ -258,7 +245,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"{nameOfParam}\">Элемент перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Строка-результат преобразования</returns>");
-                stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
+                stringBuilder.AppendLine($"\t\tpublic override string GetFullName({NameOfEnum} {nameOfParam})");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\tstringBuilder.Clear();");
                 stringBuilder.AppendLine($"\t\t\tbool first = true;");
@@ -283,7 +270,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"name\">Строковое представление элемента перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Соответствующий элемент перечисления</returns>");
-                stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
+                stringBuilder.AppendLine($"\t\tpublic override {NameOfEnum} GetElement(string name)");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\tvar tmp = name.Split(new[] {{ \", \" }}, StringSplitOptions.RemoveEmptyEntries);");
                 stringBuilder.AppendLine($"\t\t\tvar res = {NameOfEnum}.NoData;");
@@ -339,7 +326,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"{nameOfParam}\">Элемент перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Строка-результат преобразования</returns>");
-                stringBuilder.AppendLine($"\t\tpublic string GetName({NameOfEnum} {nameOfParam})");
+                stringBuilder.AppendLine($"\t\tpublic override string GetFullName({NameOfEnum} {nameOfParam})");
                 stringBuilder.AppendLine($"\t\t{{");
                 stringBuilder.AppendLine($"\t\t\tswitch({nameOfParam})");
                 stringBuilder.AppendLine($"\t\t\t{{");
@@ -357,7 +344,7 @@ namespace GeneratorsLibrary
                 stringBuilder.AppendLine($"\t\t/// </summary>");
                 stringBuilder.AppendLine($"\t\t/// <param name=\"name\">Строковое представление элемента перечисления</param>");
                 stringBuilder.AppendLine($"\t\t/// <returns>Соответствующий элемент перечисления</returns>");
-                stringBuilder.AppendLine($"\t\tpublic {NameOfEnum} GetElement(string name)");
+                stringBuilder.AppendLine($"\t\tpublic override {NameOfEnum} GetElement(string name)");
                 stringBuilder.AppendLine($"\t\t{{");
                 for (int i = 0; i < EnumElements.Count; i++)
                 {
