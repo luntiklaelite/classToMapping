@@ -175,7 +175,7 @@ namespace GeneratorsLibrary
             stringBuilder.AppendLine("\t/// <summary>");
             stringBuilder.AppendLine($"\t/// Класс-преобразователь перечисления {NameOfEnum} ({CommentOfEnum}) в строку и обратно");
             stringBuilder.AppendLine("\t/// </summary>");
-            stringBuilder.Append($"\tpublic class {NameOfEnum}Strings : {FullNameOfBaseClass}<{NameOfEnum}>");
+            stringBuilder.AppendLine($"\tpublic class {NameOfEnum}Strings : {FullNameOfBaseClass}<{NameOfEnum}>");
             stringBuilder.AppendLine("\t{");
             if (!needMaxPerfomance)
             {
@@ -226,7 +226,7 @@ namespace GeneratorsLibrary
                     stringBuilder.AppendLine($"\t\t/// </summary>");
                     stringBuilder.AppendLine($"\t\tprivate static readonly string Str{EnumElements[i]} = \"{EnumComments[i]}\";");
                 }
-                stringBuilder.AppendLine($"\t\tprivate static readonly StringBuilder stringBuilder = new StringBuilder();");
+                stringBuilder.AppendLine($"\t\tprivate readonly StringBuilder stringBuilder = new StringBuilder();");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"\t\t/// <summary>");
                 stringBuilder.AppendLine($"\t\t/// Конструктор по-умолчанию");
