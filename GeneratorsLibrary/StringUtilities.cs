@@ -20,7 +20,7 @@ namespace GeneratorsLibrary
             {
                 if (char.IsLetter(camelCase[i]) && char.IsUpper(camelCase[i]))
                 {
-                    if (camelCase[i - 1] != '_')
+                    if (camelCase[i - 1] != '_' && (i != camelCase.Length - 1 && !char.IsUpper(camelCase[i + 1])))
                     {
                         stringBuilder.Append('_');
                     }

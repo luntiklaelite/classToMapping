@@ -23,39 +23,39 @@ namespace classToMapping
             {
                 MapEnumToIntegerType = true
             };
-            gen.CustomXmlInMainMapping = @"    <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
-          <key column=""bridge_id""/>
-        <one-to-many class=""ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges""/>
-    </bag>
-    <bag name=""Supports"" lazy =""false"" cascade=""all-delete-orphan"" >
-      <key column=""bridge_id"" />
-      <one-to-many class=""ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges"" />
-    </bag>
-    <bag name=""SpanStructures"" lazy =""false"" cascade=""all-delete-orphan"" >
-      <key column=""bridge_id"" />
-      <one-to-many class=""ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges"" />
-    </bag>
-    <bag name=""Defects"" lazy =""false"" cascade=""all-delete-orphan"" >
-      <key column=""bridge_id"" />
-      <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
-    </bag>
-    <bag name=""InfoOfRepairs"" lazy=""false"" cascade=""all-delete-orphan"" >
-          <key column = ""bridge_id"" />
-          <one-to-many class=""ITS.Core.Bridges.Domain.InfoOfRepairs, ITS.Core.Bridges"" />
-    </bag>
-    <bag name=""Documentations"" lazy=""false"" cascade=""all-delete-orphan"">
-          <key column=""bridge_id""/>
-          <one-to-many class=""ITS.Core.Bridges.Domain.DocumentationInfo, ITS.Core.Bridges""/>
-    </bag>";
-            gen.PropertyWithCascadeAll.AddRange(new[]
-            {
-                "ProtectionOnBridge",
-                "ProtectionOnApproach",
-                "ProtectionOnApproach",
-                "Section",
-                "CrossPile",
-                "LongitudinalPile",
-            });
+            //        gen.CustomXmlInMainMapping = @"    <bag name=""Obstacles"" lazy=""false"" cascade=""all-delete-orphan"">
+            //      <key column=""bridge_id""/>
+            //    <one-to-many class=""ITS.Core.Bridges.Domain.BridgeObstacle, ITS.Core.Bridges""/>
+            //</bag>
+            //<bag name=""Supports"" lazy =""false"" cascade=""all-delete-orphan"" >
+            //  <key column=""bridge_id"" />
+            //  <one-to-many class=""ITS.Core.Bridges.Domain.BridgeSupport, ITS.Core.Bridges"" />
+            //</bag>
+            //<bag name=""SpanStructures"" lazy =""false"" cascade=""all-delete-orphan"" >
+            //  <key column=""bridge_id"" />
+            //  <one-to-many class=""ITS.Core.Bridges.Domain.SpanStructure, ITS.Core.Bridges"" />
+            //</bag>
+            //<bag name=""Defects"" lazy =""false"" cascade=""all-delete-orphan"" >
+            //  <key column=""bridge_id"" />
+            //  <one-to-many class=""ITS.Core.Bridges.Domain.Defect, ITS.Core.Bridges"" />
+            //</bag>
+            //<bag name=""InfoOfRepairs"" lazy=""false"" cascade=""all-delete-orphan"" >
+            //      <key column = ""bridge_id"" />
+            //      <one-to-many class=""ITS.Core.Bridges.Domain.InfoOfRepairs, ITS.Core.Bridges"" />
+            //</bag>
+            //<bag name=""Documentations"" lazy=""false"" cascade=""all-delete-orphan"">
+            //      <key column=""bridge_id""/>
+            //      <one-to-many class=""ITS.Core.Bridges.Domain.DocumentationInfo, ITS.Core.Bridges""/>
+            //</bag>";
+            //gen.PropertyWithCascadeAll.AddRange(new[]
+            //{
+            //    "ProtectionOnBridge",
+            //    "ProtectionOnApproach",
+            //    "ProtectionOnApproach",
+            //    "Section",
+            //    "CrossPile",
+            //    "LongitudinalPile",
+            //});
             var mappings = gen.GenerateMappings();
             Console.WriteLine("Generated files:");
             var relPaths = new string[mappings.Count];
@@ -68,22 +68,22 @@ namespace classToMapping
             }
             WriteToCsproj(relPaths, args[1]);
 
-            MigrationGenerator gen1 = new MigrationGenerator("ITS.DbMigration.Bridges", "bridges",
+            MigrationGenerator gen1 = new MigrationGenerator("ITS.DbMigration.Core", "adrplan",
                 files)
             {
                 MapEnumToIntegerType = true,
-                CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
-            Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);
-            Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);
-            Database.ExecuteNonQuery(Properties.Resources.InsertTypicalProjects);
-            Database.ExecuteNonQuery(Properties.Resources.InsertTerritories);",
+            //    CustomCodeUp = @"Database.ExecuteNonQuery(Properties.Resources.InsertDefectScrollSections);            
+            //Database.ExecuteNonQuery(Properties.Resources.InsertDefectTypes);
+            //Database.ExecuteNonQuery(Properties.Resources.InsertMaterials);
+            //Database.ExecuteNonQuery(Properties.Resources.InsertTypicalProjects);
+            //Database.ExecuteNonQuery(Properties.Resources.InsertTerritories);",
             };
-            gen1.NotMappedPropertyNames.Add("Obstacles");
-            gen1.NotMappedPropertyNames.Add("InfoOfRepairs");
-            gen1.NotMappedPropertyNames.Add("Supports");
-            gen1.NotMappedPropertyNames.Add("SpanStructures");
-            gen1.NotMappedPropertyNames.Add("Defects");
-            gen1.NotMappedPropertyNames.Add("Documentations");
+            //gen1.NotMappedPropertyNames.Add("Obstacles");
+            //gen1.NotMappedPropertyNames.Add("InfoOfRepairs");
+            //gen1.NotMappedPropertyNames.Add("Supports");
+            //gen1.NotMappedPropertyNames.Add("SpanStructures");
+            //gen1.NotMappedPropertyNames.Add("Defects");
+            //gen1.NotMappedPropertyNames.Add("Documentations");
 
             ClearDir(args);
             var migr = gen1.GenerateMigration();

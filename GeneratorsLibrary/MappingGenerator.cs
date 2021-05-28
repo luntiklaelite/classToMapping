@@ -172,8 +172,11 @@ namespace GeneratorsLibrary
                 .Where(en => en.Parent is NamespaceDeclarationSyntax); //кроме вложенных перечислений
             foreach (var cls in classes)
             {
-                CustomTypesForMappings.Add(cls.Identifier.ToString(),
+                if (!CustomTypesForMappings.ContainsKey(cls.Identifier.ToString()))
+                {
+                    CustomTypesForMappings.Add(cls.Identifier.ToString(),
                     $"{(cls.Parent as NamespaceDeclarationSyntax).Name}.{cls.Identifier.ToString()}, {AssemblyName}");
+                }
             }
             foreach (var cls in classes)
             {
@@ -202,7 +205,8 @@ namespace GeneratorsLibrary
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<IdentifierNameSyntax>().Count() > 0)
                 .Where(c => !NotMappedPropertyNames.Contains(c.Identifier.ToString()))
-                .Where(c => HasSetter(c));
+                .Where(c => HasSetter(c))
+                .Where(c => !propertiesWithPredefinedTypes.Contains(c));
             if ((propertiesWithPredefinedTypes.Count() > 0 || propertiesWithCustomTypes.Count() > 0) &&
                 baseList != null && baseList.Contains("DomainObject<long>"))
             {

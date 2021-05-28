@@ -262,4 +262,119 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\City.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityDistrict.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityDistrictName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\Country.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\FederalDistrict.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\MunicipalDistrict.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\MunicipalDistrictName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\MunicipalDistrictType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\Street.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\StreetName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\StreetType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\SubjectArea.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\SubjectType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityDistrictName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\CityType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\MunicipalDistrictName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\MunicipalDistrictType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\StreetName.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\StreetType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup> <!--Generated:28.05.2021 13:34:25-->
+    <EmbeddedResource Include="Mappings\SubjectType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

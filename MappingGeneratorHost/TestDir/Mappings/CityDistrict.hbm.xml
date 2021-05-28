@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Generated:28.05.2021 13:35:43-->
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.Domain.DistrictsNew.CityDistrict, ITS.Core" table="adrplan_city_district">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="code" name="Code" type="string" />
+		<many-to-one column="district_name_id" name="DistrictName" class="ITS.Core.Domain.DistrictsNew.Dicts.CityDistrictName, ITS.Core"/>
+	</class>
+</hibernate-mapping>

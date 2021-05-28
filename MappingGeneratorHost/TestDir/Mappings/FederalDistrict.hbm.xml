@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Generated:16.02.2021 11:51:14-->
+<!--Generated:28.05.2021 13:35:44-->
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class lazy="false" name="ITS.Core.Bridges.Domain.DefectScrollSection, ITS.Core.Bridges" table="bridges_defect_scroll_section">
+	<class lazy="false" name="ITS.Core.Domain.DistrictsNew.FederalDistrict, ITS.Core" table="adrplan_federal_district">
 		<id name="ID" column="id" type="long" unsaved-value="0">
 			<generator class="hilo" />
 		</id>
 		<property column="name" name="Name" type="string" />
-		<property column="full_name" name="FullName" type="string" />
+		<property column="abbreviature" name="Abbreviature" type="string" />
 	</class>
 </hibernate-mapping>

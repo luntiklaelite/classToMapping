@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Generated:28.05.2021 13:35:44-->
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.Domain.DistrictsNew.Dicts.SubjectType, ITS.Core" table="adrplan_subject_type">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="type_name" name="TypeName" type="string" />
+		<property column="type_name_short" name="TypeNameShort" type="string" />
+	</class>
+</hibernate-mapping>

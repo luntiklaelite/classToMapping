@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Generated:28.05.2021 13:35:44-->
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class lazy="false" name="ITS.Core.Domain.DistrictsNew.MunicipalDistrict, ITS.Core" table="adrplan_municipal_district">
+		<id name="ID" column="id" type="long" unsaved-value="0">
+			<generator class="hilo" />
+		</id>
+		<property column="code" name="Code" type="string" />
+		<property column="okato" name="OKATO" type="string" />
+		<property column="oktmo" name="OKTMO" type="string" />
+		<many-to-one column="district_name_id" name="DistrictName" class="ITS.Core.Domain.DistrictsNew.Dicts.MunicipalDistrictName, ITS.Core"/>
+		<many-to-one column="district_type_id" name="DistrictType" class="ITS.Core.Domain.DistrictsNew.Dicts.MunicipalDistrictType, ITS.Core"/>
+	</class>
+</hibernate-mapping>

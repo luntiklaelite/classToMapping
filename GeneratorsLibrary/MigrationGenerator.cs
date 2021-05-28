@@ -163,8 +163,11 @@ namespace GeneratorsLibrary
             foreach (var cls in classes)
             {
 #warning добавляет все классы, а нужно только DomainObject-ы
-                KnownTables.Add(cls.Identifier.ToString(),
+                if (!KnownTables.ContainsKey(cls.Identifier.ToString()))
+                {
+                    KnownTables.Add(cls.Identifier.ToString(),
                     $"{TablePrefix}_{CamelCaseToUnderscore(cls.Identifier.ToString())}");
+                }
             }
 
             var numberOfMigration = DateToString(now);
@@ -280,7 +283,8 @@ namespace GeneratorsLibrary
                 .Where(c => c.Parent is ClassDeclarationSyntax)
                 .Where(c => c.DescendantNodes().OfType<IdentifierNameSyntax>().Count() > 0)
                 .Where(c => !NotMappedPropertyNames.Contains(c.Identifier.ToString()))
-                .Where(c => HasSetter(c));
+                .Where(c => HasSetter(c))
+                .Where(c => !propertiesWithPredefinedTypes.Contains(c));
             if ((propertiesWithPredefinedTypes.Count() > 0 || propertiesWithCustomTypes.Count() > 0) &&
                 baseList != null && baseList.Contains("DomainObject<long>"))
 #warning не работает, если  ITS.Core.Domain.DomainObject<long>
